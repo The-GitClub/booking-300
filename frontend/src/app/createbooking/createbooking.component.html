@@ -1,0 +1,29 @@
+<br>
+<h4 class="text-center">Book a Table</h4>
+
+
+<mat-toolbar *ngIf="successMsg" color="accent">{{ successMsg }}</mat-toolbar>
+<mat-toolbar *ngIf="errorMsg" color="warn">{{ errorMsg }}</mat-toolbar>
+<div class="form-container mx-auto">
+
+  <form (submit)="createBooking()">
+    <mat-form-field>
+      <input [(ngModel)]="bookingDate" name="bookingDate" matInput [matDatepicker]="picker" placeholder="Choose a date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <input [(ngModel)]="name" name="name" matInput placeholder="Name">
+    </mat-form-field>
+    <mat-form-field>
+    <input [(ngModel)]="time" name="time" matInput placeholder="Time" type="time">
+    </mat-form-field>
+    <mat-form-field>
+    <input [(ngModel)]="table" name="table" matInput placeholder="Table" type="table">
+    </mat-form-field>
+    <mat-form-field>
+      <input [(ngModel)]="guests" name="guests" matInput  placeholder="Number of guests" type="number">
+    </mat-form-field>
+    <button mat-raised-button>Make Booking</button>
+  </form>
+</div>
