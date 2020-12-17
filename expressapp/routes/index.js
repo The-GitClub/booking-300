@@ -2,7 +2,7 @@ var express = require('express');
 const booking = require('../models/booking');
 //const booking = require('../models/booking');
 var router = express.Router();
-const { Booking } = require ("../models/booking");
+const Booking = require('../models/booking')
 
 // /* GET home page. */
 // router.get('/', function(req, res, next) {

@@ -89,11 +89,6 @@ async function newUserBooking (req, res, next) {
   }
 }
 
-
-
-
-
-
 router.route('/:userId/bookings')
 .get(getUserBookings)
 .post(newUserBooking);
