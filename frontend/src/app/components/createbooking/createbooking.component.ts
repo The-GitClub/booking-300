@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Booking } from '../Interfaces/Booking';
-import { BookingserviceService } from '../bookingservice.service';
+import { Booking } from '../../Interfaces/Booking';
+import { BookingserviceService } from '../../services/booking/bookingservice.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { User } from '../Interfaces/User';
-import { UserService } from '../user.service';
+import { User } from '../../Interfaces/User';
+import { UserService } from '../../services/user/user.service';
 
 @Component({
   selector: 'app-createbooking',

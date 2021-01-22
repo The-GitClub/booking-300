@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Booking } from '../Interfaces/Booking';
-import { User } from '../Interfaces/User';
-import { BookingserviceService } from '../bookingservice.service';
-import { UserService } from '../user.service';
+import { Booking } from '../../Interfaces/Booking';
+import { User } from '../../Interfaces/User';
+import { BookingserviceService } from '../../services/booking/bookingservice.service';
+import { UserService } from '../../services/user/user.service';
 import { mergeMap } from 'rxjs/operators';
 
 @Component({

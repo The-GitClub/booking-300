@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from '../environments/environment';
-import { Booking } from './Interfaces/Booking';
-import { User } from './Interfaces/User';
+import { environment } from '../../../environments/environment';
+import { Booking } from '../../Interfaces/Booking';
+import { User } from '../../Interfaces/User';
 
 @Injectable()
 export class BookingserviceService {
