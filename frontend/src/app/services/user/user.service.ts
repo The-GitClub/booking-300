@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { User } from '../../Interfaces/User';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class UserService {
@@ -12,11 +13,22 @@ export class UserService {
   constructor(private _http:HttpClient) { }
 
   register(body:any){
-    return this._http.post('http://127.0.0.1:3000/users/register',body,{
+    return this._http.post<any>('http://127.0.0.1:3000/users/register',body,{
       observe:'body',
       headers:new HttpHeaders().append('Content-Type','application/json')
-    });
+    })
+    .pipe(map((res: HttpResponse<JSON>) => res));;
   }
+
+  // registerUser(user) {
+  //   let headers = new HttpHeaders();
+  //   headers.append('Content-Type', 'application/json');
+  //   return this.http
+  //     .post<any>('http://localhost:3000/users/register', user, {
+  //       headers: headers,
+  //     })
+  //     .pipe(map((res: HttpResponse<JSON>) => res));
+  // }
 
   login(body:any){
     return this._http.post('http://127.0.0.1:3000/users/login',body,{

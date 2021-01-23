@@ -24,6 +24,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { HomeComponent } from './components/home/home.component';
 import { CreatebookingComponent } from './components/createbooking/createbooking.component';
 
+//alerts
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+//Icons
+import { MatIconModule } from '@angular/material/icon';
+//Material Card
+import {MatCardModule} from '@angular/material/card';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +55,10 @@ import { CreatebookingComponent } from './components/createbooking/createbooking
     BrowserAnimationsModule,
     MatToolbarModule,
     HttpClientModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSnackBarModule,
+    MatIconModule,
+    MatCardModule
   ],
   providers: [UserService, 
     BookingserviceService],

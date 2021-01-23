@@ -43,7 +43,7 @@ router.post("/register", async (req, res, next) => {
     // not-not-taken means it is taken because it is a double negative
     return res.json({
       //bad request
-      msg: `Username unavailable.`,
+      message: `Username unavailable.`,
       success: false,
     });
   }
@@ -53,7 +53,7 @@ router.post("/register", async (req, res, next) => {
   console.log("EMAIL AVAILABLE: " + emailNotRegistered);
   if (!emailNotRegistered) {
     return res.json({
-      msg: `This email is already associated with a registered account.`,
+      message: `This email is already associated with a registered account.`,
       success: false,
     });
   }
@@ -66,9 +66,18 @@ router.post("/register", async (req, res, next) => {
 async function addToDB(user, res) {
   try {
     doc = await user.save();
+    
+     res.json({
+      message: `Registration Success.`,
+      success: true,
+    })
     return res.status(201).json(doc);
   }
   catch (err) {
+    res.json({
+      message: `Registration Failure.`,
+      success: false,
+    });
     return res.status(501).json(err);
   }
 }
