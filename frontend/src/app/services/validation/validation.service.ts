@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-
 //import the MatSnackBar Messages Service to notify the user of an error
 import {
   MatSnackBar,
@@ -12,6 +11,7 @@ import {
   providedIn: "root",
 })
 export class ValidationService {
+  //positions for the alert
   horizontalPosition: MatSnackBarHorizontalPosition = "center";
   verticalPosition: MatSnackBarVerticalPosition = "bottom";
 
@@ -24,16 +24,15 @@ export class ValidationService {
   });
 
   //form group for the login form
-  loginForm : FormGroup=new FormGroup({
-    email:new FormControl(null,[Validators.email,Validators.required]),
-    password:new FormControl(null, Validators.required)
+  loginForm: FormGroup = new FormGroup({
+    email: new FormControl(null, [Validators.email, Validators.required]),
+    password: new FormControl(null, Validators.required),
   });
 
   constructor(private _snackBar: MatSnackBar) {}
-
+// (validate that all required form fields have been filled in and that both entered passwords match)
   validateRegister(_registerForm) {
     this.registerForm = _registerForm;
-    console.log("REGISTER VALIDATION STARTED");
     if (
       !this.registerForm.controls.email.valid &&
       !this.registerForm.controls.username.valid &&
@@ -126,27 +125,26 @@ export class ValidationService {
         verticalPosition: this.verticalPosition,
       });
       return false;
-    } else if (this.registerForm.valid) {
-      console.log("Valid Form");
+    } else {
       return true;
     }
   }
-
-  validateEmail(email){
-    //taken from StackOverFlow
+// (validate that the entered email is a valid email)
+  validateEmail(email) {
     const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     console.log(regex.test(email));
     return regex.test(email);
   }
 
-  validateRegisterPassword(password){
-   // Minimum eight characters, maximum 30, letters and numbers:
+// (validate that the entered password is a valid password)
+  validateRegisterPassword(password) {
+  // Minimum eight characters, maximum 30, letters and numbers:
     const regex = /^[A-Za-z\d]{8,30}$/;
     console.log(regex.test(password));
     return regex.test(password);
   }
 
-
+// (validate that all required form fields have been filled in)
   validateLogin(_loginForm) {
     this.loginForm = _loginForm;
     console.log("LOGIN VALIDATION STARTED");
@@ -161,9 +159,7 @@ export class ValidationService {
         verticalPosition: this.verticalPosition,
       });
       return false;
-    }
-    else if (
-      !this.loginForm.controls.email.valid) {
+    } else if (!this.loginForm.controls.email.valid) {
       console.log("Email Required");
       this._snackBar.open("Email Required", "", {
         duration: 2000,
@@ -171,9 +167,7 @@ export class ValidationService {
         verticalPosition: this.verticalPosition,
       });
       return false;
-    }
-    else if (
-      !this.loginForm.controls.password.valid) {
+    } else if (!this.loginForm.controls.password.valid) {
       console.log("Password Required");
       this._snackBar.open("Password Required", "", {
         duration: 2000,
@@ -181,9 +175,7 @@ export class ValidationService {
         verticalPosition: this.verticalPosition,
       });
       return false;
-    }
-    else{
-      //console.log("Valid Form");
+    } else {
       return true;
     }
   }
