@@ -20,6 +20,7 @@ export class UserService {
   constructor(private _http:HttpClient,  private _snackBar: MatSnackBar) { }
 
   register(body:any){
+    //return this._http.get(`${this.BASE_URL}/users/register`,{
     return this._http.post<any>('http://127.0.0.1:3000/users/register',body,{
       observe:'body',
       headers:new HttpHeaders().append('Content-Type','application/json')
@@ -28,6 +29,7 @@ export class UserService {
   }
 
   login(body:any){
+    //return this._http.get(`${this.BASE_URL}/users/login`,{
     return this._http.post('http://127.0.0.1:3000/users/login',body,{
       observe:'body',
       withCredentials:true,
@@ -37,6 +39,7 @@ export class UserService {
   }
 
   user(){
+    //return this._http.get(`${this.BASE_URL}/users`,{
     return this._http.get('http://127.0.0.1:3000/users/user',{
       observe:'body',
       withCredentials:true,
@@ -50,6 +53,7 @@ export class UserService {
   }
 
   logout(){
+    //return this._http.get(`${this.BASE_URL}/users/logout`,{
     return this._http.get('http://127.0.0.1:3000/users/logout',{
       observe:'body',
       withCredentials:true,
