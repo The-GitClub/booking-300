@@ -1,17 +1,24 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+//Services
 import { AppRoutingModule } from './app-routing.module';
 import { BookingserviceService } from './services/booking/bookingservice.service';
+import { UserService } from './services/user/user.service';
+import { ValidationService } from './services/validation/validation.service';
 
+//Components
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { UserhomeComponent } from './components/userhome/userhome.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { UserService } from './services/user/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ViewbookingsComponent } from './components/viewbookings/viewbookings.component';
+import { CreatebookingComponent } from './components/createbooking/createbooking.component';
+import { HomeComponent } from './components/home/home.component';
+
+//Material Components
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -21,8 +28,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { HomeComponent } from './components/home/home.component';
-import { CreatebookingComponent } from './components/createbooking/createbooking.component';
 
 //alerts
 import {MatSnackBarModule} from '@angular/material/snack-bar';
@@ -61,7 +66,8 @@ import {MatCardModule} from '@angular/material/card';
     MatCardModule
   ],
   providers: [UserService, 
-    BookingserviceService],
+    BookingserviceService,
+  ValidationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

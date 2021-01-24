@@ -1,122 +1,135 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-var User = require('../models/user');
-const Booking = require('../models/booking')
+var User = require("../models/user");
+const Booking = require("../models/booking");
 
-var passport = require('passport');
+var passport = require("passport");
 /* GET users listing. */
 // router.get('/', function(req, res, next) {
 //   res.send('respond with a resource');
 // });
 
-// Register
-router.post("/register", async (req, res, next) => {
-  //store the users as variables for easier use from the JSON request
-  var user = new User({
-    email: req.body.email,
-    username: req.body.username,
-    password: User.hashPassword(req.body.password),
-    creation_dt: Date.now()
-  });
+/* #region  REGISTER */
+  router.post("/register", async (req, res, next) => {
+    // Store the user as a variable for easier use from the JSON request
+      var user = new User({
+        email: req.body.email,
+        username: req.body.username,
+        password: User.hashPassword(req.body.password),
+        creation_dt: Date.now(),
+      });
 
   console.dir(user);
   console.log("START OF METHOD");
 
+    // Validate username call
+      const validateUsername = async (username) => {
+        let user = await User.findOne({ username });
+        return user ? false : true;
+      };
 
-   //Validate userName
-   const validateUsername = async (username) => {
-    let user = await User.findOne({ username });
-    return user ? false : true;
-  };
+     // ValidateEmail call
+      const validateEmail = async (email) => {
+        let user = await User.findOne({ email });
+        return user ? false : true;
+      };
 
-  //#region validateEmail
-  const validateEmail = async (email) => {
-    let user = await User.findOne({ email });
-    return user ? false : true;
-  };
-  //#endregion validateEmail
+    // Validate the username method
+      let usernameNotTaken = await validateUsername(user.username);
+      console.log("USERNAME AVAILABLE: " + usernameNotTaken);
+      if (!usernameNotTaken) {
+        // not-not-taken means it is taken because it is a double negative
+        return res.status(501).json({
+          //bad request
+          message: `Username unavailable.`,
+          success: false,
+        });
+      }
 
-  // Validate the username
-  let usernameNotTaken = await validateUsername(user.username);
-  console.log("USERNAME AVAILABLE: " + usernameNotTaken);
-  if (!usernameNotTaken) {
-    // not-not-taken means it is taken because it is a double negative
-    return res.json({
-      //bad request
-      message: `Username unavailable.`,
-      success: false,
-    });
+    // Validate the email method
+      let emailNotRegistered = await validateEmail(user.email);
+      console.log("EMAIL AVAILABLE: " + emailNotRegistered);
+      if (!emailNotRegistered) {
+        return res.status(501).json({
+          message: `This email is already associated with a registered account.`,
+          success: false,
+        });
+      }
+      
+
+    // Adding to database call
+      await addToDB(user, res);
+  });
+/* #endregion Register*/
+
+// Adding to database function
+  async function addToDB(user, res) {
+    try {
+      doc = await user.save();
+      return res.status(201).json({
+        message: `Account Created.`,
+        success: true,
+      });
+
+    } catch (err) {
+      res.json();
+      return res.status(501).json({
+        message: `Account Creation Failure.`,
+        success: false,
+      });
+    }
   }
 
-  // Validate the email
-  let emailNotRegistered = await validateEmail(user.email);
-  console.log("EMAIL AVAILABLE: " + emailNotRegistered);
-  if (!emailNotRegistered) {
-    return res.json({
-      message: `This email is already associated with a registered account.`,
-      success: false,
-    });
-  }
-  addToDB(user, res); 
-  }
-);
+/* #region  LOGIN */
+  router.post('/login',function(req,res,next){
+    passport.authenticate('local', function(err, user, info) {
+      if (err) { 
+        return res.status(501).json({
+          message: `Login Failure.`,
+          success: false,
+        }); 
+      }
+      if (!user) { 
+        return res.status(501).json({
+          message: `Username Or Password Incorrect.`,
+          success: false,
+        }); 
+      }
+      req.logIn(user, function(err) {
+        if (err) { return res.status(501).json(err); 
+        }
+        return res.status(200).json({
+          message: `You are now logged in.`,
+          success: true,
+        });
+      });
+    })(req, res, next);
+  });
+/* #endregion LOGIN */
 
-
-
-async function addToDB(user, res) {
-  try {
-    doc = await user.save();
-    
-     res.json({
-      message: `Registration Success.`,
-      success: true,
-    })
-    return res.status(201).json(doc);
-  }
-  catch (err) {
-    res.json({
-      message: `Registration Failure.`,
-      success: false,
-    });
-    return res.status(501).json(err);
-  }
-}
-
-
-router.post('/login',function(req,res,next){
-  passport.authenticate('local', function(err, user, info) {
-    if (err) { return res.status(501).json(err); }
-    if (!user) { return res.status(501).json(info); }
-    req.logIn(user, function(err) {
-      if (err) { return res.status(501).json(err); }
-      return res.status(200).json({message:'Login Success'});
-    });
-  })(req, res, next);
-});
-
-router.get('/user',isValidUser,function(req,res,next){
+router.get("/user", isValidUser, function (req, res, next) {
   return res.status(200).json(req.user);
 });
 
-router.get('/logout',isValidUser, function(req,res,next){
+router.get("/logout", isValidUser, function (req, res, next) {
   req.logout();
-  return res.status(200).json({message:'Logout Success'});
-})
+  return res.status(200).json({ message: "Logout Success" });
+});
 
-function isValidUser(req,res,next){
-  if(req.isAuthenticated()) next();
-  else return res.status(401).json({message:'Unauthorized Request'});
+function isValidUser(req, res, next) {
+  if (req.isAuthenticated()) next();
+  else return res.status(401).json({ message: "Unauthorized Request" });
 }
 
 // Associating user with booking
-async function getUserBookings (req, res, next) {
+async function getUserBookings(req, res, next) {
   const { userId } = req.params;
-  const user = await User.findById(userId).populate('bookings');
-  console.log('user\'s bookings', user.bookings);
+  const user = await User.findById(userId).populate("bookings");
+  console.log("user's bookings", user.bookings);
   res.status(200).json(user.bookings);
 }
 
-async function newUserBooking (req, res, next) {
+async function newUserBooking(req, res, next) {
   const { userId } = req.params;
   // Create new booking
   const newBooking = new Booking(req.body);
@@ -130,17 +143,13 @@ async function newUserBooking (req, res, next) {
   user.bookings.push(newBooking);
   // Save user
   try {
-  await user.save();
-  res.status(201).json(newBooking);
-  }
-
-  catch(err){
-      return res.status(501).json(err);
+    await user.save();
+    res.status(201).json(newBooking);
+  } catch (err) {
+    return res.status(501).json(err);
   }
 }
 
-router.route('/:userId/bookings')
-.get(getUserBookings)
-.post(newUserBooking);
+router.route("/:userId/bookings").get(getUserBookings).post(newUserBooking);
 
 module.exports = router;
