@@ -16,6 +16,7 @@ export class UserService {
    
   userr: User;
   BASE_URL = environment.API_URL;
+  LoginState: boolean;
 
   constructor(private _http:HttpClient,  private _snackBar: MatSnackBar) { }
 
@@ -51,8 +52,20 @@ export class UserService {
   getBookings(id: string): Observable<User> {
     return this._http.get<User>(`${this.BASE_URL}/users/${id}/bookings`);
   }
+  loggedIn() {
+    if(this.LoginState == true)
+    {
+      console.log("LoginState TRUE: ", this.LoginState);
+      return true;
+    }
+    else{
+      console.log("LoginState FALSE: ", this.LoginState);
+      return false;
+    }
+  }
 
   logout(){
+    this.LoginState = false;
     //return this._http.get(`${this.BASE_URL}/users/logout`,{
     return this._http.get('http://127.0.0.1:3000/users/logout',{
       observe:'body',

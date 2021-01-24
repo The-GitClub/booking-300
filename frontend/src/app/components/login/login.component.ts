@@ -59,8 +59,11 @@ export class LoginComponent implements OnInit {
     // (subscribe to the register method on the user service to log in)
       this._userService.login(JSON.stringify(this.loginForm.value)).subscribe(
         (data) => {
+          console.log("TOKEN", (data as any).token);
         // (if the boolean "success" returns true, display the returned message to the user and redirect them to the 'user' page)
           if ((data as any).success) {
+          //set the login state to true
+            this._userService.LoginState = true;
             this._router.navigate(["/user"]);
             this._snackBar.open((data as any).message, "", {
               duration: 2000,
@@ -71,6 +74,8 @@ export class LoginComponent implements OnInit {
           // (if there is an error display the returned error message to the user)
         },
         (error) => {
+        //set the login state to true
+          this._userService.LoginState = false;
           this._snackBar.open((error as any).error.message, "", {
             duration: 2000,
             horizontalPosition: this.horizontalPosition,

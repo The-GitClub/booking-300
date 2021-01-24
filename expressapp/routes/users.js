@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 var User = require("../models/user");
 const Booking = require("../models/booking");
+const jwt = require("jsonwebtoken");
 
 var passport = require("passport");
 /* GET users listing. */
@@ -82,6 +83,7 @@ var passport = require("passport");
 
 /* #region  LOGIN */
   router.post('/login',function(req,res,next){
+
     passport.authenticate('local', function(err, user, info) {
       if (err) { 
         return res.status(501).json({
@@ -96,7 +98,10 @@ var passport = require("passport");
         }); 
       }
       req.logIn(user, function(err) {
-        if (err) { return res.status(501).json(err); 
+        console.dir(user);
+        if (err) { 
+          console.log("FUCK");
+          return res.status(501).json(err); 
         }
         return res.status(200).json({
           message: `You are now logged in.`,

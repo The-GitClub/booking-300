@@ -35,6 +35,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 //Material Card
 import {MatCardModule} from '@angular/material/card';
+import { NavbarComponent } from './layout/navbar/navbar.component';
+import { FooterComponent } from './layout/footer/footer.component';
+import { AuthGuard } from './components/guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -44,7 +47,9 @@ import {MatCardModule} from '@angular/material/card';
     UserhomeComponent,
     ViewbookingsComponent,
     CreatebookingComponent,
-    HomeComponent
+    HomeComponent,
+    NavbarComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -65,9 +70,7 @@ import {MatCardModule} from '@angular/material/card';
     MatIconModule,
     MatCardModule
   ],
-  providers: [UserService, 
-    BookingserviceService,
-  ValidationService],
+  providers: [UserService, BookingserviceService, ValidationService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
