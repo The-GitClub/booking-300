@@ -14,7 +14,8 @@ export class UserService {
    horizontalPosition: MatSnackBarHorizontalPosition = 'center';
    verticalPosition: MatSnackBarVerticalPosition = 'bottom';
    
-  userr: User;
+  userr: any;
+
   BASE_URL = environment.API_URL;
   LoginState: boolean;
 
@@ -39,6 +40,12 @@ export class UserService {
     .pipe(catchError(this.handleError));
   }
 
+  storeUserData(user) {
+    localStorage.setItem('user', JSON.stringify(user));
+    this.userr = user;
+    console.log("USER IN SERVICE FILE", this.userr);
+  }
+
   user(){
     //return this._http.get(`${this.BASE_URL}/users`,{
     return this._http.get('http://127.0.0.1:3000/users/user',{
@@ -52,20 +59,22 @@ export class UserService {
   getBookings(id: string): Observable<User> {
     return this._http.get<User>(`${this.BASE_URL}/users/${id}/bookings`);
   }
+  
   loggedIn() {
-    if(this.LoginState == true)
+    this.userr = localStorage.getItem('user');
+    if(this.userr == null)
     {
-      console.log("LoginState TRUE: ", this.LoginState);
-      return true;
-    }
-    else{
-      console.log("LoginState FALSE: ", this.LoginState);
       return false;
+    }
+    else if(this.userr != null)
+    {
+      return true;
     }
   }
 
   logout(){
-    this.LoginState = false;
+    this.loggedIn();
+    localStorage.clear();
     //return this._http.get(`${this.BASE_URL}/users/logout`,{
     return this._http.get('http://127.0.0.1:3000/users/logout',{
       observe:'body',

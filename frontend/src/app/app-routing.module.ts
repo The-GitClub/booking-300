@@ -10,20 +10,16 @@ import { ViewbookingsComponent } from './components/viewbookings/viewbookings.co
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
-
-  // {path:'', redirectTo:'login', pathMatch:'full'},
   {path:'login', component:LoginComponent},
   {path:'register', component:RegisterComponent},
-  {path:'user',component:UserhomeComponent, canActivate: [AuthGuard]},
-  {path:'user/:id/view', component: ViewbookingsComponent,  canActivate: [AuthGuard]},
-  {path:'user/:id/book', component: CreatebookingComponent, canActivate: [AuthGuard]}
-
-
+  {path:'user',component:UserhomeComponent,},
+  {path:'user/:id/view', component: ViewbookingsComponent,  },
+  {path:'user/:id/book', component: CreatebookingComponent, } //canActivate: [AuthGuard]
 
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
+  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

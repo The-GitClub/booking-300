@@ -106,6 +106,11 @@ var passport = require("passport");
         return res.status(200).json({
           message: `You are now logged in.`,
           success: true,
+          user: {
+            id: user._id,
+            username: user.username,
+            email: user.email,
+          },
         });
       });
     })(req, res, next);
