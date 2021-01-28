@@ -128,10 +128,8 @@ const validateEmail = async (email) => {
     const serializeUser = (user) => {
       return {
         username: user.username,
-        email: user.email,
         _id: user._id,
-        updatedAt: user.updatedAt,
-        createdAt: user.createdAt,
+        role: user.role
       };
     };
 //#endregion SerializeResponse

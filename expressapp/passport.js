@@ -13,7 +13,7 @@ const options = {
 module.exports = passport => {
   passport.use(
     new Strategy(options, async (payload, done) => { //JSON web token extracted from payload
-      console.log(jwtFromRequest); 
+      console.log(payload); 
       await User.findById(payload.user_id)//find the user from the payload by ID
         .then(user => {
           if (user) {
