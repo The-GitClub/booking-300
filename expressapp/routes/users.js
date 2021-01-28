@@ -4,11 +4,12 @@ const Booking = require("../models/booking");
 
 // Bring in the User Registration Function, User Login Function
 const {
-  //userAuth,
-  //userLogin,
-  //checkRole,
-  userRegister,
-  //serializeUser
+    userRegister,
+    userLogin,
+    findMyRole,
+    //userAuth,
+    //checkRole,
+    //serializeUser
 } = require("../utils/authentication");
 
 /* #region  Registrations */
@@ -29,22 +30,23 @@ router.post("/register-manager", async (req, res) => {
 
 /* #endregion Registrations */
 
-/* #region  Logins */
-    // Users Login Route
-      router.post("/login-user", async (req, res) => {
-        await userLogin(req.body, "user", res);
+/* #region  Login */
+  router.post("/login", async (req, res) => {
+    console.log("METHOD ENTERED"); 
+    console.log(req.body);
+    try {
+      let role = await findMyRole(req.body.email, res);
+      console.log(role); 
+      await userLogin(req.body, role, res);
+    }
+    catch (err) {
+      return res.status(501).json({
+        message: `Login Failure. Account does not exist`,
+        success: false,
       });
-
-    // Staff Login Route
-      router.post("/login-staff", async (req, res) => {
-        await userLogin(req.body, "staff", res);
-      });
-
-    // Manager Login Route
-      router.post("/login-manager", async (req, res) => {
-        await userLogin(req.body, "manager", res);
-      });
-/* #endregion Logins*/
+    }
+  });
+/* #endregion Login*/
 
 //EXPORT THESE METHODS TO THE UTILS FOLDER CUZ I CAN'T USE THE USER MODEL
 

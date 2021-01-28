@@ -60,9 +60,9 @@ const { SECRET } = require("../config/database");
 
 //#region LoginUser
   const userLogin = async (userCreds, role, res) => {
-    let { username, password } = userCreds;
+    let { email, password } = userCreds;
     // First Check if the username is in the database
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ email });
     if (!user) {
       return res.status(404).json({
         message: "Username is not found. Invalid login credentials.",
@@ -70,13 +70,6 @@ const { SECRET } = require("../config/database");
       });
     }
 
-    // We will check the role
-    if (user.role !== role) {
-      return res.status(403).json({
-        message: "Please make sure you are logging in from the right portal.",
-        success: false,
-      });
-    }
     // That means user is existing and trying to sign in from the right portal
     // Now check for the password
     let isMatch = await bcrypt.compare(password, user.password);
@@ -117,6 +110,7 @@ const { SECRET } = require("../config/database");
   };
 //#endregion LoginUser
 
+
  //Validate userName
  const validateUsername = async (username) => {
   let user = await User.findOne({ username });
@@ -130,14 +124,25 @@ const validateEmail = async (email) => {
 };
 //#endregion validateEmail
 
+const findMyRole = async (email, err) => {
+  let user = await User.findOne({ email });
+  if (!user) {
+    return err;
+  } else {
+    console.log(user.role); 
+    return user.role;
+  }
+};
+
 //#region ExportFunctions
 //functions have to exported to be used in the users.js routing file
 module.exports = {
+  userRegister,
+  userLogin,
+  findMyRole,
     // userAuth,
     // checkRole,
-    // userLogin,
-    userRegister,
-    //serializeUser,
+   //serializeUser,
   };
   //#endregion ExportFunctions
   
