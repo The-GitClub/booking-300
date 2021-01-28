@@ -1,5 +1,5 @@
 //import the the data model
-const User = require("./models/user");
+const User = require("./models/User");
 //import the secret string 
 const { SECRET } = require("./config/database");
 //import Strategy function and ExtractJwt (they extract the JWT from the request object)

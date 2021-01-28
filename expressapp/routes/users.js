@@ -1,5 +1,5 @@
 const router = require("express").Router();
-var User = require("../models/user");
+var User = require("../models/User");
 const Booking = require("../models/booking");
 
 // Bring in the User Registration Function, User Login Function
