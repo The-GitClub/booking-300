@@ -7,9 +7,9 @@ const {
     userRegister,
     userLogin,
     findMyRole,
-    //userAuth,
+    userAuth,
     //checkRole,
-    //serializeUser
+    serializeUser
 } = require("../utils/authentication");
 
 /* #region  Registrations */
@@ -47,6 +47,12 @@ router.post("/register-manager", async (req, res) => {
     }
   });
 /* #endregion Login*/
+
+
+// Get User Route 
+  router.get("/user", userAuth, async (req, res) => {
+    return res.json(serializeUser(req.user));
+  });
 
 //EXPORT THESE METHODS TO THE UTILS FOLDER CUZ I CAN'T USE THE USER MODEL
 
