@@ -9,8 +9,8 @@ import { ValidationService } from './services/validation/validation.service';
 
 //Components
 import { AppComponent } from './app.component';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/authentication/login/login.component';
+import { RegisterComponent } from './components/authentication/registers/register/register.component';
 import { UserhomeComponent } from './components/userhome/userhome.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';

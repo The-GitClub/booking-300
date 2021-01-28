@@ -3,8 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { CreatebookingComponent } from './components/createbooking/createbooking.component';
 import { AuthGuard } from './components/guards/auth.guard';
 import { HomeComponent } from './components/home/home.component';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/authentication/login/login.component';
+import { RegisterComponent } from './components/authentication/registers/register/register.component';
 import { UserhomeComponent } from './components/userhome/userhome.component';
 import { ViewbookingsComponent } from './components/viewbookings/viewbookings.component';
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 //import the UserService to log the user in
-import { UserService } from "../../services/user/user.service";
+import { UserService } from "../../../services/user/user.service";
 //import the MatSnackBar Messages Service to notify the user of an error
 import {
   MatSnackBar,
@@ -10,7 +10,7 @@ import {
   MatSnackBarVerticalPosition,
 } from "@angular/material/snack-bar";
 //import the ValidationService to validate the form
-import { ValidationService } from "../../services/validation/validation.service";
+import { ValidationService } from "../../../services/validation/validation.service";
 
 @Component({
   selector: "app-login",
