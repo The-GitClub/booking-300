@@ -11,7 +11,8 @@ const {
   //serializeUser
 } = require("../utils/authentication");
 
-// User Registration Route
+/* #region  Registrations */
+// Customer Registration Route
 router.post("/register-customer", async (req, res) => {
   await userRegister(req.body, "customer", res);
 });
@@ -21,10 +22,29 @@ router.post("/register-staff", async (req, res) => {
   await (userRegister.body, "staff", res);
 });
 
-// Manager Admin Registration Route
+// Manager  Registration Route
 router.post("/register-manager", async (req, res) => {
   await userRegister(req.body, "manager", res);
 });
+
+/* #endregion Registrations */
+
+/* #region  Logins */
+    // Users Login Route
+      router.post("/login-user", async (req, res) => {
+        await userLogin(req.body, "user", res);
+      });
+
+    // Staff Login Route
+      router.post("/login-staff", async (req, res) => {
+        await userLogin(req.body, "staff", res);
+      });
+
+    // Manager Login Route
+      router.post("/login-manager", async (req, res) => {
+        await userLogin(req.body, "manager", res);
+      });
+/* #endregion Logins*/
 
 //EXPORT THESE METHODS TO THE UTILS FOLDER CUZ I CAN'T USE THE USER MODEL
 
