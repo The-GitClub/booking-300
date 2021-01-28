@@ -38,6 +38,7 @@ const userRegister = async (userDetails, role, res) => {
       ...userDetails,
       password,
       role,
+      creation_dt: Date.now(),
     });
 
     //save the newly created user
@@ -56,6 +57,19 @@ const userRegister = async (userDetails, role, res) => {
   }
 };
 //#endregion RegisterUser
+
+ //Validate userName
+ const validateUsername = async (username) => {
+  let user = await User.findOne({ username });
+  return user ? false : true;
+};
+
+//#region validateEmail
+const validateEmail = async (email) => {
+  let user = await User.findOne({ email });
+  return user ? false : true;
+};
+//#endregion validateEmail
 
 //#region ExportFunctions
 //functions have to exported to be used in the users.js routing file
