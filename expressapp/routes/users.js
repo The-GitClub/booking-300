@@ -32,11 +32,10 @@ router.post("/register-manager", async (req, res) => {
 
 /* #region  Login */
   router.post("/login", async (req, res) => {
-    console.log("METHOD ENTERED"); 
-    console.log(req.body);
+    console.log("LOGIN ROUTE ENTERED"); 
     try {
       let role = await findMyRole(req.body.email, res);
-      console.log(role); 
+      console.log("ROLE IN LOGIN ROUTE", role); 
       await userLogin(req.body, role, res);
     }
     catch (err) {

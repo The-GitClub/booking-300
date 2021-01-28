@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { User } from '../../Interfaces/User';
 import { catchError, map } from 'rxjs/operators';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 //import the MatSnackBar Messages Service to notify the user of an error
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition, } from '@angular/material/snack-bar';
@@ -11,18 +12,16 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 @Injectable()
 export class UserService {
    //positions for the alert
-   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
-   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
-   
-  userr: any;
-
-  BASE_URL = environment.API_URL;
-  LoginState: boolean;
-
+    horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+    verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+    BASE_URL = environment.API_URL;
+    authToken: any;
+    userr: any;
+    CredentialsUsed = false;
   constructor(private _http:HttpClient,  private _snackBar: MatSnackBar) { }
 
   register(body:any){
-    //return this._http.get(`${this.BASE_URL}/users/register`,{
+    //return this._http.get(`${this.BASE_URL}/users/register`,{ 
     return this._http.post<any>('http://127.0.0.1:3000/users/register-customer',body,{
       observe:'body',
       headers:new HttpHeaders().append('Content-Type','application/json')
@@ -40,18 +39,11 @@ export class UserService {
     .pipe(catchError(this.handleError));
   }
 
-  storeUserData(user) {
-    localStorage.setItem('user', JSON.stringify(user));
-    this.userr = user;
-    console.log("USER IN SERVICE FILE", this.userr);
-  }
-
-  user(){
-    //return this._http.get(`${this.BASE_URL}/users`,{
-    return this._http.get('http://127.0.0.1:3000/users/user',{
-      observe:'body',
+  user() {
+    this.loadToken();
+    return this._http.get('http://127.0.0.1:3000/users/user', {
       withCredentials:true,
-      headers:new HttpHeaders().append('Content-Type','application/json')
+      headers:new HttpHeaders().append('Authorization', this.authToken)
     })
     .pipe(catchError(this.handleError));
   }
@@ -60,28 +52,29 @@ export class UserService {
     return this._http.get<User>(`${this.BASE_URL}/users/${id}/bookings`);
   }
   
-  loggedIn() {
-    this.userr = localStorage.getItem('user');
-    if(this.userr == null)
-    {
-      return false;
-    }
-    else if(this.userr != null)
-    {
-      return true;
-    }
+  storeUserData(token, user) {
+    localStorage.setItem('id_token', token);
+    localStorage.setItem('user', JSON.stringify(user));
+    this.authToken = token;
+    this.userr = user;
   }
 
-  logout(){
-    this.loggedIn();
+  loggedIn() {
+    this.loadToken();
+    const helper = new JwtHelperService();
+    return helper.isTokenExpired(this.authToken); //False if Token is good, True if not good
+  }
+
+  loadToken() {
+    const token = localStorage.getItem('id_token');
+    this.authToken = token;
+  }
+
+  //clears local storage
+  logout() {
+    this.authToken = null;
+    this.userr = null;
     localStorage.clear();
-    //return this._http.get(`${this.BASE_URL}/users/logout`,{
-    return this._http.get('http://127.0.0.1:3000/users/logout',{
-      observe:'body',
-      withCredentials:true,
-      headers:new HttpHeaders().append('Content-Type','application/json')
-    })
-    .pipe(catchError(this.handleError));
   }
 
   handleError(err){

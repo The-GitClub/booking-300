@@ -14,10 +14,16 @@ export class NavbarComponent implements OnInit {
 
   constructor(public _user:UserService, private _router:Router) { 
     this._user.user()
-    .subscribe(
-      data=>this.addName(data),
-      error=>this._router.navigate(['/login'])
-    )
+    .subscribe((data) =>
+    {
+      console.log("DATA IN NAVBAR", data); 
+      this.addName(data);
+      console.log("DATA IN NAVBAR", data); 
+    },
+    (error) =>
+    {
+      console.error("COULDN'T ACCESS THE SERVER FROM THE NAVBAR", error);
+    });
   }
 
   addName(data){
@@ -29,11 +35,7 @@ export class NavbarComponent implements OnInit {
   }
 
   logout(){
-    this._user.logout()
-    .subscribe(
-      data=>{console.log(data);},
-      error=>console.error(error)
-    )
+    this._user.logout();
     this._router.navigate(['/login']);
   }
 }

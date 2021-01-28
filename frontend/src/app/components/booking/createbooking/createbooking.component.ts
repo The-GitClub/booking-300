@@ -27,7 +27,7 @@ export class CreatebookingComponent implements OnInit {
     this._user.user()
     .subscribe(
       data=>this.addId(data),
-      error=>this._router.navigate(['/login'])
+      error=>console.log(error)
     )
   }
 
@@ -36,6 +36,7 @@ export class CreatebookingComponent implements OnInit {
 
 
   addId(data){
+    console.log(data);  
     this.username = data.username;
     this.userId = data._id;
   }
@@ -49,13 +50,13 @@ export class CreatebookingComponent implements OnInit {
       this.time = '';
       this.table ='';
       this.name = '';
-      this.guests;
-      this.userId = '';
+      this.guests = null;
+      //this.userId = '';
       const bookingDate = new Date(createdBooking.bookingDate).toDateString();
       this.successMsg = `Booking successfully created for ${bookingDate}`;
 
     },
-    (error: ErrorEvent) => {
+    (error) => {
       this.errorMsg = 'No';
     });
 }

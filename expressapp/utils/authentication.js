@@ -60,12 +60,15 @@ const userRegister = async (userDetails, role, res) => {
 
 //#region LoginUser
 const userLogin = async (userCreds, role, res) => {
+  console.log("USER LOGIN METHOD BEGAN");
+  console.log("USER CREDNETAILS IN LOGIN METHOD",userCreds);  
   let { email, password } = userCreds;
+  console.log("EMAIL" , email); 
   // First Check if the username is in the database
   const user = await User.findOne({ email });
   if (!user) {
     return res.status(404).json({
-      message: "Username is not found. Invalid login credentials.",
+      message: "Username is not found in the login method? Invalid login credentials.",
       success: false,
     });
   }
@@ -80,7 +83,6 @@ const userLogin = async (userCreds, role, res) => {
       {
         user_id: user._id,
         role: user.role,
-        username: user.username,
         email: user.email,
       },
       SECRET,
@@ -89,7 +91,6 @@ const userLogin = async (userCreds, role, res) => {
     );
 
     let result = {
-      username: user.username,
       role: user.role,
       email: user.email,
       token: `Bearer ${token}`,
@@ -140,7 +141,7 @@ const validateEmail = async (email) => {
     if (!user) {
       return err;
     } else {
-      console.log(user.role);
+      console.log("ROLE IN UTILS FILE", user.role);
       return user.role;
     }
   };
