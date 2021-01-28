@@ -11,12 +11,8 @@ import { ValidationService } from './services/validation/validation.service';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/authentication/login/login.component';
 import { RegisterComponent } from './components/authentication/registers/register/register.component';
-import { UserhomeComponent } from './components/userhome/userhome.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { ViewbookingsComponent } from './components/viewbookings/viewbookings.component';
-import { CreatebookingComponent } from './components/createbooking/createbooking.component';
-import { HomeComponent } from './components/home/home.component';
 
 //Material Components
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -37,7 +33,11 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { FooterComponent } from './layout/footer/footer.component';
-import { AuthGuard } from './components/guards/auth.guard';
+import { UserhomeComponent } from './components/app_pages/userhome/userhome.component';
+import { ViewbookingsComponent } from './components/booking/viewbookings/viewbookings.component';
+import { CreatebookingComponent } from './components/booking/createbooking/createbooking.component';
+import { HomeComponent } from './components/app_pages/home/home.component';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [

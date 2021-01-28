@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CreatebookingComponent } from './components/createbooking/createbooking.component';
-import { AuthGuard } from './components/guards/auth.guard';
-import { HomeComponent } from './components/home/home.component';
+import { CreatebookingComponent } from './components/booking/createbooking/createbooking.component';
+import { AuthGuard } from './guards/auth.guard';
+import { HomeComponent } from './components/app_pages/home/home.component';
 import { LoginComponent } from './components/authentication/login/login.component';
 import { RegisterComponent } from './components/authentication/registers/register/register.component';
-import { UserhomeComponent } from './components/userhome/userhome.component';
-import { ViewbookingsComponent } from './components/viewbookings/viewbookings.component';
+import { UserhomeComponent } from './components/app_pages/userhome/userhome.component';
+import { ViewbookingsComponent } from './components/booking/viewbookings/viewbookings.component';
 
 const routes: Routes = [
   {path:'', component:HomeComponent},

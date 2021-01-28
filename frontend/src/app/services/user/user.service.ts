@@ -23,7 +23,7 @@ export class UserService {
 
   register(body:any){
     //return this._http.get(`${this.BASE_URL}/users/register`,{
-    return this._http.post<any>('http://127.0.0.1:3000/users/register',body,{
+    return this._http.post<any>('http://127.0.0.1:3000/users/register-customer',body,{
       observe:'body',
       headers:new HttpHeaders().append('Content-Type','application/json')
     })
