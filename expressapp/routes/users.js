@@ -9,7 +9,8 @@ const {
     findMyRole,
     userAuth,
     //checkRole,
-    serializeUser
+    serializeUser,
+    serializeUserForId
 } = require("../utils/authentication");
 
 /* #region  Registrations */
@@ -49,13 +50,14 @@ router.post("/register-manager", async (req, res) => {
 
 
 // Get User Route 
-  router.get("/user", userAuth, async (req, res) => {
-    return res.json(serializeUser(req.user));
-  });
+router.get("/user", userAuth, async (req, res) => {
+  console.log("USER IN THE GET USER METHOD", req.user._id.id);
+  let id = req.user._id.id;
+  getUserBookings(id);
+  return res.json(serializeUser(req.user));
+});
 
-//EXPORT THESE METHODS TO THE UTILS FOLDER CUZ I CAN'T USE THE USER MODEL
 
-// Associating user with booking
 async function getUserBookings(req, res, next) {
   const { userId } = req.params;
   const user = await User.findById(userId).populate("bookings");
@@ -65,6 +67,7 @@ async function getUserBookings(req, res, next) {
 
 async function newUserBooking(req, res, next) {
   const { userId } = req.params;
+  console.log(userId); 
   // Create new booking
   const newBooking = new Booking(req.body);
   // Get user

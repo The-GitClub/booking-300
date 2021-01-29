@@ -13,8 +13,9 @@ const routes: Routes = [
   {path:'login', component:LoginComponent},
   {path:'register', component:RegisterComponent},
   {path:'user',component:UserhomeComponent,},
-  {path:'user/:id/view', component: ViewbookingsComponent,  },
-  {path:'user/:id/book', component: CreatebookingComponent, } //canActivate: [AuthGuard]
+  //doesn't have to match back end
+  {path:'user/view', component: ViewbookingsComponent,  },
+  {path:'user/book', component: CreatebookingComponent, } //canActivate: [AuthGuard]
 
 ];
 

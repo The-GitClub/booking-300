@@ -76,7 +76,6 @@ export class RegisterComponent implements OnInit {
           (data) => {
           // (if the boolean "success" returns true, display the returned message to the user and redirect them to the 'user' page)
             if ((data as any).success) {
-              //console.log("REGISTER SUCCESS: ", (data as any).success);
               this._router.navigate(["/login"]);
               this._snackBar.open((data as any).message, "", {
                 duration: 2000,

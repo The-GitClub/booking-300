@@ -17,7 +17,10 @@ export class UserService {
     BASE_URL = environment.API_URL;
     authToken: any;
     userr: any;
+    CurrentUser: User;
     CredentialsUsed = false;
+    id: String;
+
   constructor(private _http:HttpClient,  private _snackBar: MatSnackBar) { }
 
   register(body:any){
@@ -47,6 +50,17 @@ export class UserService {
     })
   }
 
+  getBookingsForViewing(){
+    this.user()
+    .subscribe((user: User) => {
+      this.CurrentUser = user;
+      this.id = this.CurrentUser._id;
+    },
+    (error) => {
+       error.error.message;
+    });
+  }
+
   getBookings(id: string): Observable<User> {
     return this._http.get<User>(`${this.BASE_URL}/users/${id}/bookings`);
   }
@@ -71,7 +85,6 @@ export class UserService {
 
   checkTokenExists(tokenVal){
     tokenVal = localStorage.getItem('id_token');
-    console.log("LOADING THE TOKEN", tokenVal); 
     return tokenVal;
   }
   

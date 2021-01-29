@@ -126,11 +126,19 @@ const validateEmail = async (email) => {
 
 //#region SerializeResponse
 //prevents the displaying of passwords and emails in the response
-    const serializeUser = (user) => {
+const serializeUser = (user) => {
+  return {
+    username: user.username,
+    _id: user._id,
+    role: user.role
+  };
+};
+//#endregion SerializeResponse
+//#region SerializeResponse
+//prevents the displaying of passwords and emails in the response
+    const serializeUserForId = (user) => {
       return {
-        username: user.username,
         _id: user._id,
-        role: user.role
       };
     };
 //#endregion SerializeResponse
@@ -158,6 +166,7 @@ module.exports = {
   findMyRole,
   userAuth,
   serializeUser,
+  serializeUserForId,
   //checkRole,
 };
 //#endregion ExportFunctions

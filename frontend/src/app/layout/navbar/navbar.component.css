@@ -6,3 +6,7 @@
 a {
     color: white;
 }
+button:hover {
+    background-color: #1E1E1E;
+    text-decoration: underline;
+}

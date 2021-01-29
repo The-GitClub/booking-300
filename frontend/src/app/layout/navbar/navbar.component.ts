@@ -11,10 +11,11 @@ export class NavbarComponent implements OnInit {
 
   username:String='';
   userId:String='';
+  blankToken:any;
   tokenVal:any;
   constructor(public _user:UserService, private _router:Router) { 
-    if(this._user.checkTokenExists(this.tokenVal) != undefined){
-      console.log("TOKEN IS NOT NULL!", this.tokenVal); 
+    this.tokenVal = this._user.checkTokenExists(this.blankToken);
+    if(this.tokenVal != undefined){
       this._user.user()
       .subscribe((data) =>
       {
@@ -25,7 +26,8 @@ export class NavbarComponent implements OnInit {
         console.error(error);
       });
     }
-    console.log("TOKEN IS NULL!", this.tokenVal); 
+    else{
+    }
   }
 
   addName(data){
