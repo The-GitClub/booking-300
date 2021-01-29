@@ -11,19 +11,21 @@ export class NavbarComponent implements OnInit {
 
   username:String='';
   userId:String='';
-
+  tokenVal:any;
   constructor(public _user:UserService, private _router:Router) { 
-    this._user.user()
-    .subscribe((data) =>
-    {
-      console.log("DATA IN NAVBAR", data); 
-      this.addName(data);
-      console.log("DATA IN NAVBAR", data); 
-    },
-    (error) =>
-    {
-      console.error("COULDN'T ACCESS THE SERVER FROM THE NAVBAR", error);
-    });
+    if(this._user.checkTokenExists(this.tokenVal) != undefined){
+      console.log("TOKEN IS NOT NULL!", this.tokenVal); 
+      this._user.user()
+      .subscribe((data) =>
+      {
+        this.addName(data);
+      },
+      (error) =>
+      {
+        console.error(error);
+      });
+    }
+    console.log("TOKEN IS NULL!", this.tokenVal); 
   }
 
   addName(data){

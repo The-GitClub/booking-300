@@ -1,5 +1,5 @@
 .form-container {
-  margin-top: 50px;
+  margin-top: 500px;
   max-width: 600px;
   margin: auto;
 }
@@ -27,14 +27,11 @@ form {
   background-color: #73cc73;
   padding: 10px;
 }
-h4{
-    text-align: center;
-}
 .mat-card-header{
   justify-content: center;
 }
 .example-card {
-  background-color: #F4F5F5;
+  background-color: #EFF0F2;
   max-width: 700px;
   margin-top: 50px;
 }

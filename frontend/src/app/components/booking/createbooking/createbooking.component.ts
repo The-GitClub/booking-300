@@ -36,7 +36,6 @@ export class CreatebookingComponent implements OnInit {
 
 
   addId(data){
-    console.log(data);  
     this.username = data.username;
     this.userId = data._id;
   }
@@ -57,7 +56,7 @@ export class CreatebookingComponent implements OnInit {
 
     },
     (error) => {
-      this.errorMsg = 'No';
+      this.errorMsg = (error as any).error.message;
     });
 }
 

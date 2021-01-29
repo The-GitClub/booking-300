@@ -25,7 +25,6 @@ export class ViewbookingsComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.bookingService.getBookings(id).subscribe((booking: Booking) => {
       this.booking = booking;
-      console.log(booking);
     },
     (error) => {
       this.error = error.message;
@@ -40,7 +39,7 @@ export class ViewbookingsComponent implements OnInit {
       )
       .subscribe((bookings: Booking[]) => {
         this.bookings = bookings;
-        this.successMsg = 'Booking successfully canceled';
+        this.successMsg = 'Booking cancelled successfully';
       },
       (error: ErrorEvent) => {
       this.errorMsg = error.error.message;

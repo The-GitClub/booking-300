@@ -45,7 +45,6 @@ export class UserService {
       withCredentials:true,
       headers:new HttpHeaders().append('Authorization', this.authToken)
     })
-    .pipe(catchError(this.handleError));
   }
 
   getBookings(id: string): Observable<User> {
@@ -70,15 +69,20 @@ export class UserService {
     this.authToken = token;
   }
 
+  checkTokenExists(tokenVal){
+    tokenVal = localStorage.getItem('id_token');
+    console.log("LOADING THE TOKEN", tokenVal); 
+    return tokenVal;
+  }
+  
+
   //clears local storage
   logout() {
     this.authToken = null;
     this.userr = null;
     localStorage.clear();
   }
-
   handleError(err){
-    console.log("ERROR MESSAGE IN SERVICE FILE : " , err.error.message);
     return throwError(err);
   }
 }
