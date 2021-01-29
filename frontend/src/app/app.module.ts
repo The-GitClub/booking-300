@@ -68,7 +68,7 @@ import { AuthGuard } from './guards/auth.guard';
     MatNativeDateModule,
     MatSnackBarModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
   ],
   providers: [UserService, BookingserviceService, ValidationService, AuthGuard],
   bootstrap: [AppComponent]
