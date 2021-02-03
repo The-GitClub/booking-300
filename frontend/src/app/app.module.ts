@@ -24,7 +24,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
-
+import { MatSelectModule } from '@angular/material/select';
 //alerts
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 //Icons
@@ -40,6 +40,7 @@ import { HomeComponent } from './components/app_pages/home/home.component';
 import { AuthGuard } from './guards/auth.guard';
 //import { UpdatebookingComponent } from './components/updatebooking/updatebooking.component';
 import { UpdatebookingComponent } from '../app/components/booking/updatebooking/updatebooking.component';
+import { from } from 'rxjs';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { UpdatebookingComponent } from '../app/components/booking/updatebooking/
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatSelectModule,
     MatDatepickerModule,
     BrowserAnimationsModule,
     MatToolbarModule,

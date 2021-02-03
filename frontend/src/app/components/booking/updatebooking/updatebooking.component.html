@@ -16,11 +16,16 @@
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
     </mat-form-field> 
-    <br>
-    <mat-form-field>        
-
-<input [(ngModel)]="booking.time" matInput placeholder="Time">
-    </mat-form-field>   
+    
+    <br>      
+ 
+    <mat-form-field>
+        <mat-select class="" id="booking.time" [(ngModel)]="booking.time" name="booking.time" matInput placeholder="Time" required>
+          <mat-option value="18:00">6:00 PM</mat-option>
+          <mat-option value="19:00">7:00 PM</mat-option>
+          <mat-option value="20:00">8:00 PM</mat-option>
+        </mat-select>
+      </mat-form-field>
     <br>
     <button mat-raised-button (click)="save()">Update</button>
 

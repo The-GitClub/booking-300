@@ -1,7 +1,7 @@
 <mat-toolbar *ngIf="successMsg" color="accent">{{ successMsg }}</mat-toolbar>
 <mat-toolbar *ngIf="errorMsg" color="warn">{{ errorMsg }}</mat-toolbar>
 <mat-card class="example-card">
-  <div class="jumbotron">
+  <div class="o">
     <mat-card-header>
       <mat-card-title>Make A Booking</mat-card-title>
       <mat-card-subtitle>Enter the required details</mat-card-subtitle>
@@ -31,13 +31,11 @@
           </mat-form-field>
 
           <mat-form-field>
-            <input
-              [(ngModel)]="time"
-              name="time"
-              matInput
-              placeholder="Time"
-              type="time"
-            />
+            <mat-select class="" id="time" [(ngModel)]="time" name="time" matInput placeholder="Time" required>
+              <mat-option value="18:00">6:00 PM</mat-option>
+              <mat-option value="19:00">7:00 PM</mat-option>
+              <mat-option value="20:00">8:00 PM</mat-option>
+            </mat-select>
           </mat-form-field>
 
           <mat-form-field>
@@ -51,13 +49,13 @@
           </mat-form-field>
 
           <mat-form-field>
-            <input
-              [(ngModel)]="guests"
-              name="guests"
-              matInput
-              placeholder="Number of guests"
-              type="number"
-            />
+            <mat-select class="" id="guests" [(ngModel)]="guests" name="guests" matInput placeholder="Party Size" required>
+              <mat-option value="1">1</mat-option>
+              <mat-option value="2">2</mat-option>
+              <mat-option value="3">3</mat-option>
+              <mat-option value="4">4</mat-option>
+              <mat-option value="5">5</mat-option>
+            </mat-select>
           </mat-form-field>
 
           <button mat-raised-button>Make Booking</button>
