@@ -42,8 +42,6 @@ export class CreatebookingComponent implements OnInit {
   }
 
   createBooking() {
-    this.successMsg = '';
-    this.errorMsg = '';
     this.bookingService.createBooking(this.userId, this.bookingDate, this.time, this.table, this.name, this.guests)
     .subscribe((createdBooking: Booking) => {
       this.bookingDate = '';

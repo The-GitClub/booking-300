@@ -31,6 +31,11 @@
             <td mat-cell *matCellDef="let booking"> {{ booking?.guests }}</td>
         </ng-container>
 
+        <ng-container matColumnDef="update">
+            <th mat-header-cell *matHeaderCellDef>Update</th>
+            <td style="width: 1%; padding-right: 1%;" mat-cell *matCellDef="let booking"> <button [routerLink]="['update', booking._id]" mat-raised-button color="warn">Update</button></td>
+        </ng-container>
+
         <ng-container matColumnDef="cancel">
             <th mat-header-cell *matHeaderCellDef>Cancel Booking</th>
             <td mat-cell *matCellDef="let booking"> <button (click)="cancelBooking(booking._id)" mat-raised-button color="warn">Cancel</button></td>

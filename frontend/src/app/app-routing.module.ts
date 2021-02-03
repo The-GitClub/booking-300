@@ -7,6 +7,7 @@ import { LoginComponent } from './components/authentication/login/login.componen
 import { RegisterComponent } from './components/authentication/registers/register/register.component';
 import { UserhomeComponent } from './components/app_pages/userhome/userhome.component';
 import { ViewbookingsComponent } from './components/booking/viewbookings/viewbookings.component';
+import { UpdatebookingComponent } from './components/booking/updatebooking/updatebooking.component';
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
@@ -15,8 +16,8 @@ const routes: Routes = [
   {path:'user',component:UserhomeComponent,},
   //doesn't have to match back end
   {path:'user/view', component: ViewbookingsComponent,  },
-  {path:'user/book', component: CreatebookingComponent, } //canActivate: [AuthGuard]
-
+  {path:'user/book', component: CreatebookingComponent, }, //canActivate: [AuthGuard]
+  {path:'user/view/update/:id', component: UpdatebookingComponent, }
 ];
 
 @NgModule({

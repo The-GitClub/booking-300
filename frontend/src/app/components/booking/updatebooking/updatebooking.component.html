@@ -1,0 +1,30 @@
+<mat-toolbar *ngIf="successMsg" color="accent">{{ successMsg }}</mat-toolbar>
+<mat-toolbar *ngIf="errorMsg" color="warn">{{ errorMsg }}</mat-toolbar>
+<mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>Update Booking</mat-card-title>
+      <mat-card-subtitle>Enter the required details</mat-card-subtitle>
+      <div mat-card-avatar class="example-header-image"></div>
+    </mat-card-header>
+    <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+    <mat-card-content>
+      <div class="form-container mx-auto">
+<div *ngIf="booking" class="form-container mx-auto">
+    <table class="form"> 
+        <mat-form-field>        
+            <input [(ngModel)]="booking.bookingDate" matInput [matDatepicker]="picker" placeholder="Date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field> 
+    <br>
+    <mat-form-field>        
+
+<input [(ngModel)]="booking.time" matInput placeholder="Time">
+    </mat-form-field>   
+    <br>
+    <button mat-raised-button (click)="save()">Update</button>
+
+</table>  
+
+
+</div>

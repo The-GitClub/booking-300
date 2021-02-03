@@ -73,6 +73,43 @@ function deleteBooking(req, res) {
           res.status(404).send({ message: 'not found' }));
 }
 
+// Get specific booking
+router.get('/:id', (req,res) => {
+    
+  readBooking(req,res);
 
+});
+function readBooking(req, res) {
+  const id = req.params.id;
+  Booking.findById(id)
+      .then((result) => {
+          console.log('result' + result.uri);
+
+          res.json(result)
+      })
+      .catch((error) =>
+          res.status(404).json({ error: 'not found' }))
+}
+
+
+// Update a booking
+router.put('/:id',(req, res) => {
+  updateBooking(req, res);
+});
+function updateBooking(req, res) {
+  const id = req.params.id;
+
+  Booking.findByIdAndUpdate(id, req.body).
+      then((result) => {
+          if (result) {
+              res.status(200).send({ message: 'updated' })
+          }
+          else {
+              res.status(404).send({ message: 'not found' })
+          }
+      })
+      .catch((error) =>
+          res.status(404).send({ message: 'not found' }));
+}
 
 module.exports = router;

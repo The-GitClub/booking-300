@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { Booking } from '../../Interfaces/Booking';
 import { User } from '../../Interfaces/User';
@@ -29,6 +30,20 @@ export class BookingserviceService {
 
   getBookingsForCancel(): Observable<Booking[]> {
     return this.http.get<Booking[]>(`${this.BASE_URL}/bookings`)
+  }
+
+  getBooking(id: string): Observable<Booking> {
+    return this.http.get<Booking>(`${this.BASE_URL}/bookings/${id}`)
+  }
+
+  updateBooking(booking: Booking): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+    return this.http.put(`${this.BASE_URL}/bookings/${booking._id}`, booking, httpOptions).pipe(
+      tap(updatedBooking => console.log(`updated booking = ${JSON.stringify(updatedBooking)}`)),
+      // catchError(error => of(new Booking()))
+    );
   }
 
 }

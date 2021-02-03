@@ -38,6 +38,8 @@ import { ViewbookingsComponent } from './components/booking/viewbookings/viewboo
 import { CreatebookingComponent } from './components/booking/createbooking/createbooking.component';
 import { HomeComponent } from './components/app_pages/home/home.component';
 import { AuthGuard } from './guards/auth.guard';
+//import { UpdatebookingComponent } from './components/updatebooking/updatebooking.component';
+import { UpdatebookingComponent } from '../app/components/booking/updatebooking/updatebooking.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,8 @@ import { AuthGuard } from './guards/auth.guard';
     CreatebookingComponent,
     HomeComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    UpdatebookingComponent
   ],
   imports: [
     BrowserModule,
