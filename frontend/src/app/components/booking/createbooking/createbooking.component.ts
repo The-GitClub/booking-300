@@ -23,6 +23,7 @@ export class CreatebookingComponent implements OnInit {
   public guests: number;
   username: String='';
   userId: string='';
+  todayDate:Date = new Date(); //Used too disable the selection of dates before the current day
 
   constructor(private _user:UserService, private bookingService: BookingserviceService, private _router:Router) { 
     this._user.user()
