@@ -9,23 +9,23 @@ import {
 } from "@angular/material/snack-bar";
 
 @Injectable()
-export class AuthGuard implements CanActivate {
-   //positions for the alert
-      horizontalPosition: MatSnackBarHorizontalPosition = "center";
-      verticalPosition: MatSnackBarVerticalPosition = "bottom";
+export class StaffGuard implements CanActivate {
 
-  constructor (private userService:UserService, private router:Router,  private _snackBar: MatSnackBar,){
+    //positions for the alert
+    horizontalPosition: MatSnackBarHorizontalPosition = "center";
+    verticalPosition: MatSnackBarVerticalPosition = "bottom";
+  constructor (private _user:UserService, private router:Router, private _snackBar: MatSnackBar){
 
   }
-
   canActivate() {
-    if(this.userService.loggedIn()) {
+    if(this._user.ObtainRole() != 'staff'|| 'manager') {
       this.router.navigate(['/']);
-      this._snackBar.open("Please Login First", "", {
+      this._snackBar.open("Please Log In With Staff Credentials First", "", {
         duration: 2000,
         horizontalPosition: this.horizontalPosition,
         verticalPosition: this.verticalPosition,
       });
+      return false;
       return false;
     } 
     else{

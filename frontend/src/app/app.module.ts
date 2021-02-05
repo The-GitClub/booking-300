@@ -25,10 +25,13 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSelectModule } from '@angular/material/select';
+
 //alerts
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 //Icons
 import { MatIconModule } from '@angular/material/icon';
+
 //Material Card
 import {MatCardModule} from '@angular/material/card';
 import { NavbarComponent } from './layout/navbar/navbar.component';
@@ -37,14 +40,19 @@ import { UserhomeComponent } from './components/app_pages/userhome/userhome.comp
 import { ViewbookingsComponent } from './components/booking/viewbookings/viewbookings.component';
 import { CreatebookingComponent } from './components/booking/createbooking/createbooking.component';
 import { HomeComponent } from './components/app_pages/home/home.component';
-import { AuthGuard } from './guards/auth.guard';
+
 //import { UpdatebookingComponent } from './components/updatebooking/updatebooking.component';
 import { UpdatebookingComponent } from '../app/components/booking/updatebooking/updatebooking.component';
-import { from } from 'rxjs';
 import { StaffPageComponent } from './components/app_pages/staff-page/staff-page.component';
 import { ManagerPageComponent } from './components/app_pages/manager-page/manager-page.component';
 import { RegisterManagerComponent } from './components/authentication/registers/register-manager/register-manager.component';
 import { RegisterStaffComponent } from './components/authentication/registers/register-staff/register-staff.component';
+
+// Guards
+import { AuthGuard } from './guards/auth.guard';
+import { antiAuthGuard } from './guards/antiAuth.gaurd';
+import { StaffGuard } from './guards/staff.guard';
+import { ManagerGuard } from './guards/manager.guard';
 
 @NgModule({
   declarations: [
@@ -83,7 +91,7 @@ import { RegisterStaffComponent } from './components/authentication/registers/re
     MatIconModule,
     MatCardModule,
   ],
-  providers: [UserService, BookingserviceService, ValidationService, AuthGuard],
+  providers: [UserService, BookingserviceService, ValidationService, AuthGuard, antiAuthGuard, StaffGuard, ManagerGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

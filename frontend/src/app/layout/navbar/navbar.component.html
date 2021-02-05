@@ -1,39 +1,36 @@
-
-<nav class="navbar navbar-expand-lg navbar-black bg-black">
-    <button mat-button><a class="navbar-brand" [routerLink]="['']">Booking300&trade;</a></button>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-        aria-label="Toggle navigation">
+<div class="bs-component">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black">
+        <button mat-button><mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon><a class="navbar-brand" [routerLink]="['']">Booking300&trade;</a></button>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-              <button mat-button><a class="nav-link"  *ngIf = "!_user.loggedIn()" [routerLink]="['user/book']" routerLinkActive="active">Book Table</a></button>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <button mat-button *ngIf = "!_user.loggedIn()" [routerLink]="['user/book']" routerLinkActive="active"><mat-icon>book</mat-icon><a class="nav-link">  Book A Table</a></button>
           </li>
           <li class="nav-item">
-              <button mat-button ><a class="nav-link"  *ngIf = "!_user.loggedIn()" [routerLink]="['user/view']" routerLinkActive="active">View Bookings</a></button>
+            <button mat-button *ngIf = "!_user.loggedIn()" [routerLink]="['user/view']" routerLinkActive="active"><mat-icon>event</mat-icon><a class="nav-link" >View Bookings</a></button>
+        </li>
+          <li class="nav-item">
+            <button mat-button (click) = "protectedStaffAndManager()" [routerLink]="['/staff']" routerLinkActive="active" *ngIf = "_user.ObtainRole() == 'staff'" ><mat-icon>group</mat-icon><a class="nav-link"  >Staff Options</a></button>
           </li>
-          <span class="spacer2"></span>
-         
-        <li class="nav-item">
-            <button mat-button (click) = "protectedStaffAndManager()" ><a class="nav-link"  *ngIf = "_user.ObtainRole() == 'staff' || _user.ObtainRole() == 'manager'"  [routerLink]="['/staff']" routerLinkActive="active">Staff Options</a></button>
-        </li>
-        <li class="nav-item">
-            <button mat-button (click) = "protectedManager()" ><a class="nav-link"  *ngIf = "_user.ObtainRole() == 'manager'" [routerLink]="['/manager']" routerLinkActive="active">Manager Options</a></button>
-        </li>
+          <li class="nav-item">
+            <button mat-button (click) = "protectedManager()" [routerLink]="['/manager']" routerLinkActive="active"  *ngIf = "_user.ObtainRole() == 'manager'"><mat-icon>business_center</mat-icon><a class="nav-link"  >Manager Options</a></button>
+          </li>
         </ul>
-    </div>
-  
-    <ul class="nav navbar-nav navbar-right">
-      <li class="nav-item">
-          <button mat-button><a class="nav-link" *ngIf = "_user.loggedIn()" [routerLink]="['/register']" routerLinkActive="active">Register<span class="sr-only">(current)</span></a></button>
-      </li>
-      <li class="nav-item">
-          <button mat-button ><a class="nav-link" *ngIf = "_user.loggedIn()" [routerLink]="['/login']" routerLinkActive="active">Login</a></button>
-      </li>
-      <li class="nav-item">
-        <button mat-button (click) = "logout()" *ngIf = "!_user.loggedIn()" [routerLink]="['/login']" routerLinkActive="active">Logout</button>
-        </li>
-    </ul>
-  </nav>
-  
+        <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item">
+                <button mat-button *ngIf = "_user.loggedIn()" [routerLink]="['/register']" routerLinkActive="active"><mat-icon>supervisor_account</mat-icon><a class="nav-link"  >Register<span class="sr-only">(current)</span></a></button>
+            </li>
+            <li class="nav-item" >
+                <button mat-button *ngIf = "_user.loggedIn()"><mat-icon>account_circle</mat-icon><a class="nav-link" [routerLink]="['/login']" routerLinkActive="active">Login</a></button>
+            </li>
+            <li class="nav-item">
+              <button mat-button (click) = "logout()" *ngIf = "!_user.loggedIn()"  [routerLink]="['/login']" routerLinkActive="active"><mat-icon>exit_to_app</mat-icon><a class="nav-link">Log Out</a></button>
+              </li>
+          </ul>
+      </div>
+    </nav>
+  </div>

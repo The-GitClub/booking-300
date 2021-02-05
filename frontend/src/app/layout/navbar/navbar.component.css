@@ -10,3 +10,11 @@ button:hover {
     background-color: #1E1E1E;
     text-decoration: underline;
 }
+
+#toggler{
+    background-color: yellow;
+}
+#icon{
+    background-color: green;
+}
+
