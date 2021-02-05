@@ -29,11 +29,7 @@ export class UpdatebookingComponent implements OnInit {
   userId: string='';
 
   constructor(private _user:UserService, private bookingService: BookingserviceService, private _router:Router, private route: ActivatedRoute) { 
-    this._user.user()
-    .subscribe(
-      data=>this.addId(data),
-      error=>console.log(error)
-    )
+    this.userId = this._user.ObtainID();
   }
 
   ngOnInit() {

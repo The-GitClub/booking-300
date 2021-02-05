@@ -30,20 +30,11 @@ export class ViewbookingsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    //call the get user id method and pass that id instead of passing as a a parameter
-    this._user.user().subscribe(
-      (data) => this.addId(data),
-      (error) => console.error()
-    );
-    //const id = this.route.snapshot.paramMap.get('id');
-  }
-
-  addId(data) {
-    this.username = data.username;
-    this.userId = data._id;
     this.getTheBookings();
+    const id = this.route.snapshot.paramMap.get('id');
   }
   getTheBookings() {
+    this.userId = this._user.ObtainID();
     this.bookingService.getBookings(this.userId).subscribe(
       (booking: Booking) => {
         this.booking = booking;

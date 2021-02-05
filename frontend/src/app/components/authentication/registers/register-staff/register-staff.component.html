@@ -1,1 +1,64 @@
-<p>register-staff works!</p>
+<!-- <div class="row" style="margin-top:40px; padding:20px; background-color:#eff0f2;border-radius:15px;
+-webkit-box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);
+-moz-box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);
+box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);"> -->
+
+<mat-card class="example-card">
+    <div class="jumbotron">
+
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>Register</mat-card-title>
+    <mat-card-subtitle>Create A New Staff Account</mat-card-subtitle>
+  </mat-card-header>
+  <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+  <mat-card-content>
+    <div class="form-container mx-auto">
+    <form [formGroup]="registerForm" (ngSubmit)="register()" >
+      <mat-form-field>
+        <input id="email"
+               matInput
+               formControlName="email"
+               placeholder="Enter your email" />
+      </mat-form-field>
+  
+        <mat-form-field>
+          <input id="username"
+                 matInput
+                 formControlName="username"
+                 placeholder="Enter your username" />
+        </mat-form-field>
+  
+        <mat-form-field>
+            <input id="password1"
+                   matInput
+                   formControlName="password"
+                   placeholder="Enter your password"
+                   [type]="hide1 ? 'password':'text'" />
+              <mat-icon matSuffix (click)="hide1 = !hide1">
+                {{!hide1 ? 'visibility_off' : 'visibility'}}
+              </mat-icon>
+          </mat-form-field>
+  
+          <mat-form-field>
+            <input id="password2"
+                   matInput
+                   formControlName="cpass"
+                   placeholder="Enter your password"
+                   [type]="hide2 ? 'password':'text'" />
+              <mat-icon matSuffix (click)="hide2 = !hide2">
+                {{!hide2 ? 'visibility_off' : 'visibility'}}
+              </mat-icon>
+          </mat-form-field> 
+                      
+          <mat-card-actions>
+            <button mat-button type="submit" 
+                  class="mat-raised-button mat-primary" 
+                  >Register</button>
+                  <button mat-button routerLink="/login" class="divider">Already Have An Account? Login</button>
+          </mat-card-actions>
+    </form>
+  </div>
+  </mat-card-content>
+    </div>
+</mat-card>

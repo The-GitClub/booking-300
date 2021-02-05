@@ -1,4 +1,38 @@
-<br>
-<h1>Welcome to Booking300</h1>
-<p>Log in to your account or create an account to book seats wherever you like inside our partner restaurants.</p>
 
+<div class="row" style="margin-top:40px; background-color:#eff0f2;
+-webkit-box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);
+-moz-box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);
+box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);">
+  <!-- <div class="col-sm-12" style="text-align:center;">
+    Register
+  </div> -->
+
+  <div *ngIf = "!_user.loggedIn()" class="col-sm-12">
+      <div class="jumbotron">
+          <p class="lead">You have successfully logged in to our system.</p>
+          <hr class="my-4">
+          <p>Create or view your bookings.</p>
+          <p class="lead" style="color:white;">
+            <button [routerLink]="['user/book']" class="btn btn-primary btn-md">Create Booking</button> &nbsp;
+            <button [routerLink]="['user/view']" class="btn  btn-primary btn-md">View Bookings</button>
+          </p>
+        </div>
+  </div>
+</div>
+<br>
+<div class="row" style="margin-top:40px; background-color:#eff0f2;
+-webkit-box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);
+-moz-box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);
+box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);">
+<div *ngIf = "_user.loggedIn()" class="col-sm-12">
+    <div class="jumbotron">
+        <p class="lead">Book A Table</p>
+        <hr class="my-4">
+        <p>Login or Register</p>
+        <p class="lead" style="color:white;">
+          <button  [routerLink]="['/login']" class="btn btn-primary btn-md">Login</button> &nbsp;
+          <button [routerLink]="['/register']" class="btn  btn-primary btn-md">Register</button>
+        </p>
+      </div>
+</div>
+</div>

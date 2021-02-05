@@ -41,6 +41,10 @@ import { AuthGuard } from './guards/auth.guard';
 //import { UpdatebookingComponent } from './components/updatebooking/updatebooking.component';
 import { UpdatebookingComponent } from '../app/components/booking/updatebooking/updatebooking.component';
 import { from } from 'rxjs';
+import { StaffPageComponent } from './components/app_pages/staff-page/staff-page.component';
+import { ManagerPageComponent } from './components/app_pages/manager-page/manager-page.component';
+import { RegisterManagerComponent } from './components/authentication/registers/register-manager/register-manager.component';
+import { RegisterStaffComponent } from './components/authentication/registers/register-staff/register-staff.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +57,11 @@ import { from } from 'rxjs';
     HomeComponent,
     NavbarComponent,
     FooterComponent,
-    UpdatebookingComponent
+    UpdatebookingComponent,
+    RegisterManagerComponent,
+    RegisterStaffComponent,
+    StaffPageComponent,
+    ManagerPageComponent
   ],
   imports: [
     BrowserModule,

@@ -21,7 +21,7 @@ router.post("/register-customer", async (req, res) => {
 
 // Staff Registration Route
 router.post("/register-staff", async (req, res) => {
-  await (userRegister.body, "staff", res);
+  await userRegister(req.body, "staff", res);
 });
 
 // Manager  Registration Route

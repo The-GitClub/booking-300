@@ -25,24 +25,17 @@ export class CreatebookingComponent implements OnInit {
   userId: string='';
   todayDate:Date = new Date(); //Used too disable the selection of dates before the current day
 
-  constructor(private _user:UserService, private bookingService: BookingserviceService, private _router:Router) { 
-    this._user.user()
-    .subscribe(
-      data=>this.addId(data),
-      error=>console.log(error)
-    )
-  }
+  constructor(private _user:UserService, private bookingService: BookingserviceService, private _router:Router) { }
+    
 
   ngOnInit() {
+    
   }
 
 
-  addId(data){
-    this.username = data.username;
-    this.userId = data._id;
-  }
 
   createBooking() {
+    this.userId = this._user.ObtainID();
     this.bookingService.createBooking(this.userId, this.bookingDate, this.time, this.table, this.name, this.guests)
     .subscribe((createdBooking: Booking) => {
       this.bookingDate = '';
