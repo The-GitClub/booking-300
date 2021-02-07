@@ -29,6 +29,26 @@ export class NavbarComponent implements OnInit {
     this._router.navigate(["/login"]);
   }
 
+  isStaff(){
+    if(this._user.ObtainRole() == 'staff'){
+     return true;
+    }
+    else{
+      return false;
+    }
+    
+  }
+  isManager(){
+    if(this._user.ObtainRole() == 'manager'){
+      return true;
+     }
+     else{
+       return false;
+     }
+  }
+
+
+
   protectedManager() {
     if (this._user.ObtainRole() == "manager") {
       return true;
@@ -42,8 +62,8 @@ export class NavbarComponent implements OnInit {
       return false;
     }
   }
-  protectedStaffAndManager() {
-    if (this._user.ObtainRole() == "manager" || this._user.ObtainRole() == "staff") {
+  protectedStaff() {
+    if (this._user.ObtainRole() == "staff") {
       return true;
     } else {
       this._router.navigate(["/login"]);
