@@ -14,10 +14,10 @@
             <button mat-button *ngIf = "!_user.loggedIn()" [routerLink]="['user/view']" routerLinkActive="active"><mat-icon>event</mat-icon><a class="nav-link" >View Bookings</a></button>
         </li>
           <li class="nav-item">
-            <button mat-button (click) = "protectedStaff()" [routerLink]="['/staff']" routerLinkActive="active" *ngIf =  ><mat-icon>group</mat-icon><a class="nav-link"  >Staff Options</a></button>
+            <button mat-button (click) = "protectedStaff()" [routerLink]="['/staff']" routerLinkActive="active" *ngIf = "isStaff()" ><mat-icon>group</mat-icon><a class="nav-link"  >Staff Options</a></button>
           </li>
           <li class="nav-item">
-            <button mat-button (click) = "protectedManager()" [routerLink]="['/manager']" routerLinkActive="active"  *ngIf = "_user.ObtainRole() == 'manager'"><mat-icon>business_center</mat-icon><a class="nav-link"  >Manager Options</a></button>
+            <button mat-button (click) = "protectedManager()" [routerLink]="['/manager']" routerLinkActive="active"  *ngIf = "isManager()"><mat-icon>business_center</mat-icon><a class="nav-link"  >Manager Options</a></button>
           </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
