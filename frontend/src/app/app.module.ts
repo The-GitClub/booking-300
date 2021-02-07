@@ -53,6 +53,8 @@ import { AuthGuard } from './guards/auth.guard';
 import { antiAuthGuard } from './guards/antiAuth.gaurd';
 import { StaffGuard } from './guards/staff.guard';
 import { ManagerGuard } from './guards/manager.guard';
+import { ManagerNotificationComponent } from './components/notifications/manager-notification/manager-notification.component';
+import { StaffNotificationComponent } from './components/notifications/staff-notification/staff-notification.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +71,9 @@ import { ManagerGuard } from './guards/manager.guard';
     RegisterManagerComponent,
     RegisterStaffComponent,
     StaffPageComponent,
-    ManagerPageComponent
+    ManagerPageComponent,
+    ManagerNotificationComponent,
+    StaffNotificationComponent
   ],
   imports: [
     BrowserModule,
@@ -91,6 +95,7 @@ import { ManagerGuard } from './guards/manager.guard';
     MatIconModule,
     MatCardModule,
   ],
+  entryComponents: [ManagerNotificationComponent, StaffNotificationComponent],
   providers: [UserService, BookingserviceService, ValidationService, AuthGuard, antiAuthGuard, StaffGuard, ManagerGuard],
   bootstrap: [AppComponent]
 })

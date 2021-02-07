@@ -8,24 +8,24 @@
       <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <button mat-button *ngIf = "!_user.loggedIn()" [routerLink]="['user/book']" routerLinkActive="active"><mat-icon>book</mat-icon><a class="nav-link">  Book A Table</a></button>
+            <button mat-button *ngIf = "!_user.loggedIn()" [routerLink]="['user/book']" routerLinkActive="active"><mat-icon>book</mat-icon><a class="nav-link">Book A Table</a></button>
           </li>
           <li class="nav-item">
-            <button mat-button *ngIf = "!_user.loggedIn()" [routerLink]="['user/view']" routerLinkActive="active"><mat-icon>event</mat-icon><a class="nav-link" >View Bookings</a></button>
+            <button mat-button *ngIf = "!_user.loggedIn()" [routerLink]="['user/view']" routerLinkActive="active"><mat-icon>event</mat-icon><a class="nav-link">View Bookings</a></button>
         </li>
           <li class="nav-item">
-            <button mat-button (click) = "protectedStaff()" [routerLink]="['/staff']" routerLinkActive="active" *ngIf = "isStaff()" ><mat-icon>group</mat-icon><a class="nav-link"  >Staff Options</a></button>
+            <button mat-button (click) = "protectedStaff()" [routerLink]="['/staff']" routerLinkActive="active" *ngIf = "isStaff()" ><mat-icon>group</mat-icon><a class="nav-link">Staff Options</a></button>
           </li>
           <li class="nav-item">
-            <button mat-button (click) = "protectedManager()" [routerLink]="['/manager']" routerLinkActive="active"  *ngIf = "isManager()"><mat-icon>business_center</mat-icon><a class="nav-link"  >Manager Options</a></button>
+            <button mat-button (click) = "protectedManager()" [routerLink]="['/manager']" routerLinkActive="active"  *ngIf = "isManager()"><mat-icon>business_center</mat-icon><a class="nav-link" >Manager Options</a></button>
           </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li class="nav-item">
-                <button mat-button *ngIf = "_user.loggedIn()" [routerLink]="['/register']" routerLinkActive="active"><mat-icon>supervisor_account</mat-icon><a class="nav-link"  >Register<span class="sr-only">(current)</span></a></button>
+                <button mat-button *ngIf = "_user.loggedIn()" [routerLink]="['/register']" routerLinkActive="active"><mat-icon>supervisor_account</mat-icon><a class="nav-link">Register<span class="sr-only">(current)</span></a></button>
             </li>
             <li class="nav-item" >
-                <button mat-button *ngIf = "_user.loggedIn()"><mat-icon>account_circle</mat-icon><a class="nav-link" [routerLink]="['/login']" routerLinkActive="active">Login</a></button>
+                <button mat-button *ngIf = "_user.loggedIn()" [routerLink]="['/login']" routerLinkActive="active"><mat-icon>account_circle</mat-icon><a class="nav-link">Login</a></button>
             </li>
             <li class="nav-item">
               <button mat-button (click) = "logout()" *ngIf = "!_user.loggedIn()"  [routerLink]="['/login']" routerLinkActive="active"><mat-icon>exit_to_app</mat-icon><a class="nav-link">Log Out</a></button>
