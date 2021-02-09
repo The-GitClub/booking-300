@@ -1,6 +1,6 @@
 const router = require("express").Router();
 var User = require("../models/User");
-const Booking = require("../models/booking");
+const Bookings = require("../models/booking");
 
 // Bring in the User Registration Function, User Login Function
 const {
@@ -69,7 +69,7 @@ async function newUserBooking(req, res, next) {
   const { userId } = req.params;
   console.log(userId); 
   // Create new booking
-  const newBooking = new Booking(req.body);
+  const newBooking = new Bookings(req.body);
   // Get user
   const user = await User.findById(userId);
   // Assign booking to user

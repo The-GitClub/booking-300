@@ -12,9 +12,12 @@ import { StaffPageComponent } from './components/app_pages/staff-page/staff-page
 import { ManagerGuard } from './guards/manager.guard';
 import { StaffGuard } from './guards/staff.guard';
 import { antiAuthGuard } from './guards/antiAuth.gaurd';
+import { BookingconfirmationComponent } from './components/app_pages/bookingconfirmation/bookingconfirmation.component';
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
+  {path:'booking-confirmation', component:BookingconfirmationComponent},
+
   {path:'login', component:LoginComponent, canActivate: [antiAuthGuard]}, 
   {path:'register', component:RegisterComponent, canActivate: [antiAuthGuard] }, 
   {path:'manager', component:ManagerPageComponent, canActivate: [ManagerGuard]},
@@ -22,6 +25,7 @@ const routes: Routes = [
   {path:'user/view', component: ViewbookingsComponent, canActivate: [AuthGuard] },
   {path:'user/book', component: CreatebookingComponent, canActivate: [AuthGuard] }, //canActivate: [AuthGuard]
   {path:'user/view/update/:id', component: UpdatebookingComponent, canActivate: [AuthGuard] }
+
 ];
 
 @NgModule({

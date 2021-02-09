@@ -1,70 +1,191 @@
-<mat-toolbar *ngIf="successMsg" color="accent">{{ successMsg }}</mat-toolbar>
-<mat-toolbar *ngIf="errorMsg" color="warn">{{ errorMsg }}</mat-toolbar>
-<mat-card class="example-card">
-  <div class="o">
-    <mat-card-header>
-      <mat-card-title>Make A Booking</mat-card-title>
-      <mat-card-subtitle>Enter the required details</mat-card-subtitle>
-      <div mat-card-avatar class="example-header-image"></div>
-    </mat-card-header>
-    <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
-    <mat-card-content>
-      <div class="form-container mx-auto">
-        <form (submit)="createBooking()">
-          <mat-form-field>
-            <input
-              [(ngModel)]="bookingDate"
-              name="bookingDate"
-              matInput
-              [min]="todayDate"
-              [matDatepicker]="picker"
-              placeholder="Choose a date"
-              required
-            />
-            <mat-datepicker-toggle
-              matSuffix
-              [for]="picker"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-
-          <mat-form-field>
-            <input [(ngModel)]="name" name="name" matInput placeholder="Name" required/>
-          </mat-form-field>
-
-          <mat-form-field>
-            <mat-select class="" id="time" [(ngModel)]="time" name="time" matInput placeholder="Time" required>
-              <mat-option value="09:00">09:00 - 12:00</mat-option>
-              <mat-option value="12:00">12:00 - 15:00</mat-option>
-              <mat-option value="15:00">15:00 - 18:00</mat-option>
-              <mat-option value="18:00">18:00 - 21:00</mat-option>
-              <mat-option value="21:00">21:00 - 23:00</mat-option>
-            </mat-select>
-          </mat-form-field>
-
-          <mat-form-field>
-            <input
-              [(ngModel)]="table"
-              name="table"
-              matInput
-              placeholder="Table"
-              type="table"
-            />
-          </mat-form-field>
-
-          <mat-form-field>
-            <mat-select class="" id="guests" [(ngModel)]="guests" name="guests" matInput placeholder="Party Size" required>
-              <mat-option value="1">1</mat-option>
-              <mat-option value="2">2</mat-option>
-              <mat-option value="3">3</mat-option>
-              <mat-option value="4">4</mat-option>
-              <mat-option value="5">5</mat-option>
-            </mat-select>
-          </mat-form-field>
-
-          <button mat-raised-button>Make Booking</button>
-        </form>
+<div class="container-fluid mx-auto">
+  <div class="background">
+    <div class="row">
+      <div class="col-md-6 offset-sm-1 col-sm-12">
+        <br>
+        <h2 class="header">Table Reservation Software</h2>
       </div>
-    </mat-card-content>
+      <div class="col-md-3 col-sm-12 mx-auto">
+        <br /><br />
+        <div class="card booking-card">
+          <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+            <div (click)="d.toggle()" class="date">
+              Click to select available date
+            </div>
+
+            <div class="form-group">
+              <input
+                type="text"
+                name="date"
+                placeholder="..."
+                class="form-control"
+                ngbDatepicker
+                #d="ngbDatepicker"
+                ngModel
+                (ngModelChange)="filterGuests(f)"
+                [markDisabled]="isDisabled"
+                [minDate]="fullDate"
+                required
+                #date="ngModel"
+              />
+              <!-- <div
+                class="required"
+                *ngIf="(f.submitted || date.touched) && date.errors"
+              >
+                This field is required!
+              </div> -->
+            <div class="form-group">
+              <label for="exampleFormControlSelect1" class="label"
+                >Select time</label
+              >
+              <select
+                class="form-control"
+                id="exampleFormControlSelect"
+                name="time"
+                ngModel
+                required
+                #time="ngModel"
+                (ngModelChange)="filterGuests(f);"
+              >
+                <option
+                  *ngFor="let item of filteredOptions"
+                  [value]="item.value"
+                >
+                  {{ item.text }}
+                </option>
+              </select>
+              <!-- <div
+                class="required"
+                *ngIf="(f.submitted || time.touched) && time.errors"
+              >
+                This field is required!
+              </div> -->
+              <div
+                class="required"
+              *ngIf="fullCapacityError">We are at full capacity. Please choose another time.</div>
+            </div>
+            </div>
+
+ <!-- <div class="form-group">
+              <label for="exampleFormControlSelect1" class="label"
+                >Select table</label
+              >
+              <select
+                class="form-control"
+                id="exampleFormControlSelect1"
+                name="table"
+                ngModel
+                required
+                #table="ngModel"
+                (ngModelChange)="filterTime(f)"
+                
+              >
+                <option
+                  *ngFor="let item of filteredTbls"
+                  [value]="item.value"
+                >
+                  {{ item.text }}
+                </option>
+              </select>
+              <div
+                class="required"
+                *ngIf="(f.submitted || table.touched) && table.errors"
+              >
+                This field is required!
+              </div>
+            </div> -->
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1" class="label"
+                >Select guests</label
+              >
+              <select
+                class="form-control"
+                id="exampleFormControlSelect1"
+                name="guests"
+                ngModel
+                required
+                #guests="ngModel"
+                
+                
+              >
+                <option
+                  *ngFor="let item of filteredGuests;"
+                  [value]="item.value"
+                >
+                  {{ item.text }}
+                </option>
+              </select>
+              <!-- <div
+                class="required"
+                *ngIf="(f.submitted || guests.touched) && guests.errors || guests === null"
+              >
+                This field is required!
+              </div> -->
+            </div>
+
+            <div class="form-group">
+              <label for="formGroupExampleInput" class="label">Full name</label>
+              <input
+                type="text"
+                class="form-control"
+                name="name"
+                ngModel
+                required
+                #name="ngModel"
+              />
+              <!-- <div
+                class="required"
+                *ngIf="(f.submitted || name.touched) && name.errors"
+              >
+                This field is required!
+              </div> -->
+            </div>
+
+            <div class="form-group">
+              <label for="formGroupExampleInput" class="label">Email</label>
+              <input
+                type="text"
+                class="form-control"
+                name="email"
+                email
+                ngModel
+                required
+                #email="ngModel"
+              />
+
+              <!-- <div
+                class="required"
+                *ngIf="(f.submitted || email.touched) && email.errors"
+              >
+                This field is required!
+              </div> -->
+            </div>
+
+            <div class="form-group">
+              <label for="formGroupExampleInput" class="label"
+                >Phone number</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                name="phone"
+                ngModel
+                required
+                #phone="ngModel"
+              />
+              <!-- <div
+                class="required"
+                *ngIf="(f.submitted || phone.touched) && phone.errors"
+              >
+                This field is required!
+              </div> -->
+            </div>
+            <button type="submit" class="btn submit" [disabled]="fullCapacityError">Submit</button>
+          </form>
+        </div>
+        <br /><br />
+      </div>
+    </div>
   </div>
-</mat-card>
+</div>

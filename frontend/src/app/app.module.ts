@@ -55,6 +55,8 @@ import { StaffGuard } from './guards/staff.guard';
 import { ManagerGuard } from './guards/manager.guard';
 import { ManagerNotificationComponent } from './components/notifications/manager-notification/manager-notification.component';
 import { StaffNotificationComponent } from './components/notifications/staff-notification/staff-notification.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BookingconfirmationComponent } from './components/app_pages/bookingconfirmation/bookingconfirmation.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +75,8 @@ import { StaffNotificationComponent } from './components/notifications/staff-not
     StaffPageComponent,
     ManagerPageComponent,
     ManagerNotificationComponent,
-    StaffNotificationComponent
+    StaffNotificationComponent,
+    BookingconfirmationComponent
   ],
   imports: [
     BrowserModule,
@@ -94,6 +97,7 @@ import { StaffNotificationComponent } from './components/notifications/staff-not
     MatSnackBarModule,
     MatIconModule,
     MatCardModule,
+    NgbModule,
   ],
   entryComponents: [ManagerNotificationComponent, StaffNotificationComponent],
   providers: [UserService, BookingserviceService, ValidationService, AuthGuard, antiAuthGuard, StaffGuard, ManagerGuard],

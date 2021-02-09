@@ -10,7 +10,7 @@ var schema = new Schema({
     role: { type: String, default: "customer", enum: ["customer", "staff", "manager"]},
     bookings: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Booking'
+        ref: 'Bookings'
       }]
 });
 

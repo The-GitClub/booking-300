@@ -18,7 +18,7 @@ export class ViewbookingsComponent implements OnInit {
   public loading = true;
   public errorMsg: string;
   public successMsg: string;
-  public columns = ["bookingDate", "time", "name", "table", "guests", "update", "cancel"];
+  public columns = ["date", "time", "name", "guests", "update", "cancel"];
 
   username: String = "";
   userId: string = "";
