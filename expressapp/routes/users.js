@@ -1,75 +1,75 @@
-var express = require('express');
-var router = express.Router();
-var User = require('../models/user');
-const Booking = require('../models/booking')
+const router = require("express").Router();
+var User = require("../models/User");
+const Bookings = require("../models/booking");
 
-var passport = require('passport');
-/* GET users listing. */
-// router.get('/', function(req, res, next) {
-//   res.send('respond with a resource');
-// });
+// Bring in the User Registration Function, User Login Function
+const {
+    userRegister,
+    userLogin,
+    findMyRole,
+    userAuth,
+    //checkRole,
+    serializeUser,
+    serializeUserForId
+} = require("../utils/authentication");
 
-router.post('/register', function (req, res, next) {
-  addToDB(req, res);
+/* #region  Registrations */
+// Customer Registration Route
+router.post("/register-customer", async (req, res) => {
+  await userRegister(req.body, "customer", res);
 });
 
+// Staff Registration Route
+router.post("/register-staff", async (req, res) => {
+  await userRegister(req.body, "staff", res);
+});
 
-async function addToDB(req, res) {
+// Manager  Registration Route
+router.post("/register-manager", async (req, res) => {
+  await userRegister(req.body, "manager", res);
+});
 
-  var user = new User({
-    email: req.body.email,
-    username: req.body.username,
-    password: User.hashPassword(req.body.password),
-    creation_dt: Date.now()
+/* #endregion Registrations */
+
+/* #region  Login */
+  router.post("/login", async (req, res) => {
+    console.log("LOGIN ROUTE ENTERED"); 
+    try {
+      let role = await findMyRole(req.body.email, res);
+      console.log("ROLE IN LOGIN ROUTE", role); 
+      await userLogin(req.body, role, res);
+    }
+    catch (err) {
+      return res.status(501).json({
+        message: `Login Failure. Account does not exist`,
+        success: false,
+      });
+    }
   });
-
-  try {
-    doc = await user.save();
-    return res.status(201).json(doc);
-  }
-  catch (err) {
-    return res.status(501).json(err);
-  }
-}
+/* #endregion Login*/
 
 
-router.post('/login',function(req,res,next){
-  passport.authenticate('local', function(err, user, info) {
-    if (err) { return res.status(501).json(err); }
-    if (!user) { return res.status(501).json(info); }
-    req.logIn(user, function(err) {
-      if (err) { return res.status(501).json(err); }
-      return res.status(200).json({message:'Login Success'});
-    });
-  })(req, res, next);
+// Get User Route 
+router.get("/user", userAuth, async (req, res) => {
+  console.log("USER IN THE GET USER METHOD", req.user._id.id);
+  let id = req.user._id.id;
+  getUserBookings(id);
+  return res.json(serializeUser(req.user));
 });
 
-router.get('/user',isValidUser,function(req,res,next){
-  return res.status(200).json(req.user);
-});
 
-router.get('/logout',isValidUser, function(req,res,next){
-  req.logout();
-  return res.status(200).json({message:'Logout Success'});
-})
-
-function isValidUser(req,res,next){
-  if(req.isAuthenticated()) next();
-  else return res.status(401).json({message:'Unauthorized Request'});
-}
-
-// Associating user with booking
-async function getUserBookings (req, res, next) {
+async function getUserBookings(req, res, next) {
   const { userId } = req.params;
-  const user = await User.findById(userId).populate('bookings');
-  console.log('user\'s bookings', user.bookings);
+  const user = await User.findById(userId).populate("bookings");
+  console.log("user's bookings", user.bookings);
   res.status(200).json(user.bookings);
 }
 
-async function newUserBooking (req, res, next) {
+async function newUserBooking(req, res, next) {
   const { userId } = req.params;
+  console.log(userId); 
   // Create new booking
-  const newBooking = new Booking(req.body);
+  const newBooking = new Bookings(req.body);
   // Get user
   const user = await User.findById(userId);
   // Assign booking to user
@@ -80,17 +80,13 @@ async function newUserBooking (req, res, next) {
   user.bookings.push(newBooking);
   // Save user
   try {
-  await user.save();
-  res.status(201).json(newBooking);
-  }
-
-  catch(err){
-      return res.status(501).json(err);
+    await user.save();
+    res.status(201).json(newBooking);
+  } catch (err) {
+    return res.status(501).json(err);
   }
 }
 
-router.route('/:userId/bookings')
-.get(getUserBookings)
-.post(newUserBooking);
+router.route("/:userId/bookings").get(getUserBookings).post(newUserBooking);
 
 module.exports = router;

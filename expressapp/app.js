@@ -7,19 +7,15 @@ const config = require('./config/database');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var nodemailerRouter = require('./routes/nodemailer');
 var cors= require('cors');
 var app = express();
 
 app.use(cors({
   origin:['http://localhost:4200','http://127.0.0.1:4200'],
+ // origin:['http://localhost:4200','http://localhost:3000'],
   credentials:true
 }));
-
-app.use((req, res, next) => {
-  const collection = req.app.locals[config.database.dbCollection];
-  req.collection = collection;
-  next();
-})
 
 var mongoose =require('mongoose');
 
@@ -45,8 +41,9 @@ app.use(session({
   },
   store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
-require('./passport-config');
 app.use(passport.initialize());
+require("./passport")(passport);
+
 app.use(passport.session());
 
 
@@ -64,6 +61,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/bookings', indexRouter);
 app.use('/users', usersRouter);
+app.use('/nodemailer', nodemailerRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

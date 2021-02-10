@@ -1,0 +1,27 @@
+.navbar {
+    background-color: black;
+    color: white;
+}
+
+a {
+    color: white;
+}
+button:hover{
+    border-right: 1px solid white;
+    border-left: 1px solid white;
+}
+
+li:hover {
+    background-color: #1E1E1E;
+    text-decoration: underline;
+}
+
+#toggler{
+    background-color: yellow;
+}
+#icon{
+    background-color: green;
+}
+
+
+

@@ -1,0 +1,192 @@
+<div class="container-fluid mx-auto">
+  <div class="background">
+    <div class="row">
+      <div class="col-md-6 offset-sm-1 col-sm-12">
+        <br>
+        <h2 class="header">Table Reservation Software</h2>
+      </div>
+      <div class="col-md-3 col-sm-12 mx-auto">
+        <br /><br />
+        <div class="card booking-card">
+          <form #f="ngForm" (ngSubmit)="save()" novalidate>
+            <div (click)="d.toggle()" class="date">
+              Click to select available date
+            </div>
+
+            <div class="form-group">
+              <input
+                type="text"
+                name="date"
+                placeholder="..."
+                class="form-control"
+                id="booking.date"
+                ngbDatepicker
+                #d="ngbDatepicker"
+                ngModel
+                (ngModelChange)="filterGuests(f)"
+                [markDisabled]="isDisabled"
+                [minDate]="fullDate"
+                required
+                #booking.date="ngModel"
+              />
+              <!-- <div
+                class="required"
+                *ngIf="(f.submitted || date.touched) && date.errors"
+              >
+                This field is required!
+              </div> -->
+            <div class="form-group">
+              <label for="exampleFormControlSelect1" class="label"
+                >Select time</label
+              >
+              <select
+                class="form-control"
+                id="exampleFormControlSelect"
+                name="time"
+                ngModel
+                required
+                #booking.time="ngModel"
+                (ngModelChange)="filterGuests(f);"
+              >
+                <option
+                  *ngFor="let item of filteredOptions"
+                  [value]="item.value"
+                >
+                  {{ item.text }}
+                </option>
+              </select>
+              <!-- <div
+                class="required"
+                *ngIf="(f.submitted || time.touched) && time.errors"
+              >
+                This field is required!
+              </div> -->
+              <div
+                class="required"
+              *ngIf="fullCapacityError">We are at full capacity. Please choose another time.</div>
+            </div>
+            </div>
+
+ <!-- <div class="form-group">
+              <label for="exampleFormControlSelect1" class="label"
+                >Select table</label
+              >
+              <select
+                class="form-control"
+                id="exampleFormControlSelect1"
+                name="table"
+                ngModel
+                required
+                #table="ngModel"
+                (ngModelChange)="filterTime(f)"
+                
+              >
+                <option
+                  *ngFor="let item of filteredTbls"
+                  [value]="item.value"
+                >
+                  {{ item.text }}
+                </option>
+              </select>
+              <div
+                class="required"
+                *ngIf="(f.submitted || table.touched) && table.errors"
+              >
+                This field is required!
+              </div>
+            </div> -->
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1" class="label"
+                >Select guests</label
+              >
+              <select
+                class="form-control"
+                id="exampleFormControlSelect1"
+                name="booking.guests"
+                ngModel
+                required
+                #booking.guests="ngModel"
+                
+                
+              >
+                <option
+                  *ngFor="let item of filteredGuests;"
+                  [value]="item.value"
+                >
+                  {{ item.text }}
+                </option>
+              </select>
+              <!-- <div
+                class="required"
+                *ngIf="(f.submitted || guests.touched) && guests.errors || guests === null"
+              >
+                This field is required!
+              </div> -->
+            </div>
+
+            <div class="form-group">
+              <label for="formGroupExampleInput" class="label">Full name</label>
+              <input
+                type="text"
+                class="form-control"
+                name="booking.name"
+                ngModel
+                required
+                #booking.name="ngModel"
+              />
+              <!-- <div
+                class="required"
+                *ngIf="(f.submitted || name.touched) && name.errors"
+              >
+                This field is required!
+              </div> -->
+            </div>
+
+            <div class="form-group">
+              <label for="formGroupExampleInput" class="label">Email</label>
+              <input
+                type="text"
+                class="form-control"
+                name="booking.email"
+                email
+                ngModel
+                required
+                #booking.email="ngModel"
+              />
+
+              <!-- <div
+                class="required"
+                *ngIf="(f.submitted || email.touched) && email.errors"
+              >
+                This field is required!
+              </div> -->
+            </div>
+
+            <div class="form-group">
+              <label for="formGroupExampleInput" class="label"
+                >Phone number</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                name="phone"
+                ngModel
+                required
+                #booking.phone="ngModel"
+              />
+              <!-- <div
+                class="required"
+                *ngIf="(f.submitted || phone.touched) && phone.errors"
+              >
+                This field is required!
+              </div> -->
+            </div>
+            <button type="submit" class="btn submit" [disabled]="fullCapacityError">Submit</button>
+          </form>
+        </div>
+        <br /><br />
+      </div>
+    </div>
+  </div>
+</div>

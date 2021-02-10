@@ -7,9 +7,10 @@ var schema = new Schema({
     username: {type:String, require:true},
     password:{type:String, require:true},
     creation_dt:{type:Date, require:true},
+    role: { type: String, default: "customer", enum: ["customer", "staff", "manager"]},
     bookings: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Booking'
+        ref: 'Bookings'
       }]
 });
 
