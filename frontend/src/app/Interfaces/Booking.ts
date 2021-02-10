@@ -8,6 +8,9 @@ export interface Booking {
         name: String;
         email: String;
         phone: String;
+
+        allergy: String;
+        
         guests: number;
         customer: string;
 }

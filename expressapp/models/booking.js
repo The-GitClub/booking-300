@@ -49,6 +49,13 @@ const BookingSchema = new Schema({
     type: String,
     required: true,
   },
+
+  allergy: {
+    type: String,
+    required: false,
+  },
+
+
   // table: {
   //   type: String,
   //   required: true,

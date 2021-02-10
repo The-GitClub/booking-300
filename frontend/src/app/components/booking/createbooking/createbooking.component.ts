@@ -19,6 +19,8 @@ type Booking = {
   phone: string;
   table: string;
   guests: string;
+
+  allergy: string; //Form to fill in details
 };
 
 @Component({
@@ -62,6 +64,8 @@ export class CreatebookingComponent implements OnInit {
   tableDB: TableInDB;
   fullCapacityError: boolean;
   userId: string='';
+  //below is used for food allergy form
+  ShowHideAllergy:boolean = false; //To hide and show the box
   
 
   constructor(private _user:UserService, private bookingService: BookingserviceService, private router: Router) {}
@@ -104,7 +108,10 @@ export class CreatebookingComponent implements OnInit {
     this.bookingService.sendEmailConfirmation(data).subscribe(() => {});
   }
 
-  
+  toggleShowAllergy() {
+    this.ShowHideAllergy = ! this.ShowHideAllergy;
+    }
+
 
   // filterTime(f: NgForm): void {
   //   let sameDayBookings = this.bookings.filter((booking) => {
