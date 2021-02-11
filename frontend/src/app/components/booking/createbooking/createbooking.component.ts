@@ -54,6 +54,8 @@ export class CreatebookingComponent implements OnInit {
     { text: '5', value: '5' },
     
   ];
+
+  
   bookings: Booking[];
   filteredOptions: Option[];
   filteredTbls: Option[];

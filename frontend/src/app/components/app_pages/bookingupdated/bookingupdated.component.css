@@ -1,0 +1,30 @@
+.go-back-to-home-page {
+    background-color: rgb(10, 73, 60);
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: smaller;
+    width: fit-content;
+  }
+  
+  .card {
+    top: 100%;
+    padding: 20px;
+    background-color: rgb(207, 214, 216);
+  }
+  
+  .background {
+    background-image: url(../../../../assets/images/background.jpg);
+    background-repeat: no-repeat;
+    background-color: rgb(5, 31, 5);
+  /*  background-size: cover;
+    /* height: 100%;
+    width: 100%; */
+    position: fixed;
+    right: 0;
+    left: 0;
+  }
+
+  .container-fluid {
+    background-color: aliceblue;
+    height: 100%;
+  }
