@@ -183,6 +183,22 @@
                 This field is required!
               </div> -->
             </div>
+
+            <div>
+              <label class="label">Tick this box if a guest has a food allergy or intolerance</label>
+              <input type="checkbox" (click)="toggleShowAllergy()">
+              <div *ngIf="ShowHideAllergy">
+                Enter guests food allergy or intolerance
+                <input 
+                type="text" 
+                class="form-control" 
+                name="allergy"
+                ngModel 
+                #allergy="ngModel"
+                />
+              </div>
+            </div>
+
             <button type="submit" class="btn submit" [disabled]="fullCapacityError">Submit</button>
           </form>
         </div>
