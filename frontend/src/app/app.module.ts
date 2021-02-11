@@ -57,6 +57,7 @@ import { ManagerNotificationComponent } from './components/notifications/manager
 import { StaffNotificationComponent } from './components/notifications/staff-notification/staff-notification.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BookingconfirmationComponent } from './components/app_pages/bookingconfirmation/bookingconfirmation.component';
+import { BookingupdatedComponent } from './components/app_pages/bookingupdated/bookingupdated.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { BookingconfirmationComponent } from './components/app_pages/bookingconf
     ManagerPageComponent,
     ManagerNotificationComponent,
     StaffNotificationComponent,
-    BookingconfirmationComponent
+    BookingconfirmationComponent,
+    BookingupdatedComponent
   ],
   imports: [
     BrowserModule,

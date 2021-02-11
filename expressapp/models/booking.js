@@ -49,10 +49,6 @@ const BookingSchema = new Schema({
     type: String,
     required: true,
   },
-  // table: {
-  //   type: String,
-  //   required: true,
-  // },
   guests:{
     type: Number,
     required: true

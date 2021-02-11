@@ -36,10 +36,10 @@ export class UpdatebookingComponent implements OnInit {
   public successMsg: string;
   public errorMsg: string;
   public user: User;
-  public bookingDate: string;
-  public time: string;
-  public table: string;
-  public name: string;
+  // public bookingDate: string;
+  // public time: string;
+  // public table: string;
+  // public name: string;
 //  public booking: Booking;
   public guests: number;
   username: String='';
@@ -113,9 +113,10 @@ export class UpdatebookingComponent implements OnInit {
     this.userId = data._id;
   }
 
-  save(): void {
-    this.bookingService.updateBooking(this.booking).subscribe();
+  save(f: NgForm) {
+    this.bookingService.updateBooking(this.booking, f.value).subscribe();
     this.successMsg = 'Updated Successfully.';
+    this._router.navigate(['booking-updated']);
     console.log(this.booking);
   }
 
@@ -135,7 +136,7 @@ export class UpdatebookingComponent implements OnInit {
       this.getAll();
       this.sendEmailConfirmation(data);
       f.resetForm();
-    //  this._router.navigate(['booking-confirmation']);
+      this._router.navigate(['booking-updated']);
     });
   }
 

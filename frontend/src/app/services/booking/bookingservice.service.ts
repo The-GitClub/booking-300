@@ -27,11 +27,11 @@ export class BookingserviceService {
   getBooking(id: string): Observable<Booking> {
     return this.http.get<Booking>(`http://localhost:3000/bookings/${id}`)
   }
-  updateBooking(booking: Booking): Observable<any> {
+  updateBooking(booking, data): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
-    return this.http.put(`http://localhost:3000/bookings/${booking._id}`, booking, httpOptions).pipe(
+    return this.http.put(`http://localhost:3000/bookings/${booking._id}`, data, httpOptions).pipe(
       tap(updatedBooking => console.log(`updated booking = ${JSON.stringify(updatedBooking)}`)),
       // catchError(error => of(new Booking()))
     );

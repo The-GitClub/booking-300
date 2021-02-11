@@ -8,7 +8,7 @@
       <div class="col-md-3 col-sm-12 mx-auto">
         <br /><br />
         <div class="card booking-card">
-          <form #f="ngForm" (ngSubmit)="save()" novalidate>
+          <form #f="ngForm" (ngSubmit)="save(f)" novalidate>
             <div (click)="d.toggle()" class="date">
               Click to select available date
             </div>
@@ -103,7 +103,7 @@
               <select
                 class="form-control"
                 id="exampleFormControlSelect1"
-                name="booking.guests"
+                name="guests"
                 ngModel
                 required
                 #booking.guests="ngModel"
@@ -130,7 +130,7 @@
               <input
                 type="text"
                 class="form-control"
-                name="booking.name"
+                name="name"
                 ngModel
                 required
                 #booking.name="ngModel"
@@ -148,7 +148,7 @@
               <input
                 type="text"
                 class="form-control"
-                name="booking.email"
+                name="email"
                 email
                 ngModel
                 required
