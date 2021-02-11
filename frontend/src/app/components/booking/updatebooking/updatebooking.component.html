@@ -28,6 +28,8 @@
                 [minDate]="fullDate"
                 required
                 #booking.date="ngModel"
+                placeholder="{{booking.date.year}}-{{booking.date.month}}-{{booking.date.day}}"
+              
               />
               <!-- <div
                 class="required"
@@ -47,6 +49,7 @@
                 required
                 #booking.time="ngModel"
                 (ngModelChange)="filterGuests(f);"
+
               >
                 <option
                   *ngFor="let item of filteredOptions"
@@ -108,7 +111,6 @@
                 required
                 #booking.guests="ngModel"
                 
-                
               >
                 <option
                   *ngFor="let item of filteredGuests;"
@@ -134,6 +136,7 @@
                 ngModel
                 required
                 #booking.name="ngModel"
+                placeholder="{{booking?.name}}"
               />
               <!-- <div
                 class="required"
@@ -153,6 +156,7 @@
                 ngModel
                 required
                 #booking.email="ngModel"
+                placeholder="{{booking?.email}}"
               />
 
               <!-- <div
@@ -174,6 +178,7 @@
                 ngModel
                 required
                 #booking.phone="ngModel"
+                placeholder="{{booking?.phone}}"
               />
               <!-- <div
                 class="required"
@@ -181,6 +186,23 @@
               >
                 This field is required!
               </div> -->
+
+              <div>
+                <label class="label">Tick this box if a guest has a food allergy or intolerance</label>
+                <input type="checkbox" (click)="toggleShowAllergy()">
+                <div *ngIf="ShowHideAllergy">
+                  Enter guests food allergy or intolerance
+                  <input 
+                  type="text" 
+                  class="form-control" 
+                  name="allergy"
+                  ngModel 
+                  #allergy="ngModel"
+                  placeholder="{{booking?.allergy}}"
+                  />
+                </div>
+              </div>
+
             </div>
             <button type="submit" class="btn submit" [disabled]="fullCapacityError">Submit</button>
           </form>
