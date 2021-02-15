@@ -7,12 +7,20 @@ a {
     color: white;
 }
 button:hover{
-    border-right: 1px solid white;
-    border-left: 1px solid white;
+
+}
+
+.nav-link {
+    text-transform: uppercase;
+    font-weight: 150;
+}
+
+.navbar-brand {
+    font-family: cursive;
 }
 
 li:hover {
-    background-color: #1E1E1E;
+    background-color: #181818;
     text-decoration: underline;
 }
 

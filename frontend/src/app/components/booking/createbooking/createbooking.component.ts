@@ -5,6 +5,8 @@ import { NgbDate, NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { BookingserviceService } from '../../../services/booking/bookingservice.service';
 import { UserService } from '../../../services/user/user.service';
+import { RestaurantService } from '../../../services/restaurant/restaurant.service';
+//import { Restaurant } from '../../../Interfaces/Restaurant';
 
 
 type Option = { text: string; value: string };
@@ -21,6 +23,10 @@ type Booking = {
   guests: string;
 
   allergy: string; //Form to fill in details
+};
+type Restaurant = {
+  _id: string;
+  capacity: number;
 };
 
 @Component({
@@ -57,6 +63,8 @@ export class CreatebookingComponent implements OnInit {
 
   
   bookings: Booking[];
+  public restaurant: Restaurant;
+  
   filteredOptions: Option[];
   filteredTbls: Option[];
   filteredGuests: Option[];
@@ -66,11 +74,13 @@ export class CreatebookingComponent implements OnInit {
   tableDB: TableInDB;
   fullCapacityError: boolean;
   userId: string='';
+  capacity: number;
+  
   //below is used for food allergy form
   ShowHideAllergy:boolean = false; //To hide and show the box
   
 
-  constructor(private _user:UserService, private bookingService: BookingserviceService, private router: Router) {}
+  constructor(private _user:UserService, private bookingService: BookingserviceService, private restaurantService: RestaurantService, private router: Router) {}
 
   ngOnInit(): void {
     this.currentHour = this.today.getHours().toString();
@@ -79,6 +89,7 @@ export class CreatebookingComponent implements OnInit {
     this.filteredGuests = this.optionsGuests;
     this.fullCapacityError = false;
     this.getAll();
+    this.getRestaurantCapacity();
     this.fullDate = {
       year: this.today.getFullYear(),
       month: this.today.getMonth() + 1,
@@ -87,10 +98,24 @@ export class CreatebookingComponent implements OnInit {
   }
 
   getAll(): void {
-    this.bookingService.getAllBookings().subscribe((data: any[]) => {
+    this.bookingService.getAllBookings().subscribe((data: any[]) => { 
       this.bookings = data || [];
      // console.log(data);
     });
+  }
+
+  getRestaurantCapacity() {
+  this.restaurantService.getRestaurant().subscribe(
+    (restaurant: Restaurant) => {
+     // this.restaurant = restaurant;
+   //   this.restaurant.capacity = this.capacity
+  this.capacity = restaurant[0].capacity
+     console.log(this.capacity)
+    },
+    (error) => {
+    //  this.error = error.message;
+    }
+  );
   }
 
   onSubmit(f: NgForm) {
@@ -171,6 +196,7 @@ export class CreatebookingComponent implements OnInit {
   //     });
   // }
 
+
   filterGuests(f: NgForm): void {
     let sameDayBookings = this.bookings.filter((booking) => {
       return (
@@ -180,6 +206,10 @@ export class CreatebookingComponent implements OnInit {
         && booking.time === f.value.time
       );
     });
+
+   
+
+    
     
     // for(let data of sameDayAppointments){
     //   console.log(data.guests);
@@ -225,7 +255,7 @@ export class CreatebookingComponent implements OnInit {
   console.log(totalguests);
 
   
-
+  
     
     // Need to sum up guests in the appointments that are now found with same date/time
 
@@ -233,13 +263,14 @@ export class CreatebookingComponent implements OnInit {
       .filter((filteredguests) => {
         return !sameDayBookings.some((booking) => {
           // This disables the guests dropbox if over 30 on slot
-          if(totalguests == 6){
+          if(totalguests == this.capacity){
             console.log('OVERBOOKED!')
           //  this.fullCapacityError = 'We are at full capacity. Please choose another time.'
             this.fullCapacityError = true;
           }
-
-          if(totalguests == 6)
+          
+          
+          if(totalguests == this.capacity)
           {
             console.log('All 5 item missing from guests')
             this.optionsGuests[0].text = "";
@@ -256,7 +287,7 @@ export class CreatebookingComponent implements OnInit {
           }
 
           // This disables guests dropdowns 2, 3, 4, 5, 6 --29
-          if(totalguests == 5)
+          if(totalguests == this.capacity -1)
           {
             console.log('4 item missing from guests')
             this.optionsGuests[0].text = "1";
@@ -273,7 +304,7 @@ export class CreatebookingComponent implements OnInit {
           }
 
           // This disables guests dropdowns 3, 4, 5, 6 --28
-          if(totalguests == 4)
+          if(totalguests == this.capacity - 2)
           {
             console.log('3 item missing from guests')
             this.optionsGuests[0].text = "1";
@@ -289,8 +320,8 @@ export class CreatebookingComponent implements OnInit {
             this.fullCapacityError = false;
           }
 
-          // This disables guests dropdowns 4, 5, 6 --27
-          if(totalguests == 3){
+          // // This disables guests dropdowns 4, 5, 6 --27
+          if(totalguests == this.capacity - 3){
             console.log('2 item missing from guests')
             this.optionsGuests[0].text = "1";
             this.optionsGuests[0].value = "1";
@@ -305,8 +336,8 @@ export class CreatebookingComponent implements OnInit {
             this.fullCapacityError = false;
           }
 
-          // This disables guests dropdowns 5, 6 --26
-          if(totalguests == 2){
+          // // This disables guests dropdowns 5, 6 --26
+          if(totalguests == this.capacity - 4){
             console.log('1 item missing from guests')
             this.optionsGuests[0].text = "1";
             this.optionsGuests[0].value = "1";
@@ -321,7 +352,7 @@ export class CreatebookingComponent implements OnInit {
             this.fullCapacityError = false;
           }
 
-          // This disables no guests dropdowns  --25
+          // // This disables no guests dropdowns  --25
           if(totalguests == 1){
             console.log('0 item missing from guests')
             this.optionsGuests[0].text = "1";

@@ -58,6 +58,8 @@ import { StaffNotificationComponent } from './components/notifications/staff-not
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BookingconfirmationComponent } from './components/app_pages/bookingconfirmation/bookingconfirmation.component';
 import { BookingupdatedComponent } from './components/app_pages/bookingupdated/bookingupdated.component';
+import { AdmindashboardComponent } from './components/app_pages/admindashboard/admindashboard.component';
+import { AdmindashboardupdateComponent } from './components/app_pages/admindashboardupdate/admindashboardupdate.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +80,9 @@ import { BookingupdatedComponent } from './components/app_pages/bookingupdated/b
     ManagerNotificationComponent,
     StaffNotificationComponent,
     BookingconfirmationComponent,
-    BookingupdatedComponent
+    BookingupdatedComponent,
+    AdmindashboardComponent,
+    AdmindashboardupdateComponent
   ],
   imports: [
     BrowserModule,

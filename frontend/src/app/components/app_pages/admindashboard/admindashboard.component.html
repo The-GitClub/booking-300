@@ -1,0 +1,26 @@
+<div class="">
+    <br>
+    <h2 class="header text-center">Restaurant Details</h2>
+  </div>
+
+<div class ="mx-auto" *ngIf="!errorMsg">
+    <table mat-table [dataSource]="restaurant" class="mat-elevation-z8">
+        <ng-container matColumnDef="restaurantName">
+            <th mat-header-cell *matHeaderCellDef>Restaurant Name</th>
+            <td mat-cell *matCellDef="let restaurant">{{ restaurant?.restaurantName }} </td>
+        </ng-container>
+        <ng-container matColumnDef="capacity">
+            <th mat-header-cell *matHeaderCellDef>Capacity (Per Hour)</th>
+            <td mat-cell *matCellDef="let restaurant">{{ restaurant?.capacity }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="update">
+            <th mat-header-cell *matHeaderCellDef>Update</th>
+            <td style  mat-cell *matCellDef="let restaurant"> <button [routerLink]="['update', restaurant._id]" class="btn buttons">Update</button></td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let restaurants; columns: columns"></tr>
+        </table>
+        </div>
+  

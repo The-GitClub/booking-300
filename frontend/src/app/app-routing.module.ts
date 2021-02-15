@@ -14,9 +14,13 @@ import { StaffGuard } from './guards/staff.guard';
 import { antiAuthGuard } from './guards/antiAuth.gaurd';
 import { BookingconfirmationComponent } from './components/app_pages/bookingconfirmation/bookingconfirmation.component';
 import { BookingupdatedComponent } from './components/app_pages/bookingupdated/bookingupdated.component';
+import { AdmindashboardComponent } from './components/app_pages/admindashboard/admindashboard.component';
+import { AdmindashboardupdateComponent } from './components/app_pages/admindashboardupdate/admindashboardupdate.component';
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
+  {path:'dashboard', component:AdmindashboardComponent},
+  {path:'dashboard/update/:id', component:AdmindashboardupdateComponent},
   {path:'booking-confirmation', component:BookingconfirmationComponent},
   {path:'booking-updated', component:BookingupdatedComponent},
 

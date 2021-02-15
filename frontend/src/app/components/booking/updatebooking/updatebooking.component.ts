@@ -79,6 +79,7 @@ export class UpdatebookingComponent implements OnInit {
   fullDate: BookingDate;
   tableDB: TableInDB;
   fullCapacityError: boolean;
+  ShowHideAllergy:boolean = false;
 
   constructor(private _user:UserService, private bookingService: BookingserviceService, private _router:Router, private route: ActivatedRoute) { 
     this.userId = this._user.ObtainID();
@@ -119,6 +120,10 @@ export class UpdatebookingComponent implements OnInit {
     this._router.navigate(['booking-updated']);
     console.log(this.booking);
   }
+
+  toggleShowAllergy() {
+    this.ShowHideAllergy = ! this.ShowHideAllergy;
+    }
 
   getAll(): void {
     this.bookingService.getAllBookings().subscribe((data: any[]) => {

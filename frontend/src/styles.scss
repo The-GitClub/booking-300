@@ -1,5 +1,18 @@
 // src/styles.scss
 
+@font-face {
+  font-family: 'Custom Logo';
+  src: url('./assets/images/Fonts/Sweet\ Salssa.ttf') format('truetype');
+}
+
+
+.lol2 {
+  font-family: 'Custom Logo' !important;
+  font-size: 1.5em !important;
+  color: rgb(255, 255, 255);
+  background-color: rgb(0, 0, 0);
+}
+
 // Custom Theming for Angular Material
 
 // For more information: https://material.angular.io/guide/theming
