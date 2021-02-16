@@ -24,6 +24,34 @@
               </div>
 
               <div class="form-group">
+                <label for="formGroupExampleInput" class="label">Set Restaurant Email</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="restaurantEmail"
+                  placeholder="{{restaurant?.restaurantEmail}}"
+                  ngModel
+                  required
+                  #restaurant.restaurantEmail="ngModel"
+                />
+
+              </div>
+
+              <div class="form-group">
+                <label for="formGroupExampleInput" class="label"> Restaurant Email Password</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="restaurantPassword"
+                  placeholder="{{restaurant?.restaurantPassword}}"
+                  ngModel
+                  required
+                  #restaurant.restaurantEmail="ngModel"
+                />
+
+              </div>
+
+              <!-- <div class="form-group">
                 <label for="formGroupExampleInput" class="label">Set Restaurant Name</label>
                 <input
                   type="text"
@@ -35,7 +63,7 @@
                   #restaurant.restaurantName="ngModel"
                 />
 
-              </div>
+              </div> -->
             
   
               

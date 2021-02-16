@@ -2,18 +2,40 @@ const db = require("../models");
 const nodemailer = require("nodemailer");
 const moment = require("moment");
 
+
+// var respassword = db.Restaurant.distinct("restaurantPassword", { "restaurantPassword" : { $ne : null } } );
+//    var resemail = db.Restaurant.distinct("restaurantEmail", { "restaurantEmail" : { $ne : null } } );
+
+
 module.exports = {
+  
   handleEmail: (req, res) => {
+    // const respassword = db.Restaurant.distinct("restaurantPassword");
+    // const resemail = db.Restaurant.distinct("restaurantEmail");
+
+    // console.log(resemail);
+    // console.log(respassword);
+    db.Restaurant.distinct("restaurantEmail", function o(error, resemail){
+      console.log(`${resemail[0]}`);
+    
+    db.Restaurant.distinct("restaurantPassword", function p(error, respassword){
+      console.log(`${respassword[0]}`);
+    
+    
+    
+    
     let transporter = nodemailer.createTransport({
       service: "gmail",
       host: "smtp.gmail.com",
       port: 587,
       secure: false,
       auth: {
-        user: "Booking300Project@gmail.com",
-        pass: "Password300",
+        user: `${resemail[0]}`,
+        pass: `${respassword[0]}`,
       },
     });
+
+   
 
     const { name, email, date, time, _id } = req.body;
     let newDate = moment(date).format("LL");
@@ -44,5 +66,8 @@ module.exports = {
         });
       }
     });
+  });
+}); //transporter.sendMail bracket
   },
-};
+   // handleEmail bracket
+}; // exports brakcet

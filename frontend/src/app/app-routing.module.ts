@@ -19,8 +19,8 @@ import { AdmindashboardupdateComponent } from './components/app_pages/admindashb
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
-  {path:'dashboard', component:AdmindashboardComponent},
-  {path:'dashboard/update/:id', component:AdmindashboardupdateComponent},
+  {path:'dashboard', component:AdmindashboardComponent, canActivate: [ManagerGuard]},
+  {path:'dashboard/update/:id', component:AdmindashboardupdateComponent, canActivate: [ManagerGuard]},
   {path:'booking-confirmation', component:BookingconfirmationComponent},
   {path:'booking-updated', component:BookingupdatedComponent},
 

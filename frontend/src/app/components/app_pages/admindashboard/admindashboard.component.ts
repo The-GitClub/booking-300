@@ -17,7 +17,7 @@ export class AdmindashboardComponent implements OnInit {
   public errorMsg: string;
   public successMsg: string;
   //Defines the columns for the booking section
-  public columns = ["restaurantName", "capacity", "update"];
+  public columns = ["restaurantName", "restaurantEmail", "capacity", "update"];
 
   username: String = "";
   userId: string = "";

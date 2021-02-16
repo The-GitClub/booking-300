@@ -20,7 +20,7 @@
             <button mat-button (click) = "protectedManager()" [routerLink]="['/manager']" routerLinkActive="active"  *ngIf = "isManager()"><mat-icon>business_center</mat-icon><a class="nav-link" >Manager Options</a></button>
           </li>
           <li class="nav-item">
-            <button mat-button *ngIf = "!_user.loggedIn()" [routerLink]="['dashboard']" routerLinkActive="active"><mat-icon>book</mat-icon><a class="nav-link">Dashboard</a></button>
+            <button mat-button (click) = "protectedManager()" [routerLink]="['dashboard']" routerLinkActive="active" *ngIf = "isManager()"><mat-icon>book</mat-icon><a class="nav-link">Dashboard</a></button>
           </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">

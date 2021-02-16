@@ -9,6 +9,8 @@
   text-align: center;
   cursor: pointer;
   padding: 3px;
+ 
+  font-weight: 150;
 }
 .main {
   padding: 0px;
@@ -52,6 +54,7 @@
   color: white;
   font-family: Arial, Helvetica, sans-serif;
   font-size: smaller;
+  text-transform: uppercase;
 }
 
 .background {

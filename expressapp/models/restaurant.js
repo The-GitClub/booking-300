@@ -6,6 +6,12 @@ const RestaurantSchema = new Schema({
 restaurantName: {
     type: String,
 },
+restaurantEmail: {
+    type: String,
+},
+restaurantPassword: {
+    type: String,
+},
 capacity:{
     type: Number,
     required: false,
