@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { BookingserviceService } from '../../../services/booking/bookingservice.service';
 import { UserService } from '../../../services/user/user.service';
 import { RestaurantService } from '../../../services/restaurant/restaurant.service';
+import { HttpClient } from '@angular/common/http';
 //import { Restaurant } from '../../../Interfaces/Restaurant';
 
 
@@ -78,9 +79,21 @@ export class CreatebookingComponent implements OnInit {
   
   //below is used for food allergy form
   ShowHideAllergy:boolean = false; //To hide and show the box
+
+  // Stripe
+  private readonly stripePublishableKey = 'pk_test_51IEHtSHNSX0dPtFXwuhN1cNF14lgeDVGf2pIfN4VDjwDAUQ4GE8EenTFkpJbxzpXD3gV6YdUc5LuCKSQhk1Tqfac00QM95ByXa'
+
+  amount: number = 20;
+  private readonly checkoutHandler = (window as any).StripeCheckout.configure({
+    key: this.stripePublishableKey,
+    locale: 'auto',
+    token: (token: any) => {
+      this.sendToken(token);
+    }
+  });
   
 
-  constructor(private _user:UserService, private bookingService: BookingserviceService, private restaurantService: RestaurantService, private router: Router) {}
+  constructor(private _user:UserService, private bookingService: BookingserviceService, private restaurantService: RestaurantService, private router: Router, private http: HttpClient) {}
 
   ngOnInit(): void {
     this.currentHour = this.today.getHours().toString();
@@ -118,18 +131,7 @@ export class CreatebookingComponent implements OnInit {
   );
   }
 
-  onSubmit(f: NgForm) {
-    this.userId = this._user.ObtainID();
-    this.bookingService.makeBooking(this.userId, f.value).subscribe((data) => {
-      this.filteredOptions = this.options;
-      this.filteredTbls = this.optionsTbl;
-      this.filteredGuests =this.optionsGuests;
-      this.getAll();
-      this.sendEmailConfirmation(data);
-      f.resetForm();
-      this.router.navigate(['booking-confirmation']);
-    });
-  }
+  
 
   sendEmailConfirmation(data) {
     this.bookingService.sendEmailConfirmation(data).subscribe(() => {});
@@ -424,4 +426,45 @@ export class CreatebookingComponent implements OnInit {
       sameDayBookings.length === this.options.length
     );
   };
+
+  onSubmit(f: NgForm) {
+    this.userId = this._user.ObtainID();
+    this.bookingService.makeBooking(this.userId, f.value).subscribe((data) => {
+      this.filteredOptions = this.options;
+      this.filteredTbls = this.optionsTbl;
+      this.filteredGuests =this.optionsGuests;
+      this.getAll();
+      this.sendEmailConfirmation(data);
+      f.resetForm();
+      this.router.navigate(['booking-confirmation']);
+    });
+  }
+
+  openCheckout() {
+    this.checkoutHandler.open({
+      name: 'Book a Table',
+      description: 'Deposit for reservation.',
+      image: '../../assets/images/background.jpg',
+      currency: 'eur',
+      amount: 2000
+    });
+  }
+
+  private sendToken(token: string): void {
+    console.log(token);
+    const charge = { amount: this.getFormattedCurrency(), token };
+
+    this.http.post('http://localhost:3000/charge', charge)
+      .subscribe(data => {
+        console.log(data);
+      });
+
+      
+
+      
+  }
+
+  private getFormattedCurrency(): number {
+    return this.amount * 100;
+  }
 }

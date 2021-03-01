@@ -5,6 +5,8 @@
         <br>
         <h2 class="header">Table Reservation Software</h2>
       </div>
+
+
       <div class="col-md-3 col-sm-12 mx-auto">
         <br /><br />
         <div class="card booking-card">
@@ -198,8 +200,10 @@
                 />
               </div>
             </div>
-
-            <button type="submit" class="btn submit" [disabled]="fullCapacityError">Submit</button>
+            <button type="submit" class="btn submit" (click)="openCheckout()" [disabled]="fullCapacityError">
+              Purchase
+            </button>
+            <!-- <button type="submit" class="btn submit" [disabled]="fullCapacityError">Submit</button> -->
           </form>
         </div>
         <br /><br />

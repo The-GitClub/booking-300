@@ -82,7 +82,7 @@ import { AdmindashboardupdateComponent } from './components/app_pages/admindashb
     BookingconfirmationComponent,
     BookingupdatedComponent,
     AdmindashboardComponent,
-    AdmindashboardupdateComponent
+    AdmindashboardupdateComponent,
   ],
   imports: [
     BrowserModule,

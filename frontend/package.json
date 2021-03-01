@@ -25,10 +25,13 @@
     "@angular/router": "^11.0.4",
     "@auth0/angular-jwt": "^5.0.2",
     "@ng-bootstrap/ng-bootstrap": "^9.0.2",
+    "@types/stripe-checkout": "^1.0.3",
+    "@types/stripe-v3": "^3.1.23",
     "bootstrap": "^4.5.3",
     "core-js": "^2.6.12",
     "rxjs": "^6.6.3",
     "rxjs-compat": "^6.0.0-rc.0",
+    "stripe": "^8.137.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },

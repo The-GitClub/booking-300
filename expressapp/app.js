@@ -13,6 +13,10 @@ var nodemailerRouter = require('./routes/nodemailer');
 var cors= require('cors');
 var app = express();
 
+const keySecret = "sk_test_51IEHtSHNSX0dPtFXkCxt7oGHOwk9b0NEDbE48THVBbMjIevoY1PSYWB9JTM5v4OHf8Zj4F4jCb15d9giBDY1Pjme00RJX1qMm9"
+const stripe = require('stripe')(keySecret);
+
+//const stripe = require('stripe')('sk_test_51IEHtSHNSX0dPtFXkCxt7oGHOwk9b0NEDbE48THVBbMjIevoY1PSYWB9JTM5v4OHf8Zj4F4jCb15d9giBDY1Pjme00RJX1qMm9')
 app.use(cors({
   origin:['http://localhost:4200','http://127.0.0.1:4200'],
  // origin:['http://localhost:4200','http://localhost:3000'],
@@ -43,6 +47,14 @@ app.use(session({
   },
   store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
+
+app.use(express.static("."));
+app.use(express.json());
+
+
+
+
+
 app.use(passport.initialize());
 require("./passport")(passport);
 
@@ -59,6 +71,27 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+app.post('/charge', (req, res) => {
+  const amount = req.body.amount;
+
+  stripe.customers.create({
+    email: req.body.token.email,
+    source: req.body.token.id,
+  })
+    .then(customer =>
+      stripe.charges.create({
+        amount,
+        description: 'Reservation deposit',
+        currency: 'eur',
+        customer: customer.id
+      }))
+    .then(charge => res.status(200).json(charge))
+    .catch(err => {
+      console.log("Error:", err);
+      res.status(500).send({ error: "Purchase Failed" });
+    });
+});
 
 
 app.use('/bookings', indexRouter);
@@ -81,5 +114,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
 
 module.exports = app;
