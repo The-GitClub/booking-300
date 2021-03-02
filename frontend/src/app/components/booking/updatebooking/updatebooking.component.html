@@ -17,7 +17,8 @@
               <input
                 type="text"
                 name="date"
-                placeholder="..."
+                placeholder="..."  
+
                 class="form-control"
                 id="booking.date"
                 ngbDatepicker
@@ -108,6 +109,7 @@
                 id="exampleFormControlSelect1"
                 name="guests"
                 ngModel
+                placeholder="lol"
                 required
                 #booking.guests="ngModel"
                 
@@ -132,6 +134,7 @@
               <input
                 type="text"
                 class="form-control"
+                placeholder="{{booking.name}}"
                 name="name"
                 ngModel
                 required
@@ -152,6 +155,7 @@
                 type="text"
                 class="form-control"
                 name="email"
+                placeholder="{{booking.email}}"
                 email
                 ngModel
                 required
@@ -175,6 +179,7 @@
                 type="text"
                 class="form-control"
                 name="phone"
+                placeholder="{{booking.phone}}"
                 ngModel
                 required
                 #booking.phone="ngModel"
@@ -203,6 +208,22 @@
                 </div>
               </div>
 
+            </div>
+
+            <div>
+              <label class="label">Tick this box if a guest has a food allergy or intolerance</label>
+              <input type="checkbox" (click)="toggleShowAllergy()">
+              <div *ngIf="ShowHideAllergy">
+                Enter guests food allergy or intolerance
+                <input 
+                type="text" 
+                class="form-control" 
+                name="allergy"
+                ngModel 
+                #allergy="ngModel"
+                placeholder="{{booking?.allergy}}"
+                />
+              </div>
             </div>
             <button type="submit" class="btn submit" [disabled]="fullCapacityError">Submit</button>
           </form>

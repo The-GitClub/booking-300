@@ -5,7 +5,9 @@ import { NgbDate, NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { BookingserviceService } from '../../../services/booking/bookingservice.service';
 import { UserService } from '../../../services/user/user.service';
-
+import { RestaurantService } from '../../../services/restaurant/restaurant.service';
+import { HttpClient } from '@angular/common/http';
+//import { Restaurant } from '../../../Interfaces/Restaurant';
 
 type Option = { text: string; value: string };
 type BookingDate = { year: number; month: number; day: number };
@@ -21,6 +23,10 @@ type Booking = {
   guests: string;
 
   allergy: string; //Form to fill in details
+};
+type Restaurant = {
+  _id: string;
+  capacity: number;
 };
 
 @Component({
@@ -52,11 +58,11 @@ export class CreatebookingComponent implements OnInit {
     { text: '3', value: '3' },
     { text: '4', value: '4' },
     { text: '5', value: '5' },
-    
   ];
 
-  
   bookings: Booking[];
+  public restaurant: Restaurant;
+  
   filteredOptions: Option[];
   filteredTbls: Option[];
   filteredGuests: Option[];
@@ -66,11 +72,24 @@ export class CreatebookingComponent implements OnInit {
   tableDB: TableInDB;
   fullCapacityError: boolean;
   userId: string='';
-  //below is used for food allergy form
-  ShowHideAllergy:boolean = false; //To hide and show the box
+  capacity: number;
   
+  //Below is used for food allergy form
+  ShowHideAllergy:boolean = false; //To hide and show the box
 
-  constructor(private _user:UserService, private bookingService: BookingserviceService, private router: Router) {}
+  //Stripe
+  private readonly stripePublishableKey = 'pk_test_51IEHtSHNSX0dPtFXwuhN1cNF14lgeDVGf2pIfN4VDjwDAUQ4GE8EenTFkpJbxzpXD3gV6YdUc5LuCKSQhk1Tqfac00QM95ByXa'
+
+  amount: number = 20;
+  private readonly checkoutHandler = (window as any).StripeCheckout.configure({
+    key: this.stripePublishableKey,
+    locale: 'auto',
+    token: (token: any) => {
+      this.sendToken(token);
+    }
+  });
+
+  constructor(private _user:UserService, private bookingService: BookingserviceService, private restaurantService: RestaurantService, private router: Router, private http: HttpClient) {}
 
   ngOnInit(): void {
     this.currentHour = this.today.getHours().toString();
@@ -79,6 +98,7 @@ export class CreatebookingComponent implements OnInit {
     this.filteredGuests = this.optionsGuests;
     this.fullCapacityError = false;
     this.getAll();
+    this.getRestaurantCapacity();
     this.fullDate = {
       year: this.today.getFullYear(),
       month: this.today.getMonth() + 1,
@@ -87,22 +107,22 @@ export class CreatebookingComponent implements OnInit {
   }
 
   getAll(): void {
-    this.bookingService.getAllBookings().subscribe((data: any[]) => {
+    this.bookingService.getAllBookings().subscribe((data: any[]) => { 
       this.bookings = data || [];
-     // console.log(data);
+     //console.log(data);
     });
   }
 
-  onSubmit(f: NgForm) {
-    this.userId = this._user.ObtainID();
-    this.bookingService.makeBooking(this.userId, f.value).subscribe((data) => {
-      this.filteredOptions = this.options;
-      this.filteredTbls = this.optionsTbl;
-      this.filteredGuests =this.optionsGuests;
-      this.getAll();
-      this.sendEmailConfirmation(data);
-      f.resetForm();
-      this.router.navigate(['booking-confirmation']);
+  getRestaurantCapacity() {
+  this.restaurantService.getRestaurant().subscribe(
+    (restaurant: Restaurant) => {
+     //this.restaurant = restaurant;
+     //this.restaurant.capacity = this.capacity
+  this.capacity = restaurant[0].capacity
+     console.log(this.capacity)
+    },
+    (error) => {
+    //  this.error = error.message;
     });
   }
 
@@ -112,64 +132,7 @@ export class CreatebookingComponent implements OnInit {
 
   toggleShowAllergy() {
     this.ShowHideAllergy = ! this.ShowHideAllergy;
-    }
-
-
-  // filterTime(f: NgForm): void {
-  //   let sameDayBookings = this.bookings.filter((booking) => {
-  //     return (
-  //       booking.date.year === f.value.date.year &&
-  //       booking.date.month === f.value.date.month &&
-  //       booking.date.day === f.value.date.day 
-  //    //   && booking.table === f.value.table
-  //     );
-  //   });
-
-  //   // console.log(this.appointments);
-  //   // console.log(sameDayAppointments);
-
-  //   this.filteredOptions = this.options
-  //     .filter((hour) => {
-  //       return !sameDayBookings.some((booking) => {
-  //         return booking.time === hour.value;
-  //       });
-  //     })
-  //     .filter((hour) => {
-  //       if (
-  //         this.fullDate.year === f.value.date.year &&
-  //         this.fullDate.month === f.value.date.month &&
-  //         this.fullDate.day === f.value.date.day 
-  //    //     && this.tableDB.table === f.value.table
-  //       ) {
-  //         return parseInt(hour.value) > parseInt(this.currentHour);
-  //       }
-  //       return true;
-  //     });
-  // }
-
-  // filterTable(f: NgForm): void {
-  //   let sameDayBookings = this.bookings.filter((booking) => {
-  //     return (
-  //       booking.date.year === f.value.date.year &&
-  //       booking.date.month === f.value.date.month &&
-  //       booking.date.day === f.value.date.day 
-  //       && booking.time === f.value.time
-  //     );
-  //   });
-
-  //   this.filteredTbls = this.optionsTbl
-  //     .filter((filteredtable) => {
-  //       return !sameDayBookings.some((booking) => {
-  //         return booking.table === filteredtable.value;
-  //       });
-  //     })
-  //     .filter((filteredtable) => {
-        
-  //       //  return filteredtable.value;
-        
-  //       return true;
-  //     });
-  // }
+  }
 
   filterGuests(f: NgForm): void {
     let sameDayBookings = this.bookings.filter((booking) => {
@@ -180,11 +143,6 @@ export class CreatebookingComponent implements OnInit {
         && booking.time === f.value.time
       );
     });
-    
-    // for(let data of sameDayAppointments){
-    //   console.log(data.guests);
-    // }
-
 
     var totalguests = 0;
     // If there is no appointsments for that date and time, totalguests = 0 and all guests options available
@@ -217,29 +175,21 @@ export class CreatebookingComponent implements OnInit {
   // console.log(sameDayAppointments)
 
   // console.log(totalguests);
-}
-  );
-
-  
+});
 
   console.log(totalguests);
-
-  
-
-    
     // Need to sum up guests in the appointments that are now found with same date/time
-
     this.filteredGuests = this.optionsGuests
       .filter((filteredguests) => {
         return !sameDayBookings.some((booking) => {
           // This disables the guests dropbox if over 30 on slot
-          if(totalguests == 6){
+          if(totalguests == this.capacity){
             console.log('OVERBOOKED!')
           //  this.fullCapacityError = 'We are at full capacity. Please choose another time.'
             this.fullCapacityError = true;
           }
-
-          if(totalguests == 6)
+          
+          if(totalguests == this.capacity)
           {
             console.log('All 5 item missing from guests')
             this.optionsGuests[0].text = "";
@@ -256,7 +206,7 @@ export class CreatebookingComponent implements OnInit {
           }
 
           // This disables guests dropdowns 2, 3, 4, 5, 6 --29
-          if(totalguests == 5)
+          if(totalguests == this.capacity -1)
           {
             console.log('4 item missing from guests')
             this.optionsGuests[0].text = "1";
@@ -273,7 +223,7 @@ export class CreatebookingComponent implements OnInit {
           }
 
           // This disables guests dropdowns 3, 4, 5, 6 --28
-          if(totalguests == 4)
+          if(totalguests == this.capacity - 2)
           {
             console.log('3 item missing from guests')
             this.optionsGuests[0].text = "1";
@@ -289,8 +239,8 @@ export class CreatebookingComponent implements OnInit {
             this.fullCapacityError = false;
           }
 
-          // This disables guests dropdowns 4, 5, 6 --27
-          if(totalguests == 3){
+          // // This disables guests dropdowns 4, 5, 6 --27
+          if(totalguests == this.capacity - 3){
             console.log('2 item missing from guests')
             this.optionsGuests[0].text = "1";
             this.optionsGuests[0].value = "1";
@@ -305,8 +255,8 @@ export class CreatebookingComponent implements OnInit {
             this.fullCapacityError = false;
           }
 
-          // This disables guests dropdowns 5, 6 --26
-          if(totalguests == 2){
+          // // This disables guests dropdowns 5, 6 --26
+          if(totalguests == this.capacity - 4){
             console.log('1 item missing from guests')
             this.optionsGuests[0].text = "1";
             this.optionsGuests[0].value = "1";
@@ -321,7 +271,7 @@ export class CreatebookingComponent implements OnInit {
             this.fullCapacityError = false;
           }
 
-          // This disables no guests dropdowns  --25
+          // // This disables no guests dropdowns  --25
           if(totalguests == 1){
             console.log('0 item missing from guests')
             this.optionsGuests[0].text = "1";
@@ -336,26 +286,10 @@ export class CreatebookingComponent implements OnInit {
             this.optionsGuests[4].value = "5";
             this.fullCapacityError = false;
           }
-
-          // if(totalguests = 3){
-          //   console.log('2 item missing from guests')
-          //   this.optionsGuests.splice(3-4) 
-          // //  this.fullCapacityError = 'We are at full capacity. Please choose another time.'
-          //   //this.fullCapacityError = true;
-          // }
-          // if(totalguests > 10){
-          //   console.log('3 item missing from guests')
-          //   this.optionsGuests.splice(2-4) 
-          // //  this.fullCapacityError = 'We are at full capacity. Please choose another time.'
-          //   //this.fullCapacityError = true;
-          // }
-
-         
           console.log(this.fullCapacityError);
         });
       })
       .filter((filteredguests) => {
-        
         return true;
       });
   }
@@ -369,7 +303,7 @@ export class CreatebookingComponent implements OnInit {
       );
     });
 
-    // disable today's date if current hour is greater than 5 pm
+    //Disable today's date if current hour is greater than 5 pm
     if (
       this.fullDate.year === date.year &&
       this.fullDate.month === date.month &&
@@ -385,12 +319,53 @@ export class CreatebookingComponent implements OnInit {
     );
     let dayOfTheWeek = dateOfTheMonth.getDay();
 
-    // The value returned by getDay() method is an integer corresponding to the day of the week: 0 for Sunday,
-    // 1 for Monday, 2 for Tuesday, 3 for Wednesday, 4 for Thursday, 5 for Friday, 6 for Saturday.
+    //The value returned by getDay() method is an integer corresponding to the day of the week: 0 for Sunday,
+    //1 for Monday, 2 for Tuesday, 3 for Wednesday, 4 for Thursday, 5 for Friday, 6 for Saturday.
     return (
       dayOfTheWeek === 0 ||
       dayOfTheWeek === 6 ||
       sameDayBookings.length === this.options.length
     );
   };
+
+  onSubmit(f: NgForm) {
+    this.userId = this._user.ObtainID();
+    this.bookingService.makeBooking(this.userId, f.value).subscribe((data) => {
+      this.filteredOptions = this.options;
+      this.filteredTbls = this.optionsTbl;
+      this.filteredGuests =this.optionsGuests;
+      this.getAll();
+      this.sendEmailConfirmation(data);
+      //f.resetForm();
+      this.router.navigate(['booking-confirmation']);
+    });
+  }
+
+  openCheckout() {
+    this.checkoutHandler.open({
+      name: 'Book a Table',
+      description: 'Deposit for reservation.',
+      image: '../../assets/images/background.jpg',
+      currency: 'eur',
+      amount: 2000
+    }); 
+  }
+
+  private sendToken(token: string): void {
+    const charge = { amount: this.getFormattedCurrency(), token };
+
+    this.http.post('http://localhost:3000/charge', charge)
+      .subscribe(data => {
+        //console.log(token); //Log the client token
+        //console.log(data); //Log the card data
+        
+        var myForm = document.getElementById('bookingFormBtn');
+        myForm.click();
+      });
+      //alert('The deposit for your booking has been sucessfully confirmed')
+    }
+
+  private getFormattedCurrency(): number {
+    return this.amount * 100;
+  }
 }
