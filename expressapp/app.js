@@ -30,7 +30,6 @@ mongoose.connection.on('connected', () => {
     console.log('Connected to database ' + config.database);
 });
 
-
 //passport
 var passport = require('passport');
 var session = require('express-session');
@@ -51,15 +50,10 @@ app.use(session({
 app.use(express.static("."));
 app.use(express.json());
 
-
-
-
-
 app.use(passport.initialize());
 require("./passport")(passport);
 
 app.use(passport.session());
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -70,7 +64,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 
 app.post('/charge', (req, res) => {
   const amount = req.body.amount;
@@ -95,7 +88,6 @@ app.post('/charge', (req, res) => {
       res.status(500).send({ error: "Purchase Failed" });
     });
 });
-
 
 app.use('/bookings', indexRouter);
 app.use('/users', usersRouter);

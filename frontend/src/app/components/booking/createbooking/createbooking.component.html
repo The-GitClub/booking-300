@@ -8,7 +8,8 @@
 
 
       <div class="col-md-3 col-sm-12 mx-auto">
-        <br /><br />
+        <br />
+        <br />
         <div class="card booking-card">
           <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
             <div (click)="d.toggle()" class="date">
@@ -16,174 +17,48 @@
             </div>
 
             <div class="form-group">
-              <input
-                type="text"
-                name="date"
-                placeholder="..."
-                class="form-control"
-                ngbDatepicker
-                #d="ngbDatepicker"
-                ngModel
-                (ngModelChange)="filterGuests(f)"
-                [markDisabled]="isDisabled"
-                [minDate]="fullDate"
-                required
-                #date="ngModel"
-              />
-              <!-- <div
-                class="required"
-                *ngIf="(f.submitted || date.touched) && date.errors"
-              >
-                This field is required!
-              </div> -->
+              <input type="text" name="date" placeholder="..." class="form-control" ngbDatepicker #d="ngbDatepicker"
+                ngModel (ngModelChange)="filterGuests(f)" [markDisabled]="isDisabled" [minDate]="fullDate" required
+                #date="ngModel" />
 
-            <div class="form-group">
-              <label for="exampleFormControlSelect1" class="label"
-                >Select time</label
-              >
-              <select
-                class="form-control"
-                id="exampleFormControlSelect"
-                name="time"
-                ngModel
-                required
-                #time="ngModel"
-                (ngModelChange)="filterGuests(f);"
-              >
-                <option
-                  *ngFor="let item of filteredOptions"
-                  [value]="item.value"
-                >
-                  {{ item.text }}
-                </option>
-              </select>
-              <!-- <div
-                class="required"
-                *ngIf="(f.submitted || time.touched) && time.errors"
-              >
-                This field is required!
-              </div> -->
-              <div
-                class="required"
-              *ngIf="fullCapacityError">We are at full capacity. Please choose another time.</div>
-            </div>
-            </div>
+              <div class="form-group">
+                <label for="exampleFormControlSelect1" class="label">Select time</label>
+                <select class="form-control" id="exampleFormControlSelect" name="time" ngModel required #time="ngModel"
+                  (ngModelChange)="filterGuests(f);">
+                  <option *ngFor="let item of filteredOptions" [value]="item.value">
+                    {{ item.text }}
+                  </option>
+                </select>
 
- <!-- <div class="form-group">
-              <label for="exampleFormControlSelect1" class="label"
-                >Select table</label
-              >
-              <select
-                class="form-control"
-                id="exampleFormControlSelect1"
-                name="table"
-                ngModel
-                required
-                #table="ngModel"
-                (ngModelChange)="filterTime(f)"
-                
-              >
-                <option
-                  *ngFor="let item of filteredTbls"
-                  [value]="item.value"
-                >
-                  {{ item.text }}
-                </option>
-              </select>
-              <div
-                class="required"
-                *ngIf="(f.submitted || table.touched) && table.errors"
-              >
-                This field is required!
+                <div class="required" *ngIf="fullCapacityError">We are at full capacity. Please choose another time.
+                </div>
               </div>
-            </div> -->
+            </div>
 
             <div class="form-group">
-              <label for="exampleFormControlSelect1" class="label"
-                >Select guests</label
-              >
-              <select
-                class="form-control"
-                id="exampleFormControlSelect1"
-                name="guests"
-                ngModel
-                required
-                #guests="ngModel"
-                
-                
-              >
-                <option
-                  *ngFor="let item of filteredGuests;"
-                  [value]="item.value"
-                >
+              <label for="exampleFormControlSelect1" class="label">Select guests</label>
+              <select class="form-control" id="exampleFormControlSelect1" name="guests" ngModel required
+                #guests="ngModel">
+                <option *ngFor="let item of filteredGuests;" [value]="item.value">
                   {{ item.text }}
                 </option>
               </select>
-              <!-- <div
-                class="required"
-                *ngIf="(f.submitted || guests.touched) && guests.errors || guests === null"
-              >
-                This field is required!
-              </div> -->
             </div>
 
 
             <div class="form-group">
               <label for="formGroupExampleInput" class="label">Full name</label>
-              <input
-                type="text"
-                class="form-control"
-                name="name"
-                ngModel
-                required
-                #name="ngModel"
-              />
-              <!-- <div
-                class="required"
-                *ngIf="(f.submitted || name.touched) && name.errors"
-              >
-                This field is required!
-              </div> -->
+              <input type="text" class="form-control" name="name" ngModel required #name="ngModel" />
             </div>
 
             <div class="form-group">
               <label for="formGroupExampleInput" class="label">Email</label>
-              <input
-                type="text"
-                class="form-control"
-                name="email"
-                email
-                ngModel
-                required
-                #email="ngModel"
-              />
-
-              <!-- <div
-                class="required"
-                *ngIf="(f.submitted || email.touched) && email.errors"
-              >
-                This field is required!
-              </div> -->
+              <input type="text" class="form-control" name="email" email ngModel required #email="ngModel" />
             </div>
 
             <div class="form-group">
-              <label for="formGroupExampleInput" class="label"
-                >Phone number</label
-              >
-              <input
-                type="text"
-                class="form-control"
-                name="phone"
-                ngModel
-                required
-                #phone="ngModel"
-              />
-              <!-- <div
-                class="required"
-                *ngIf="(f.submitted || phone.touched) && phone.errors"
-              >
-                This field is required!
-              </div> -->
+              <label for="formGroupExampleInput" class="label">Phone number</label>
+              <input type="text" class="form-control" name="phone" ngModel required #phone="ngModel" />
             </div>
 
             <div>
@@ -191,20 +66,15 @@
               <input type="checkbox" (click)="toggleShowAllergy()">
               <div *ngIf="ShowHideAllergy">
                 Enter guests food allergy or intolerance
-                <input 
-                type="text" 
-                class="form-control" 
-                name="allergy"
-                ngModel 
-                #allergy="ngModel"
-                />
+                <input type="text" class="form-control" name="allergy" ngModel #allergy="ngModel" />
               </div>
             </div>
-            <button id="bookingFormBtn" type="submit" class="btn submit" class="btn submit">Submit</button>
+            <button hidden id="bookingFormBtn" type="submit" class="btn submit" class="btn submit">Submit</button>
           </form>
           <button (click)="openCheckout()" [disabled]="fullCapacityError"> Purchase</button>
         </div>
-        <br /><br />
+        <br />
+        <br />
       </div>
     </div>
   </div>
