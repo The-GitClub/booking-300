@@ -200,11 +200,9 @@
                 />
               </div>
             </div>
-            <button type="submit" class="btn submit" (click)="openCheckout()" [disabled]="fullCapacityError">
-              Purchase
-            </button>
-            <!-- <button type="submit" class="btn submit" [disabled]="fullCapacityError">Submit</button> -->
+            <button id="bookingFormBtn" type="submit" class="btn submit" class="btn submit">Submit</button>
           </form>
+          <button (click)="openCheckout()" [disabled]="fullCapacityError"> Purchase</button>
         </div>
         <br /><br />
       </div>

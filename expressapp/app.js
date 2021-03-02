@@ -86,7 +86,10 @@ app.post('/charge', (req, res) => {
         currency: 'eur',
         customer: customer.id
       }))
-    .then(charge => res.status(200).json(charge))
+    .then((charge) => {
+      res.status(200).json(charge)
+    })
+
     .catch(err => {
       console.log("Error:", err);
       res.status(500).send({ error: "Purchase Failed" });

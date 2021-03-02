@@ -435,7 +435,7 @@ export class CreatebookingComponent implements OnInit {
       this.filteredGuests =this.optionsGuests;
       this.getAll();
       this.sendEmailConfirmation(data);
-      f.resetForm();
+      //f.resetForm();
       this.router.navigate(['booking-confirmation']);
     });
   }
@@ -448,21 +448,22 @@ export class CreatebookingComponent implements OnInit {
       currency: 'eur',
       amount: 2000
     });
+
+    
   }
 
   private sendToken(token: string): void {
-    console.log(token);
     const charge = { amount: this.getFormattedCurrency(), token };
 
     this.http.post('http://localhost:3000/charge', charge)
       .subscribe(data => {
-        console.log(data);
+        console.log(token); //Log the client token
+        console.log(data); //Log the card data
+        alert('The deposit for your booking has been sucessfully confirmed')
+        var myForm = document.getElementById('bookingFormBtn');
+        myForm.click();
       });
-
-      
-
-      
-  }
+    }
 
   private getFormattedCurrency(): number {
     return this.amount * 100;
