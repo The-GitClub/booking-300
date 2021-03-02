@@ -14,15 +14,6 @@ type Option = { text: string; value: string };
 type BookingDate = { year: number; month: number; day: number };
 
 type TableInDB = { table: string; };
-// type Booking = {
-//   date: BookingDate;
-//   time: string;
-//   name: string;
-//   email: string;
-//   phone: string;
-//   table: string;
-//   guests: string;
-// };
 
 @Component({
   selector: 'app-updatebooking',
@@ -36,11 +27,6 @@ export class UpdatebookingComponent implements OnInit {
   public successMsg: string;
   public errorMsg: string;
   public user: User;
-  // public bookingDate: string;
-  // public time: string;
-  // public table: string;
-  // public name: string;
-//  public booking: Booking;
   public guests: number;
   username: String='';
   userId: string='';
@@ -151,64 +137,6 @@ export class UpdatebookingComponent implements OnInit {
     this.bookingService.sendEmailConfirmation(data).subscribe(() => {});
   }
 
-  
-
-  // filterTime(f: NgForm): void {
-  //   let sameDayBookings = this.bookings.filter((booking) => {
-  //     return (
-  //       booking.date.year === f.value.date.year &&
-  //       booking.date.month === f.value.date.month &&
-  //       booking.date.day === f.value.date.day 
-  //    //   && booking.table === f.value.table
-  //     );
-  //   });
-
-  //   // console.log(this.appointments);
-  //   // console.log(sameDayAppointments);
-
-  //   this.filteredOptions = this.options
-  //     .filter((hour) => {
-  //       return !sameDayBookings.some((booking) => {
-  //         return booking.time === hour.value;
-  //       });
-  //     })
-  //     .filter((hour) => {
-  //       if (
-  //         this.fullDate.year === f.value.date.year &&
-  //         this.fullDate.month === f.value.date.month &&
-  //         this.fullDate.day === f.value.date.day 
-  //    //     && this.tableDB.table === f.value.table
-  //       ) {
-  //         return parseInt(hour.value) > parseInt(this.currentHour);
-  //       }
-  //       return true;
-  //     });
-  // }
-
-  // filterTable(f: NgForm): void {
-  //   let sameDayBookings = this.bookings.filter((booking) => {
-  //     return (
-  //       booking.date.year === f.value.date.year &&
-  //       booking.date.month === f.value.date.month &&
-  //       booking.date.day === f.value.date.day 
-  //       && booking.time === f.value.time
-  //     );
-  //   });
-
-  //   this.filteredTbls = this.optionsTbl
-  //     .filter((filteredtable) => {
-  //       return !sameDayBookings.some((booking) => {
-  //         return booking.table === filteredtable.value;
-  //       });
-  //     })
-  //     .filter((filteredtable) => {
-        
-  //       //  return filteredtable.value;
-        
-  //       return true;
-  //     });
-  // }
-
   filterGuests(f: NgForm): void {
     let sameDayBookings = this.bookingsArray.filter((booking) => {
       return (
@@ -219,11 +147,6 @@ export class UpdatebookingComponent implements OnInit {
       );
     });
     
-    // for(let data of sameDayAppointments){
-    //   console.log(data.guests);
-    // }
-
-
     var totalguests = 0;
     // If there is no appointsments for that date and time, totalguests = 0 and all guests options available
     if(sameDayBookings.length == 0){
@@ -252,21 +175,9 @@ export class UpdatebookingComponent implements OnInit {
     if(data.guests){
     totalguests += Number(data.guests);
   }
-  // console.log(sameDayAppointments)
-
-  // console.log(totalguests);
-}
-  );
-
-  
-
+});
   console.log(totalguests);
-
-  
-
-    
     // Need to sum up guests in the appointments that are now found with same date/time
-
     this.filteredGuests = this.optionsGuests
       .filter((filteredguests) => {
         return !sameDayBookings.some((booking) => {
@@ -374,21 +285,6 @@ export class UpdatebookingComponent implements OnInit {
             this.optionsGuests[4].value = "5";
             this.fullCapacityError = false;
           }
-
-          // if(totalguests = 3){
-          //   console.log('2 item missing from guests')
-          //   this.optionsGuests.splice(3-4) 
-          // //  this.fullCapacityError = 'We are at full capacity. Please choose another time.'
-          //   //this.fullCapacityError = true;
-          // }
-          // if(totalguests > 10){
-          //   console.log('3 item missing from guests')
-          //   this.optionsGuests.splice(2-4) 
-          // //  this.fullCapacityError = 'We are at full capacity. Please choose another time.'
-          //   //this.fullCapacityError = true;
-          // }
-
-         
           console.log(this.fullCapacityError);
         });
       })
@@ -397,10 +293,6 @@ export class UpdatebookingComponent implements OnInit {
         return true;
       });
   }
-
-  toggleShowAllergy() {
-    this.ShowHideAllergy = ! this.ShowHideAllergy;
-    }
 
   isDisabled = (date: NgbDate, current: { month: number }): boolean => {
     let sameDayBookings = this.bookingsArray.filter((booking) => {
