@@ -79,7 +79,9 @@ export class UpdatebookingComponent implements OnInit {
   fullDate: BookingDate;
   tableDB: TableInDB;
   fullCapacityError: boolean;
-  ShowHideAllergy:boolean = false;
+
+  ShowHideAllergy:boolean = false; //To hide and show the box
+
 
   constructor(private _user:UserService, private bookingService: BookingserviceService, private _router:Router, private route: ActivatedRoute) { 
     this.userId = this._user.ObtainID();
@@ -395,6 +397,10 @@ export class UpdatebookingComponent implements OnInit {
         return true;
       });
   }
+
+  toggleShowAllergy() {
+    this.ShowHideAllergy = ! this.ShowHideAllergy;
+    }
 
   isDisabled = (date: NgbDate, current: { month: number }): boolean => {
     let sameDayBookings = this.bookingsArray.filter((booking) => {
