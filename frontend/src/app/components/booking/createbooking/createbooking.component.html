@@ -15,8 +15,7 @@
         {{ item.text }}
       </option>
     </select>
-    <div class="required" *ngIf="fullCapacityError">We are at full capacity. Please choose another time.
-    </div>
+    <div class="required" *ngIf="fullCapacityError">We are at full capacity. Please choose another time.</div>
     <label for="formGroupExampleInput" class="label">Select guests</label>
     <select class="form-control" id="exampleFormControlSelect1" name="guests" ngModel required #guests="ngModel">
       <option *ngFor="let item of filteredGuests;" [value]="item.value">

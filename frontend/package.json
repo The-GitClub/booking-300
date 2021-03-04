@@ -33,6 +33,7 @@
     "ngx-stripe": "^10.1.2",
     "rxjs": "^6.6.3",
     "rxjs-compat": "^6.0.0-rc.0",
+    "screenfull": "^3.3.0",
     "stripe": "^8.137.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
