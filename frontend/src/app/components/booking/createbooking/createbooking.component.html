@@ -1,65 +1,66 @@
-<div class="">
-  <br>
-  <h2 class="header">Table Reservation Software</h2>
-</div>
-          <form #f="ngForm" style="width: 20em; float: left;" (ngSubmit)="onSubmit(f)" novalidate>
-            <div (click)="d.toggle()" class="date">
-              Click to select available date
-            </div>
-              <input type="text" name="date" placeholder="..." class="form-control" ngbDatepicker #d="ngbDatepicker"
-                ngModel (ngModelChange)="filterGuests(f)" [markDisabled]="isDisabled" [minDate]="fullDate" required
-                #date="ngModel" />
-                <label for="formGroupExampleInput" class="label">Select time</label>
-                <select class="form-control" id="exampleFormControlSelect" name="time" ngModel required #time="ngModel"
-                  (ngModelChange)="filterGuests(f);">
-                  <option *ngFor="let item of filteredOptions" [value]="item.value">
-                    {{ item.text }}
-                  </option>
-                </select>
-                <div class="required" *ngIf="fullCapacityError">We are at full capacity. Please choose another time.
-                </div>
-              <label for="formGroupExampleInput" class="label">Select guests</label>
-              <select class="form-control" id="exampleFormControlSelect1" name="guests" ngModel required
-                #guests="ngModel">
-                <option *ngFor="let item of filteredGuests;" [value]="item.value">
-                  {{ item.text }}
-                </option>
-              </select>
-              <label for="formGroupExampleInput" class="label">Full name</label>
-              <input type="text" class="form-control" name="name" ngModel required #name="ngModel" />
-              <label for="formGroupExampleInput" class="label">Email</label>
-              <input type="text" class="form-control" name="email" email ngModel required #email="ngModel" />
-              <label for="formGroupExampleInput" class="label">Phone number</label>
-              <input type="text" class="form-control" name="phone" ngModel required #phone="ngModel" />
-              <label class="label">Food allergy or intolerances</label>&nbsp;&nbsp;
-              <input type="checkbox" (click)="toggleShowAllergy()">
-              <div *ngIf="ShowHideAllergy">
-                Enter guests food allergy or intolerance
-                <input type="text" class="form-control" name="allergy" ngModel #allergy="ngModel" />
-              </div>
-              <button hidden id="bookingFormBtn" type="submit" class="btn submit" class="btn submit">Submit</button>
-          </form>
-        <form style="float: right;">
-          <label class="labelstripe">
-            <span>Name</span>
-            <input name="cardholder-name" class="field" placeholder="Jane Doe" />
-          </label>
-          <label class="labelstripe">
-            <span>Card</span>
-            <div id="card-element" class="field">
-              <ngx-stripe-card
-              [options]="cardOptions"
-              [elementsOptions]="elementsOptions"
-            ></ngx-stripe-card>
-            </div>
-          </label>
-          <button type="submit" (click)="pay()">Pay €10 Reservation Deposit</button>
-          <div class="outcome">
-            <div class="error"></div>
-            <div class="success">
-              Success! Your Stripe token is <span class="token"></span>
-            </div>
-          </div>
-        </form>
+<br>
+<h2 class="header text-center">Table Reservation Software</h2>
 
- 
+<div class="form-container">
+  <form #f="ngForm" class="left-form" (ngSubmit)="onSubmit(f)" novalidate>
+    <div (click)="d.toggle()" class="date">
+      Click to select available date
+    </div>
+    <input type="text" name="date" placeholder="..." class="form-control" ngbDatepicker #d="ngbDatepicker" ngModel
+      (ngModelChange)="filterGuests(f)" [markDisabled]="isDisabled" [minDate]="fullDate" required #date="ngModel" />
+    <label for="formGroupExampleInput" class="label">Select time</label>
+    <select class="form-control" id="exampleFormControlSelect" name="time" ngModel required #time="ngModel"
+      (ngModelChange)="filterGuests(f);">
+      <option *ngFor="let item of filteredOptions" [value]="item.value">
+        {{ item.text }}
+      </option>
+    </select>
+    <div class="required" *ngIf="fullCapacityError">We are at full capacity. Please choose another time.
+    </div>
+    <label for="formGroupExampleInput" class="label">Select guests</label>
+    <select class="form-control" id="exampleFormControlSelect1" name="guests" ngModel required #guests="ngModel">
+      <option *ngFor="let item of filteredGuests;" [value]="item.value">
+        {{ item.text }}
+      </option>
+    </select>
+    <label for="formGroupExampleInput" class="label">Full name</label>
+    <input type="text" class="form-control" name="name" ngModel required #name="ngModel" />
+    <label for="formGroupExampleInput" class="label">Email</label>
+    <input type="text" class="form-control" name="email" email ngModel required #email="ngModel" />
+    <label for="formGroupExampleInput" class="label">Phone number</label>
+    <input type="text" class="form-control" name="phone" ngModel required #phone="ngModel" />
+    <label class="label">Food allergy or intolerances</label>&nbsp;&nbsp;
+    <input type="checkbox" (click)="toggleShowAllergy()">
+    <div *ngIf="ShowHideAllergy" class="label">
+      ENTER GUESTS FOOD ALLERGY OR INTOLERANCE
+      <textarea maxlength="50" size="3" type="text" class="form-control" name="allergy" ngModel
+        #allergy="ngModel"></textarea>
+    </div>
+    <button hidden id="bookingFormBtn" type="submit" class="btn submit" class="btn submit">Submit</button>
+  </form>
+
+
+  <form class="right-form">
+    <label class="labelstripe">
+      <span class="label">Cardholder Name</span>
+      <input name="cardholder-name" id="cname" class="field" placeholder="Jane Doe" />
+    </label>
+
+    <label class="labelstripe">
+      <span class="label">Card Details</span>
+      <div id="card-element" class="field">
+        <ngx-stripe-card [options]="cardOptions" [elementsOptions]="elementsOptions"></ngx-stripe-card>
+      </div>
+    </label>
+
+    <button type="submit" (click)="pay()">Pay €10 Reservation Deposit</button>
+    <div class="outcome">
+      <div class="error"></div>
+      <div class="success">
+        Success! Your Stripe token is <span class="token"></span>
+      </div>
+    </div>
+    <p>The deposit amount will be deducted from your final service charge. Please note all deposits are final and
+      non-refundable. This is to ensure our guests are guarenteed the best experience when dining with us.</p>
+  </form>
+</div>

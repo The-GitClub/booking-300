@@ -135,6 +135,7 @@ export class CreatebookingComponent implements OnInit {
   }
 
   pay(): void {
+    var inputValue = (<HTMLInputElement>document.getElementById('cname')).value;
     if (this.stripeTest.valid) {
       this.createPaymentIntent(this.stripeTest.get('amount').value)
         .pipe(
@@ -143,7 +144,7 @@ export class CreatebookingComponent implements OnInit {
               payment_method: {
                 card: this.card.element,
                 billing_details: {
-                  name: this.stripeTest.get('name').value,
+                  name:inputValue
                 },
               },
             })

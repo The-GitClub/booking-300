@@ -6,9 +6,8 @@
 <mat-toolbar *ngIf="successMsg" color="accent"> {{ successMsg }} </mat-toolbar>
 <mat-toolbar *ngIf="errorMsg" color="warn"> {{ errorMsg }} </mat-toolbar>
 
-
-<div class="mx-auto" *ngIf="!errorMsg">
-    <table mat-table table-striped [dataSource]="booking" class="mat-elevation-z8">
+<div *ngIf="!errorMsg">
+    <table mat-table table-striped [dataSource]="booking" class="mx-auto">
         <ng-container matColumnDef="date">
             <th mat-header-cell *matHeaderCellDef>Booking Date</th>
             <td mat-cell *matCellDef="let booking">{{ booking?.date.day }}/{{ booking?.date.month }}/{{ booking?.date.year }} </td>
@@ -48,10 +47,5 @@
         <tr mat-row *matRowDef="let bookings; columns: columns"></tr>
 
     </table>
-    
-
-
-
-
-        </div>
+</div>
       
