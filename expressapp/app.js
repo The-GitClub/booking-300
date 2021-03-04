@@ -13,10 +13,6 @@ var nodemailerRouter = require('./routes/nodemailer');
 var cors= require('cors');
 var app = express();
 
-const keySecret = "sk_test_51IEHtSHNSX0dPtFXkCxt7oGHOwk9b0NEDbE48THVBbMjIevoY1PSYWB9JTM5v4OHf8Zj4F4jCb15d9giBDY1Pjme00RJX1qMm9"
-const stripe = require('stripe')(keySecret);
-
-//const stripe = require('stripe')('sk_test_51IEHtSHNSX0dPtFXkCxt7oGHOwk9b0NEDbE48THVBbMjIevoY1PSYWB9JTM5v4OHf8Zj4F4jCb15d9giBDY1Pjme00RJX1qMm9')
 app.use(cors({
   origin:['http://localhost:4200','http://127.0.0.1:4200'],
  // origin:['http://localhost:4200','http://localhost:3000'],
@@ -65,28 +61,28 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.post('/charge', (req, res) => {
-  const amount = req.body.amount;
 
-  stripe.customers.create({
-    email: req.body.token.email,
-    source: req.body.token.id,
-  })
-    .then(customer =>
-      stripe.charges.create({
-        amount,
-        description: 'Reservation deposit',
-        currency: 'eur',
-        customer: customer.id
-      }))
-    .then((charge) => {
-      res.status(200).json(charge)
-    })
+// This is your real test secret API key.
+const stripe = require("stripe")("sk_test_51IEHtSHNSX0dPtFXkCxt7oGHOwk9b0NEDbE48THVBbMjIevoY1PSYWB9JTM5v4OHf8Zj4F4jCb15d9giBDY1Pjme00RJX1qMm9");
 
-    .catch(err => {
-      console.log("Error:", err);
-      res.status(500).send({ error: "Purchase Failed" });
-    });
+app.use(express.static("."));
+app.use(express.json());
+
+app.post("/create-payment-intent", (req, res) => {
+  stripe.paymentIntents.create(
+    {
+      amount: parseInt(req.body.amount),
+      currency: "usd",
+      payment_method_types: ["card"],
+    },
+    function (err, paymentIntent) {
+      if (err) {
+        res.status(500).json(err.message);
+      } else {
+        res.status(201).json(paymentIntent);
+      }
+    }
+  );
 });
 
 app.use('/bookings', indexRouter);

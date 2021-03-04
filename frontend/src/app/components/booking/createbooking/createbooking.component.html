@@ -1,81 +1,65 @@
-<div class="container-fluid mx-auto">
-  <div class="background">
-    <div class="row">
-      <div class="col-md-6 offset-sm-1 col-sm-12">
-        <br>
-        <h2 class="header">Table Reservation Software</h2>
-      </div>
-
-
-      <div class="col-md-3 col-sm-12 mx-auto">
-        <br />
-        <br />
-        <div class="card booking-card">
-          <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+<div class="">
+  <br>
+  <h2 class="header">Table Reservation Software</h2>
+</div>
+          <form #f="ngForm" style="width: 20em; float: left;" (ngSubmit)="onSubmit(f)" novalidate>
             <div (click)="d.toggle()" class="date">
               Click to select available date
             </div>
-
-            <div class="form-group">
               <input type="text" name="date" placeholder="..." class="form-control" ngbDatepicker #d="ngbDatepicker"
                 ngModel (ngModelChange)="filterGuests(f)" [markDisabled]="isDisabled" [minDate]="fullDate" required
                 #date="ngModel" />
-
-              <div class="form-group">
-                <label for="exampleFormControlSelect1" class="label">Select time</label>
+                <label for="formGroupExampleInput" class="label">Select time</label>
                 <select class="form-control" id="exampleFormControlSelect" name="time" ngModel required #time="ngModel"
                   (ngModelChange)="filterGuests(f);">
                   <option *ngFor="let item of filteredOptions" [value]="item.value">
                     {{ item.text }}
                   </option>
                 </select>
-
                 <div class="required" *ngIf="fullCapacityError">We are at full capacity. Please choose another time.
                 </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="exampleFormControlSelect1" class="label">Select guests</label>
+              <label for="formGroupExampleInput" class="label">Select guests</label>
               <select class="form-control" id="exampleFormControlSelect1" name="guests" ngModel required
                 #guests="ngModel">
                 <option *ngFor="let item of filteredGuests;" [value]="item.value">
                   {{ item.text }}
                 </option>
               </select>
-            </div>
-
-
-            <div class="form-group">
               <label for="formGroupExampleInput" class="label">Full name</label>
               <input type="text" class="form-control" name="name" ngModel required #name="ngModel" />
-            </div>
-
-            <div class="form-group">
               <label for="formGroupExampleInput" class="label">Email</label>
               <input type="text" class="form-control" name="email" email ngModel required #email="ngModel" />
-            </div>
-
-            <div class="form-group">
               <label for="formGroupExampleInput" class="label">Phone number</label>
               <input type="text" class="form-control" name="phone" ngModel required #phone="ngModel" />
-            </div>
-
-            <div>
               <label class="label">Food allergy or intolerances</label>&nbsp;&nbsp;
               <input type="checkbox" (click)="toggleShowAllergy()">
               <div *ngIf="ShowHideAllergy">
                 Enter guests food allergy or intolerance
                 <input type="text" class="form-control" name="allergy" ngModel #allergy="ngModel" />
               </div>
-            </div>
-            <button hidden id="bookingFormBtn" type="submit" class="btn submit" class="btn submit">Submit</button>
+              <button hidden id="bookingFormBtn" type="submit" class="btn submit" class="btn submit">Submit</button>
           </form>
-          <button (click)="openCheckout()" [disabled]="fullCapacityError"> Purchase</button>
-        </div>
-        <br />
-        <br />
-      </div>
-    </div>
-  </div>
-</div>
+        <form style="float: right;">
+          <label class="labelstripe">
+            <span>Name</span>
+            <input name="cardholder-name" class="field" placeholder="Jane Doe" />
+          </label>
+          <label class="labelstripe">
+            <span>Card</span>
+            <div id="card-element" class="field">
+              <ngx-stripe-card
+              [options]="cardOptions"
+              [elementsOptions]="elementsOptions"
+            ></ngx-stripe-card>
+            </div>
+          </label>
+          <button type="submit" (click)="pay()">Pay €10 Reservation Deposit</button>
+          <div class="outcome">
+            <div class="error"></div>
+            <div class="success">
+              Success! Your Stripe token is <span class="token"></span>
+            </div>
+          </div>
+        </form>
+
+ 
