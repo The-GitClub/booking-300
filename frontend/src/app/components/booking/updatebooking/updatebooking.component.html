@@ -4,17 +4,14 @@
 
 <div class="form-container">
   <form #f="ngForm" (ngSubmit)="save(f)" class="update-form" novalidate>
-    <div (click)="d.toggle()" class="date">
-      Click to select available date
-    </div>
+    <div (click)="d.toggle()" class="date">Click to select available date</div>
 
-    <div class="form-group">
+ 
       <input type="text" name="date" placeholder="..." class="form-control" id="booking.date" ngbDatepicker
         #d="ngbDatepicker" ngModel (ngModelChange)="filterGuests(f)" [markDisabled]="isDisabled" [minDate]="fullDate"
         required #booking.date="ngModel"
         placeholder="{{booking.date.year}}-{{booking.date.month}}-{{booking.date.day}}" />
 
-      <div class="form-group">
         <label for="exampleFormControlSelect1" class="label">Select time</label>
         <select class="form-control" id="exampleFormControlSelect" name="time" ngModel required #booking.time="ngModel"
           (ngModelChange)="filterGuests(f);">
@@ -22,12 +19,8 @@
             {{ item.text }}
           </option>
         </select>
-        <div class="required" *ngIf="fullCapacityError">We are at full capacity. Please choose another time.
-        </div>
-      </div>
-    </div>
 
-    <div class="form-group">
+        <div class="required" *ngIf="fullCapacityError">We are at full capacity. Please choose another time.</div>
       <label for="exampleFormControlSelect1" class="label">Select guests</label>
       <select class="form-control" id="exampleFormControlSelect1" name="guests" ngModel placeholder="lol" required
         #booking.guests="ngModel">
@@ -35,35 +28,28 @@
           {{ item.text }}
         </option>
       </select>
-    </div>
 
-    <div class="form-group">
+
       <label for="formGroupExampleInput" class="label">Full name</label>
       <input type="text" class="form-control" placeholder="{{booking.name}}" name="name" ngModel required
         #booking.name="ngModel" placeholder="{{booking?.name}}" />
-    </div>
 
-    <div class="form-group">
       <label for="formGroupExampleInput" class="label">Email</label>
       <input type="text" class="form-control" name="email" placeholder="{{booking.email}}" email ngModel required
         #booking.email="ngModel" placeholder="{{booking?.email}}" />
-    </div>
 
-    <div class="form-group">
       <label for="formGroupExampleInput" class="label">Phone number</label>
       <input type="text" class="form-control" name="phone" placeholder="{{booking.phone}}" ngModel required
         #booking.phone="ngModel" placeholder="{{booking?.phone}}" />
-    </div>
 
-    <div>
-      <label class="label">Tick this box if a guest has a food allergy or intolerance</label>
+      <label class="label">Tick this box if a guest has a food allergy or intolerance</label>&nbsp;&nbsp;
       <input type="checkbox" (click)="toggleShowAllergy()">
       <div *ngIf="ShowHideAllergy" class="label">
         ENTER GUESTS FOOD ALLERGY OR INTOLERANCE
         <textarea maxlength="50" size="3" type="text" class="form-control" name="allergy" ngModel
           #allergy="ngModel" placeholder="{{booking?.allergy}}"></textarea>
       </div>
-    </div>
+
     <button type="submit" class="btn submit" [disabled]="fullCapacityError">Submit</button>
   </form>
 </div>
