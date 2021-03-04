@@ -6,11 +6,22 @@
 }
 
 
+@font-face {
+  font-family: 'Custom Header';
+  src: url('./assets/images/Fonts/ostrich-sans/OstrichSansRounded-Medium.otf') format('truetype');
+}
+
 .lol2 {
   font-family: 'Custom Logo' !important;
   font-size: 1.5em !important;
   color: rgb(255, 255, 255);
   background-color: rgb(0, 0, 0);
+}
+
+.lol3 {
+  font-family: 'Custom Header' !important;
+  font-size: 2.5em !important;
+  color: rgb(146, 146, 146);
 }
 
 // Custom Theming for Angular Material
@@ -56,7 +67,7 @@ $theming-material-components-theme: mat-light-theme(
 html,
 body {
   height: 100%;
-  background-image: linear-gradient(-180deg, #0a0a0a 0%, #000000 100%);
+  background-image: linear-gradient(-180deg, #000000 0%, #250f2c 100%);
 
 }
 

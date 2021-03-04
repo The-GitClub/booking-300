@@ -52,14 +52,17 @@ label > span {
 button {
   float: left;
   display: block;
-  background-image: linear-gradient(-180deg, #2b2b2b 0%, #000000 100%);
+  background-image: linear-gradient(-180deg, #652a77 0%, #250f2c 100%);
   box-shadow: 0 1px 2px 0 rgba(0,0,0,0.10), inset 0 -1px 0 0 #000000;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: x-small;
   color: white;
   border-radius: 8px;
   border: 0;
   margin-top: 20px;
   font-size: 17px;
-  font-weight: 500;
+  font-weight: 150;
   width: 100%;
   height: 48px;
   line-height: 48px;
@@ -67,11 +70,11 @@ button {
 }
 
 button:focus {
-  background: #EF8C41;
+  background-image: linear-gradient(-180deg, #8c3ba5 0%, #582468 100%);
 }
 
 button:active {
-  background: #E17422;
+  background-image: linear-gradient(-180deg, #8c3ba5 0%, #582468 100%);
 }
 
 .outcome {
@@ -127,11 +130,11 @@ button:active {
 }
 
 .label {
+  text-transform: uppercase;
+  font-size: x-small;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   text-transform: uppercase;
-  font-size: x-small;
-  font-weight: bold;
   color: rgb(153, 153, 153);
 }
 
@@ -145,13 +148,6 @@ button:active {
 
 #span-tag{
   color: #000000;
-}
-
-.header {
-  text-transform: uppercase;
-  font-size: x-large;
-  color: rgb(245, 245, 245);
-  font-weight: 150;
 }
 
 .form-container{

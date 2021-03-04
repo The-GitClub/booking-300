@@ -72,7 +72,7 @@ app.post("/create-payment-intent", (req, res) => {
   stripe.paymentIntents.create(
     {
       amount: parseInt(req.body.amount),
-      currency: "usd",
+      currency: "eur",
       payment_method_types: ["card"],
     },
     function (err, paymentIntent) {
