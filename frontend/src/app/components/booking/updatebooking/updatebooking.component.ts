@@ -109,9 +109,6 @@ export class UpdatebookingComponent implements OnInit {
     console.log(this.booking);
   }
 
-  toggleShowAllergy() {
-    this.ShowHideAllergy = ! this.ShowHideAllergy;
-    }
 
   getAll(): void {
     this.bookingService.getAllBookings().subscribe((data: any[]) => {

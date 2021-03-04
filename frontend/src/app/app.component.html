@@ -1,42 +1,4 @@
-<!--The content below is only a placeholder and can be replaced.-->
 
-<!-- <nav class="navbar navbar-expand-lg navbar-black bg-black">
-  <a class="navbar-brand" [routerLink]="['']">Booking300&trade;</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-      aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-          <li class="nav-item">
-              <a class="nav-link" [routerLink]="['/user']" routerLinkActive="active">Bookings</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['user/', userId, 'book']" routerLinkActive="active">Book Table</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" [routerLink]="['user/', userId, 'view']" routerLinkActive="active">View Bookings</a>
-        </li>
-      </ul>
-  </div>
-
-  <ul class="nav navbar-nav navbar-right">
-    <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/register']" routerLinkActive="active">Register
-            <span class="sr-only">(current)</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active">Login</a>
-    </li>
-  </ul>
-</nav> -->
 
 <app-navbar></app-navbar>
-<div class="continer-fluid">
-  <div class="row">
-      <div class="col-md-6 offset-md-3">
-          <router-outlet></router-outlet>
-      </div>
-  </div>
-</div>
+<router-outlet></router-outlet>

@@ -1,10 +1,10 @@
 <div class="">
     <br>
     <h2 class="header text-center">Restaurant Details</h2>
-  </div>
+</div>
 
-<div class ="mx-auto" *ngIf="!errorMsg">
-    <table mat-table [dataSource]="restaurant" class="mat-elevation-z8">
+<div *ngIf="!errorMsg">
+    <table mat-table [dataSource]="restaurant" class="mx-auto">
         <ng-container matColumnDef="restaurantName">
             <th mat-header-cell *matHeaderCellDef>Restaurant Name</th>
             <td mat-cell *matCellDef="let restaurant">{{ restaurant?.restaurantName }} </td>
@@ -22,11 +22,11 @@
 
         <ng-container matColumnDef="update">
             <th mat-header-cell *matHeaderCellDef>Update</th>
-            <td style  mat-cell *matCellDef="let restaurant"> <button [routerLink]="['update', restaurant._id]" class="btn buttons">Update</button></td>
+            <td style mat-cell *matCellDef="let restaurant"> <button [routerLink]="['update', restaurant._id]"
+                    class="btn buttons">Update</button></td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="columns"></tr>
         <tr mat-row *matRowDef="let restaurants; columns: columns"></tr>
-        </table>
-        </div>
-  
+    </table>
+</div>

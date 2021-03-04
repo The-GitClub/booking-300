@@ -1,24 +1,123 @@
+.stripeForm {
+  background: #F6F9FC;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  float: left;
+}
+
+form {
+  width: 480px;
+}
+
+.labelstripe {
+  position: relative;
+  color: #6A7C94;
+  font-weight: 400;
+  height: 48px;
+  line-height: 48px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+}
+
+label > span {
+  width: 115px;
+}
+
+.field {
+  background: white;
+  box-sizing: border-box;
+  font-weight: 400;
+  border: 1px solid #CFD7DF;
+  border-radius: 8px;
+  color: #32315E;
+  outline: none;
+  flex: 1;
+  height: 48px;
+  line-height: 48px;
+  padding: 0 20px;
+  cursor: text;
+}
+
+.field::-webkit-input-placeholder { color: #CFD7DF; }
+.field::-moz-placeholder { color: #CFD7DF; }
+
+.field:focus,
+.field.StripeElement--focus {
+  border-color: #F99A52;
+}
+
+button {
+  float: left;
+  display: block;
+  background-image: linear-gradient(-180deg, #2b2b2b 0%, #000000 100%);
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,0.10), inset 0 -1px 0 0 #000000;
+  color: white;
+  border-radius: 8px;
+  border: 0;
+  margin-top: 20px;
+  font-size: 17px;
+  font-weight: 500;
+  width: 100%;
+  height: 48px;
+  line-height: 48px;
+  outline: none;
+}
+
+button:focus {
+  background: #EF8C41;
+}
+
+button:active {
+  background: #E17422;
+}
+
+.outcome {
+  float: left;
+  width: 100%;
+  padding-top: 8px;
+  min-height: 20px;
+  text-align: center;
+}
+
+.success, .error {
+  display: none;
+  font-size: 13px;
+}
+
+.success.visible, .error.visible {
+  display: inline;
+}
+
+.error {
+  color: #E4584C;
+}
+
+.success {
+  color: #F8B563;
+}
+
+.success .token {
+  font-weight: 500;
+  font-size: 13px;
+}
+
 .date {
   width: 100%;
-  border: 1px solid rgb(10, 73, 60);
-  background-color: rgb(10, 73, 60);
+  background-image: linear-gradient(-180deg, #2b2b2b 0%, #000000 100%);
   color: white;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  text-transform: uppercase;
+  font-size: x-small;
   font-size: smaller;
   border-radius: 2px;
   text-align: center;
   cursor: pointer;
   padding: 3px;
- 
   font-weight: 150;
-}
-.main {
-  padding: 0px;
-}
-
-.checkbox-items li {
-  list-style: none;
-  display: inline;
 }
 
 .required {
@@ -27,26 +126,13 @@
   font-size: 15px;
 }
 
-.required2 {
-  color: red;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-/* .form-group{
-  height: 5em;
-} */
-
-.booking-card {
-  padding: 10px;
-}
-
-
 .label {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   text-transform: uppercase;
   font-size: x-small;
   font-weight: bold;
+  color: rgb(153, 153, 153);
 }
 
 .submit {
@@ -57,28 +143,40 @@
   text-transform: uppercase;
 }
 
-.background {
-  background-image: url(../../../../assets/images/background.jpg);
-  background-repeat: no-repeat;
-  /* background-color: rgb(5, 31, 5); */
-/*  background-size: cover;
-  /* height: 100%;
-  width: 100%; */
-  position: fixed;
-  right: 0;
-  left: 0;
-}
-
-.container-fluid {
-  background-color: aliceblue;
-  height: 100%;
+#span-tag{
+  color: #000000;
 }
 
 .header {
   text-transform: uppercase;
   font-size: x-large;
-  color: rgb(0, 0, 0);
+  color: rgb(245, 245, 245);
   font-weight: 150;
 }
 
+.form-container{
+text-align: center;
+}
 
+.left-form {
+  max-width: 700px;
+  vertical-align: top;
+  display: inline-block;
+
+  margin: 2%;
+  padding: 2%;
+}
+
+.right-form {
+
+  max-width: 700px;
+  display: inline-block;
+
+  margin: 2%;
+  padding: 2%;
+}
+
+p {
+  color: grey;
+  text-align: center;
+}

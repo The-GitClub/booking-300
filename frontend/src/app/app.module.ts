@@ -61,6 +61,9 @@ import { BookingupdatedComponent } from './components/app_pages/bookingupdated/b
 import { AdmindashboardComponent } from './components/app_pages/admindashboard/admindashboard.component';
 import { AdmindashboardupdateComponent } from './components/app_pages/admindashboardupdate/admindashboardupdate.component';
 
+// Stripe
+import { NgxStripeModule } from 'ngx-stripe';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -104,6 +107,8 @@ import { AdmindashboardupdateComponent } from './components/app_pages/admindashb
     MatIconModule,
     MatCardModule,
     NgbModule,
+    NgxStripeModule.forRoot('pk_test_51IEHtSHNSX0dPtFXwuhN1cNF14lgeDVGf2pIfN4VDjwDAUQ4GE8EenTFkpJbxzpXD3gV6YdUc5LuCKSQhk1Tqfac00QM95ByXa'),
+
   ],
   entryComponents: [ManagerNotificationComponent, StaffNotificationComponent],
   providers: [UserService, BookingserviceService, ValidationService, AuthGuard, antiAuthGuard, StaffGuard, ManagerGuard],

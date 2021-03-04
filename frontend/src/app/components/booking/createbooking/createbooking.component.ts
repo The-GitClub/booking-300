@@ -1,13 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ɵConsole } from '@angular/core';
 import { NgForm } from '@angular/forms';
-//import { ApiService } from '../../../utils/api/api.service';
 import { NgbDate, NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { BookingserviceService } from '../../../services/booking/bookingservice.service';
 import { UserService } from '../../../services/user/user.service';
 import { RestaurantService } from '../../../services/restaurant/restaurant.service';
+// Stripe
 import { HttpClient } from '@angular/common/http';
-//import { Restaurant } from '../../../Interfaces/Restaurant';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { StripeService, StripeCardComponent } from 'ngx-stripe';
+import {
+  StripeCardElementOptions,
+  StripeElementsOptions,
+  PaymentIntent,
+} from '@stripe/stripe-js';
 
 type Option = { text: string; value: string };
 type BookingDate = { year: number; month: number; day: number };
@@ -21,7 +29,6 @@ type Booking = {
   phone: string;
   table: string;
   guests: string;
-
   allergy: string; //Form to fill in details
 };
 type Restaurant = {
@@ -35,6 +42,33 @@ type Restaurant = {
   styleUrls: ['./createbooking.component.css']
 })
 export class CreatebookingComponent implements OnInit {
+  @ViewChild(StripeCardComponent) card: StripeCardComponent;
+
+  cardOptions: StripeCardElementOptions = {
+    style: {
+      base: {
+        color: '#303238',
+        fontSize: '16px',
+        fontFamily: '"Open Sans", sans-serif',
+        lineHeight: '40px',
+        fontWeight: 300,
+        fontSmoothing: 'antialiased',
+        '::placeholder': {
+          color: '#CFD7DF',
+        },     
+      },
+      invalid: {
+        iconColor: '#FFC7EE',
+        color: '#FFC7EE',
+      },
+    },
+  };
+
+  elementsOptions: StripeElementsOptions = {
+    locale: 'en-GB',
+  };
+
+  stripeTest: FormGroup;
   options: Option[] = [
     { text: '9am', value: '9' },
     { text: '10am', value: '10' },
@@ -62,7 +96,6 @@ export class CreatebookingComponent implements OnInit {
 
   bookings: Booking[];
   public restaurant: Restaurant;
-  
   filteredOptions: Option[];
   filteredTbls: Option[];
   filteredGuests: Option[];
@@ -77,21 +110,16 @@ export class CreatebookingComponent implements OnInit {
   //Below is used for food allergy form
   ShowHideAllergy:boolean = false; //To hide and show the box
 
-  //Stripe
-  private readonly stripePublishableKey = 'pk_test_51IEHtSHNSX0dPtFXwuhN1cNF14lgeDVGf2pIfN4VDjwDAUQ4GE8EenTFkpJbxzpXD3gV6YdUc5LuCKSQhk1Tqfac00QM95ByXa'
-
-  amount: number = 20;
-  private readonly checkoutHandler = (window as any).StripeCheckout.configure({
-    key: this.stripePublishableKey,
-    locale: 'auto',
-    token: (token: any) => {
-      this.sendToken(token);
-    }
-  });
-
-  constructor(private _user:UserService, private bookingService: BookingserviceService, private restaurantService: RestaurantService, private router: Router, private http: HttpClient) {}
+  constructor(private _user:UserService, private bookingService: BookingserviceService, 
+    private restaurantService: RestaurantService, private router: Router, private http: HttpClient,
+    private fb: FormBuilder,
+    private stripeService: StripeService) {}
 
   ngOnInit(): void {
+    this.stripeTest = this.fb.group({
+      name: ['Angular v10', [Validators.required]],
+      amount: [1000],
+    });
     this.currentHour = this.today.getHours().toString();
     this.filteredOptions = this.options;
     this.filteredTbls = this.optionsTbl;
@@ -104,6 +132,47 @@ export class CreatebookingComponent implements OnInit {
       month: this.today.getMonth() + 1,
       day: this.today.getDate(),
     };
+  }
+
+  pay(): void {
+    var inputValue = (<HTMLInputElement>document.getElementById('cname')).value;
+    if (this.stripeTest.valid) {
+      this.createPaymentIntent(this.stripeTest.get('amount').value)
+        .pipe(
+          switchMap((pi) =>
+            this.stripeService.confirmCardPayment(pi.client_secret, {
+              payment_method: {
+                card: this.card.element,
+                billing_details: {
+                  name:inputValue
+                },
+              },
+            })
+          )
+        )
+        .subscribe((result) => {
+          if (result.error) {
+            // Show error to your customer (e.g., insufficient funds)
+            console.log(result.error.message);
+          } else {
+            // The payment has been processed!
+            if (result.paymentIntent.status === 'succeeded') {
+              // Show a success message to your customer
+              var myForm = document.getElementById('bookingFormBtn');
+              myForm.click();
+            }
+          }
+        });
+    } else {
+      console.log(this.stripeTest);
+    }
+  }
+
+  createPaymentIntent(amount: number): Observable<PaymentIntent> {
+    return this.http.post<PaymentIntent>(
+      `http://localhost:3000/create-payment-intent`,
+      { amount }
+    );
   }
 
   getAll(): void {
@@ -172,8 +241,7 @@ export class CreatebookingComponent implements OnInit {
     if(data.guests){
     totalguests += Number(data.guests);
   }
-  // console.log(sameDayAppointments)
-
+  // console.log(sameDayAppointments;
   // console.log(totalguests);
 });
 
@@ -336,36 +404,9 @@ export class CreatebookingComponent implements OnInit {
       this.filteredGuests =this.optionsGuests;
       this.getAll();
       this.sendEmailConfirmation(data);
-      //f.resetForm();
+      f.resetForm();
       this.router.navigate(['booking-confirmation']);
     });
   }
 
-  openCheckout() {
-    this.checkoutHandler.open({
-      name: 'Book a Table',
-      description: 'Deposit for reservation.',
-      image: '../../assets/images/background.jpg',
-      currency: 'eur',
-      amount: 2000
-    }); 
-  }
-
-  private sendToken(token: string): void {
-    const charge = { amount: this.getFormattedCurrency(), token };
-
-    this.http.post('http://localhost:3000/charge', charge)
-      .subscribe(data => {
-        //console.log(token); //Log the client token
-        //console.log(data); //Log the card data
-        
-        var myForm = document.getElementById('bookingFormBtn');
-        myForm.click();
-      });
-      //alert('The deposit for your booking has been sucessfully confirmed')
-    }
-
-  private getFormattedCurrency(): number {
-    return this.amount * 100;
-  }
 }

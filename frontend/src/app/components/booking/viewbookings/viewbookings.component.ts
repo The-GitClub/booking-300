@@ -34,6 +34,7 @@ export class ViewbookingsComponent implements OnInit {
     this.getTheBookings();
     const id = this.route.snapshot.paramMap.get('id');
   }
+  
   getTheBookings() {
     this.userId = this._user.ObtainID();
     this.bookingService.getBookings(this.userId).subscribe(
