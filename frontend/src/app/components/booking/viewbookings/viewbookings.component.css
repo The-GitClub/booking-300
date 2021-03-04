@@ -6,29 +6,31 @@ table {
 }
 
 
-.header {
-    text-transform: uppercase;
-    font-size: x-large;
-    color: rgb(0, 0, 0);
-    text-transform: uppercase;
-    font-weight: 150;
-  }
-
 th {
-    background-color: rgb(0, 0, 0);
+    background-image: linear-gradient(-180deg, #4b1f58 0%, #25102c 100%);
     color: rgb(255, 255, 255); 
     text-transform: uppercase;
     font-weight: 150;
 }
 
 .buttons {
-    background-color: rgb(10, 73, 60);
     color: white;
     font-family: Arial, Helvetica, sans-serif;
     font-size: smaller;  
     text-transform: uppercase;
-    background-image: linear-gradient(-180deg, #F8B563 0%, #F99A52 100%);
+    background-image: linear-gradient(-180deg, #79328f 0%, #642b77 100%);
 }
+
+.mat-toolbar {
+    background: rgb(0, 0, 0);
+    color: #fff;
+ }
+
+ span {
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+  }
 
 
 table{
@@ -38,15 +40,12 @@ table{
 .mat-column-date {
  word-wrap: break-word !important;
 white-space: unset !important;
-width: 10% !important;
-text-align: center;
-border: 1px solid #F8B563;
-    
+/* width: 10% !important;
+text-align: center; */
+border: 1px solid #000000;
 overflow-wrap: break-word;
 word-wrap: break-word;
-   
-word-break: break-word;
-   
+word-break: break-word; 
 -ms-hyphens: auto;
 -moz-hyphens: auto;
 -webkit-hyphens: auto;
@@ -58,13 +57,10 @@ hyphens: auto;
     white-space: unset !important;
     width: 4% !important;
     text-align: center;
-    border: 1px solid #F8B563;
-   
+    border: 1px solid #000000;
     overflow-wrap: break-word;
     word-wrap: break-word;
-  
     word-break: break-word;
-  
     -ms-hyphens: auto;
     -moz-hyphens: auto;
     -webkit-hyphens: auto;
@@ -76,7 +72,7 @@ hyphens: auto;
     white-space: unset !important;
     width: 10% !important;
     text-align: center;
-    border: 1px solid #F8B563;
+    border: 1px solid #000000;
    
     overflow-wrap: break-word;
     word-wrap: break-word;
@@ -94,7 +90,7 @@ hyphens: auto;
     white-space: unset !important;
     width: 5% !important;
     text-align: center;
-    border: 1px solid #F8B563;
+    border: 1px solid #000000;
    
     overflow-wrap: break-word;
     word-wrap: break-word;
@@ -112,7 +108,7 @@ hyphens: auto;
     white-space: unset !important;
     width: 50% !important;
     text-align: center;
-    border: 1px solid #F8B563;
+    border: 1px solid #000000;
    
     overflow-wrap: break-word;
     word-wrap: break-word;
@@ -130,13 +126,10 @@ hyphens: auto;
     white-space: unset !important;
     width: 10% !important;
     text-align: center;
-    border: 1px solid #F8B563;
-   
+    border: 1px solid #000000;
     overflow-wrap: break-word;
     word-wrap: break-word;
-  
     word-break: break-word;
-  
     -ms-hyphens: auto;
     -moz-hyphens: auto;
     -webkit-hyphens: auto;
@@ -147,14 +140,11 @@ hyphens: auto;
     word-wrap: break-word !important;
     white-space: unset !important;
     width: 10% !important;
-    text-align: center;
-    border: 1px solid #F8B563;
-   
+    text-align: center;   
+    border: 1px solid #000000;
     overflow-wrap: break-word;
     word-wrap: break-word;
-  
     word-break: break-word;
-  
     -ms-hyphens: auto;
     -moz-hyphens: auto;
     -webkit-hyphens: auto;

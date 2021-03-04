@@ -1,5 +1,5 @@
 <br>
-<h2 class="header text-center">Table Reservation Software</h2>
+<h2 class="lol3 text-center">Table Reservation Software</h2>
 
 <div class="form-container">
   <form #f="ngForm" class="left-form" (ngSubmit)="onSubmit(f)" novalidate>
@@ -28,6 +28,7 @@
     <input type="text" class="form-control" name="email" email ngModel required #email="ngModel" />
     <label for="formGroupExampleInput" class="label">Phone number</label>
     <input type="text" class="form-control" name="phone" ngModel required #phone="ngModel" />
+    <br>
     <label class="label">Food allergy or intolerances</label>&nbsp;&nbsp;
     <input type="checkbox" (click)="toggleShowAllergy()">
     <div *ngIf="ShowHideAllergy" class="label">
