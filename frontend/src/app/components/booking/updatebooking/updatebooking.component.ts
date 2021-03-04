@@ -291,6 +291,10 @@ export class UpdatebookingComponent implements OnInit {
       });
   }
 
+  toggleShowAllergy() {
+    this.ShowHideAllergy = ! this.ShowHideAllergy;
+    }
+
   isDisabled = (date: NgbDate, current: { month: number }): boolean => {
     let sameDayBookings = this.bookingsArray.filter((booking) => {
       return (
