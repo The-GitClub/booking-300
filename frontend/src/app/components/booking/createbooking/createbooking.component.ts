@@ -16,6 +16,9 @@ import {
   StripeElementsOptions,
   PaymentIntent,
 } from '@stripe/stripe-js';
+import { environment } from '../../../../environments/environment';
+
+const BASE_URL = environment.API_URL;
 
 type Option = { text: string; value: string };
 type BookingDate = { year: number; month: number; day: number };
@@ -55,7 +58,7 @@ export class CreatebookingComponent implements OnInit {
         fontSmoothing: 'antialiased',
         '::placeholder': {
           color: '#CFD7DF',
-        },     
+        },
       },
       invalid: {
         iconColor: '#FFC7EE',
@@ -84,7 +87,7 @@ export class CreatebookingComponent implements OnInit {
     { text: '1', value: '1' },
     { text: '2', value: '2' },
     { text: '3', value: '3' },
-    
+
   ];
   optionsGuests: Option[] = [
     { text: '1', value: '1' },
@@ -106,11 +109,11 @@ export class CreatebookingComponent implements OnInit {
   fullCapacityError: boolean;
   userId: string='';
   capacity: number;
-  
+
   //Below is used for food allergy form
   ShowHideAllergy:boolean = false; //To hide and show the box
 
-  constructor(private _user:UserService, private bookingService: BookingserviceService, 
+  constructor(private _user:UserService, private bookingService: BookingserviceService,
     private restaurantService: RestaurantService, private router: Router, private http: HttpClient,
     private fb: FormBuilder,
     private stripeService: StripeService) {}
@@ -170,13 +173,13 @@ export class CreatebookingComponent implements OnInit {
 
   createPaymentIntent(amount: number): Observable<PaymentIntent> {
     return this.http.post<PaymentIntent>(
-      `http://localhost:3000/create-payment-intent`,
+      BASE_URL + `create-payment-intent`,
       { amount }
     );
   }
 
   getAll(): void {
-    this.bookingService.getAllBookings().subscribe((data: any[]) => { 
+    this.bookingService.getAllBookings().subscribe((data: any[]) => {
       this.bookings = data || [];
      //console.log(data);
     });
@@ -208,7 +211,7 @@ export class CreatebookingComponent implements OnInit {
       return (
         booking.date.year === f.value.date.year &&
         booking.date.month === f.value.date.month &&
-        booking.date.day === f.value.date.day 
+        booking.date.day === f.value.date.day
         && booking.time === f.value.time
       );
     });
@@ -256,7 +259,7 @@ export class CreatebookingComponent implements OnInit {
           //  this.fullCapacityError = 'We are at full capacity. Please choose another time.'
             this.fullCapacityError = true;
           }
-          
+
           if(totalguests == this.capacity)
           {
             console.log('All 5 item missing from guests')
@@ -367,7 +370,7 @@ export class CreatebookingComponent implements OnInit {
       return (
         booking.date.year === date.year &&
         booking.date.month === date.month &&
-        booking.date.day === date.day 
+        booking.date.day === date.day
       );
     });
 

@@ -1,13 +1,12 @@
 //import the the data model
-const User = require("./models/User");
-//import the secret string 
-const { SECRET } = require("./config/database");
+const User = require("./models/user");
+
 //import Strategy function and ExtractJwt (they extract the JWT from the request object)
 const { Strategy, ExtractJwt } = require("passport-jwt");
  
 const options = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: SECRET
+  secretOrKey: process.env.SECRET
 };
 
 module.exports = passport => {

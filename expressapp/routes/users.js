@@ -1,16 +1,14 @@
 const router = require("express").Router();
-var User = require("../models/User");
+var User = require("../models/user");
 const Bookings = require("../models/booking");
+const checkAuth = require("../utils/check-auth");
 
 // Bring in the User Registration Function, User Login Function
 const {
     userRegister,
     userLogin,
     findMyRole,
-    userAuth,
-    //checkRole,
-    serializeUser,
-    serializeUserForId
+    checkRole
 } = require("../utils/authentication");
 
 /* #region  Registrations */
@@ -20,12 +18,12 @@ router.post("/register-customer", async (req, res) => {
 });
 
 // Staff Registration Route
-router.post("/register-staff", async (req, res) => {
+router.post("/register-staff", checkAuth, checkRole(["staff"]), async (req, res) => {
   await userRegister(req.body, "staff", res);
 });
 
 // Manager  Registration Route
-router.post("/register-manager", async (req, res) => {
+router.post("/register-manager", checkRole(["manager"]), async (req, res) => {
   await userRegister(req.body, "manager", res);
 });
 
@@ -50,11 +48,10 @@ router.post("/register-manager", async (req, res) => {
 
 
 // Get User Route 
-router.get("/user", userAuth, async (req, res) => {
+router.get("/user", checkAuth, async (req, res) => {
   console.log("USER IN THE GET USER METHOD", req.user._id.id);
   let id = req.user._id.id;
   getUserBookings(id);
-  return res.json(serializeUser(req.user));
 });
 
 

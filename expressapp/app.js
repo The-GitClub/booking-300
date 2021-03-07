@@ -1,9 +1,7 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const config = require('./config/database');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -14,42 +12,33 @@ var cors= require('cors');
 var app = express();
 
 app.use(cors({
-  origin:['http://localhost:4200','http://127.0.0.1:4200'],
- // origin:['http://localhost:4200','http://localhost:3000'],
-  credentials:true
+  // origin:['http://localhost:4200','http://127.0.0.1:4200'],
+  origin:['http://project300.s3-website-eu-west-1.amazonaws.com'],
 }));
 
 var mongoose =require('mongoose');
 
-mongoose.connect(config.database, { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.connection.on('connected', () => {
-    console.log('Connected to database ' + config.database);
-});
-
-//passport
-var passport = require('passport');
-var session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
-app.use(session({
-  name:'myname.sid',
-  resave:false,
-  saveUninitialized:false,
-  secret:'secret',
-  cookie:{
-    maxAge:36000000,
-    httpOnly:false,
-    secure:false,
-  },
-  store: new MongoStore({ mongooseConnection: mongoose.connection })
-}));
-
+/* #region connect to our MongoDB  */
+const uri =
+  "mongodb://S00190873:" + process.env.MONGO_ATLAS_PW + "@cluster0-shard-00-00.xf1uw.mongodb.net:27017,cluster0-shard-00-01.xf1uw.mongodb.net:27017,cluster0-shard-00-02.xf1uw.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-127w60-shard-0&authSource=admin&retryWrites=true&w=majority";
+console.log(uri);
+try {
+  // Connect to the MongoDB cluster
+  mongoose.connect(
+    uri,
+    { useNewUrlParser: true, useUnifiedTopology: true },
+    () => console.log(" Mongoose is connected")
+  );
+} catch (e) {
+  console.log("could not connect");
+}
+/* #endregion connect to our MongoDB*/
 app.use(express.static("."));
 app.use(express.json());
 
+var passport = require("passport");
 app.use(passport.initialize());
 require("./passport")(passport);
-
-app.use(passport.session());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -58,7 +47,6 @@ app.set('view engine', 'hbs');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
