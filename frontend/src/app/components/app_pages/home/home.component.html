@@ -25,8 +25,17 @@
               </p>
             </div>
           </div>
+          <div *ngIf="_user.loggedIn()"  class="centeredText">
+            <p class="lead">Welcome to Booking300. Please register or login below to start booking.</p>
+
+            <p>Login or Register</p>
+            <p class="lead" style="color:white;">
+              <button [routerLink]="['/login']" class="btn btn-md buttons">Login</button> &nbsp;
+              <button [routerLink]="['/register']" class="btn btn-md buttons">Register</button>
+            </p>
+          </div>
       </div>
-     
+
 
 
       <div class="carousel-item">
@@ -42,6 +51,15 @@
                 <button [routerLink]="['user/view']" class="btn btn-md buttons">View Bookings</button>
               </p>
             </div>
+          </div>
+          <div *ngIf="_user.loggedIn()"  class="centeredText">
+            <p class="lead">Welcome to Booking300. Please register or login below to start booking.</p>
+
+            <p>Login or Register</p>
+            <p class="lead" style="color:white;">
+              <button [routerLink]="['/login']" class="btn btn-md buttons">Login</button> &nbsp;
+              <button [routerLink]="['/register']" class="btn btn-md buttons">Register</button>
+            </p>
           </div>
       </div>
 
@@ -59,6 +77,15 @@
                 <button [routerLink]="['user/view']" class="btn btn-md buttons">View Bookings</button>
               </p>
             </div>
+          </div>
+          <div *ngIf="_user.loggedIn()"  class="centeredText">
+            <p class="lead">Welcome to Booking300. Please register or login below to start booking.</p>
+
+            <p>Login or Register</p>
+            <p class="lead" style="color:white;">
+              <button [routerLink]="['/login']" class="btn btn-md buttons">Login</button> &nbsp;
+              <button [routerLink]="['/register']" class="btn btn-md buttons">Register</button>
+            </p>
           </div>
         </div>
       </div>
@@ -79,17 +106,9 @@
 </div>
 
 
-    
 
 
-    <div *ngIf="_user.loggedIn()">
-      <p class="lead">Welcome to Booking300. Please register or login below to start booking.</p>
 
-      <p>Login or Register</p>
-      <p class="lead" style="color:white;">
-        <button [routerLink]="['/login']" class="btn btn-md buttons">Login</button> &nbsp;
-        <button [routerLink]="['/register']" class="btn btn-md buttons">Register</button>
-      </p>
-    </div>
+
 
 

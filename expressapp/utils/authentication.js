@@ -2,9 +2,7 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
-const User = require("../models/User");
-//import secret string from the .env file for the JWT
-const { SECRET } = require("../config/database");
+const User = require("../models/user");
 
 //To Register the User (Manager, Staff, User)
 //#region RegisterUser
@@ -85,16 +83,16 @@ const userLogin = async (userCreds, role, res) => {
         role: user.role,
         email: user.email,
       },
-      SECRET,
+      process.env.SECRET,
       //token is valid for 7 days
-      { expiresIn: "7 days" }
+      { expiresIn: "1h" }
     );
 
     let result = {
       role: user.role,
       email: user.email,
       token: `Bearer ${token}`,
-      expiresIn: 168, // (hours)
+      expiresIn: 3600, // (seconds)
     };
 
     return res.status(200).json({
@@ -124,25 +122,6 @@ const validateEmail = async (email) => {
 };
 //#endregion validateEmail
 
-//#region SerializeResponse
-//prevents the displaying of passwords and emails in the response
-const serializeUser = (user) => {
-  return {
-    username: user.username,
-    _id: user._id,
-    role: user.role
-  };
-};
-//#endregion SerializeResponse
-//#region SerializeResponse
-//prevents the displaying of passwords and emails in the response
-    const serializeUserForId = (user) => {
-      return {
-        _id: user._id,
-      };
-    };
-//#endregion SerializeResponse
-
 /* #region  Find User Role For Login */
   const findMyRole = async (email, err) => {
     let user = await User.findOne({ email });
@@ -155,8 +134,14 @@ const serializeUser = (user) => {
   };
 /* #endregion Find User Role For Login  */
 
-//Passport middleware
-const userAuth = passport.authenticate("jwt", { session: false });
+//#region CheckRoleMiddleware
+//type of role necessary is passed in from the protected route in route file (users.js) and if role matches, authorize
+const checkRole = (roles) => (req, res, next) =>
+  !roles.includes(req.user.role)
+    ? res.status(401).json("Unauthorized")
+    : next();
+//#endregion CheckRoleMiddleware
+
 
 //#region ExportFunctions
 //functions have to exported to be used in the users.js routing file
@@ -164,9 +149,6 @@ module.exports = {
   userRegister,
   userLogin,
   findMyRole,
-  userAuth,
-  serializeUser,
-  serializeUserForId,
-  //checkRole,
+  checkRole,
 };
 //#endregion ExportFunctions

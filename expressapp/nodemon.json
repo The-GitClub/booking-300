@@ -1,0 +1,6 @@
+{
+  "env": {
+    "MONGO_ATLAS_PW": "booking300",
+    "SECRET": "booking300key"
+  }
+}
