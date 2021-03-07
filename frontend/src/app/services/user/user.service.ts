@@ -6,6 +6,8 @@ import { User } from "../../Interfaces/User";
 import { catchError, map } from "rxjs/operators";
 import { JwtHelperService } from "@auth0/angular-jwt";
 
+const BASE_URL = environment.API_URL;
+
 //import the MatSnackBar Messages Service to notify the user of an error
 import {
   MatSnackBar,
@@ -43,7 +45,7 @@ export class UserService {
   register(body: any) {
     //return this._http.get(`${this.BASE_URL}/users/register`,{
     return this._http
-      .post<any>("http://127.0.0.1:3000/users/register-customer", body, {
+      .post<any>( BASE_URL + "users/register-customer", body, {
         observe: "body",
         headers: new HttpHeaders().append("Content-Type", "application/json"),
       })
@@ -52,9 +54,8 @@ export class UserService {
 
   login(body: any): Observable<User> {
     return this._http
-      .post("http://127.0.0.1:3000/users/login", body, {
+      .post( BASE_URL + "users/login", body, {
         observe: "body",
-        withCredentials: true,
         headers: new HttpHeaders().append("Content-Type", "application/json"),
       })
       .pipe(
