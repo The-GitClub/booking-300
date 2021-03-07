@@ -12,8 +12,8 @@ var cors= require('cors');
 var app = express();
 
 app.use(cors({
-  // origin:['http://localhost:4200','http://127.0.0.1:4200'],
-  origin:['http://project300.s3-website-eu-west-1.amazonaws.com'],
+  origin:['http://localhost:4200','http://127.0.0.1:4200'],
+  //origin:['http://project300.s3-website-eu-west-1.amazonaws.com'],
 }));
 
 var mongoose =require('mongoose');
