@@ -1,17 +1,32 @@
 .navbar {
     background-color: black;
     color: white;
-    border-bottom: 2px solid #9b33c1;
-    border-top: 2px solid #9b33c1;
+    /* border-bottom: 2px solid #581e6d;
+    border-top: 2px solid #581e6d;  */
 }
 
-a {
-    color: white;
+mat-icon {
+    font-size: 30px;
+    height: 2px;
+}
+
+button {
+    margin-left: 2px;
+    margin-right: 2px;
 }
 
 button:hover{
-  border-right: 2px solid #9b33c1;
-  border-left: 2px solid #9b33c1;
+  border-right: 2px solid #581e6d;
+  border-left: 2px solid #581e6d;
+}
+
+button:focus {
+    outline: none;
+}
+
+ul li .active {
+    border-right: 2px solid #581e6d;
+    border-left: 2px solid #581e6d;
 }
 
 .nav-link {
@@ -34,6 +49,3 @@ li:hover {
 #icon{
     background-color: green;
 }
-
-
-

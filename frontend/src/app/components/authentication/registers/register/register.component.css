@@ -10,7 +10,7 @@
 
   .mat-raised-button {
   color: #ffffff;
-  background-color: black;
+  background-color: #280e31;
   }
 
   form {
@@ -33,10 +33,15 @@
   .mat-card-header{
     justify-content: center;
   }
+
   .example-card {
-    background-color: #F4F5F5;
+    background-image: linear-gradient(-180deg, #1a0620 0%, #34183d 100%);
     max-width: 700px;
-    margin-top: 50px;
+    margin-top: 25px;
+  }
+  
+  .jumbotron{
+    background-color: rgba(255, 255, 255, 0.938);
   }
 
   .example-header-image {
