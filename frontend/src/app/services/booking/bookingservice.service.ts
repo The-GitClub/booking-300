@@ -40,11 +40,11 @@ export class BookingserviceService {
   }
 
   getBookingsForCancel(): Observable<Booking[]> {
-    return this.http.get<Booking[]>(`bookings`)
+    return this.http.get<Booking[]>(BASE_URL + `bookings`)
   }
 
   cancelBooking(id: string): Observable<any> {
-    return this.http.delete(`bookings/${id}`);
+    return this.http.delete(BASE_URL + `bookings/${id}`);
   }
 
 
