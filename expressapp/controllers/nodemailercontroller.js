@@ -10,11 +10,7 @@ const moment = require("moment");
 module.exports = {
   
   handleEmail: (req, res) => {
-    // const respassword = db.Restaurant.distinct("restaurantPassword");
-    // const resemail = db.Restaurant.distinct("restaurantEmail");
 
-    // console.log(resemail);
-    // console.log(respassword);
     db.Restaurant.distinct("restaurantEmail", function o(error, resemail){
       console.log(`${resemail[0]}`);
     
@@ -43,13 +39,13 @@ module.exports = {
     let mailOptions = {
       from: "Booking300Project@gmail.com",
       to: email,
-      subject: `You received new email from Booking300@gmail.com`,
+      subject: `You received a new email from Booking300@gmail.com`,
 
       html: `<p>Dear ${name},  
       <br><br>
-      Your appointment has been confirmed for ${newDate} at ${time + ":00"}. 
+      Your booking has been confirmed for ${newDate} at ${time + ":00"}. 
       <br><br>
-      To cancel appointment <a href="http://localhost:4200/user/view">click here.</a>
+      To cancel your booking <a href="http://localhost:4200/user/view">click here.</a>
       <br><br>
       Best regards.
       </p>`,
