@@ -1,12 +1,9 @@
 
 /* In our demo, the footers are fixed to the bottom of the page */
-
 footer{
-position: fixed;
+  position: fixed;
   bottom: 0;
 }
-
-
 
 .footer-distributed{
 background-color: #292c2f;
@@ -27,7 +24,6 @@ margin: 0;
 }
 
 /* Footer links */
-
 .footer-distributed p.footer-links{
 font-size:18px;
 font-weight: bold;
@@ -66,24 +62,7 @@ margin-left: 3px;
 .indent{
 padding-left: 50px;
 }
-/* If you don't want the footer to be responsive, remove these media queries */
 
-@media (max-width: 600px) {
-
-.footer-distributed .footer-left,
-.footer-distributed .footer-right{
-  text-align: center;
-}
-
-.footer-distributed .footer-right{
-  float: none;
-  margin: 0 auto 20px;
-}
-
-.footer-distributed .footer-left p.footer-links{
-  line-height: 1.8;
-}
-}
 #footer{
   background-color: black ;
   color: white;

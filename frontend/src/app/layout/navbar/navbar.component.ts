@@ -47,8 +47,6 @@ export class NavbarComponent implements OnInit {
      }
   }
 
-
-
   protectedManager() {
     if (this._user.ObtainRole() == "manager") {
       return true;
