@@ -63,6 +63,8 @@ import { AdmindashboardupdateComponent } from './components/app_pages/admindashb
 
 // Stripe
 import { NgxStripeModule } from 'ngx-stripe';
+import { StaffOrManagerComponent } from './components/notifications/staff-or-manager/staff-or-manager.component';
+import { FreeBookingComponent } from './components/booking/free-booking/free-booking.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +88,8 @@ import { NgxStripeModule } from 'ngx-stripe';
     BookingupdatedComponent,
     AdmindashboardComponent,
     AdmindashboardupdateComponent,
+    StaffOrManagerComponent,
+    FreeBookingComponent,
   ],
   imports: [
     BrowserModule,

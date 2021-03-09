@@ -1,0 +1,41 @@
+<br>
+<h2 class="lol3 text-center">Table Reservation Software</h2>
+
+<div class="form-container">
+  <form #f="ngForm" class="left-form" (ngSubmit)="onSubmit(f)" novalidate>
+    <div (click)="d.toggle()" class="date">
+      Click to select available date
+    </div>
+    <input type="text" name="date" placeholder="..." class="form-control" ngbDatepicker #d="ngbDatepicker" ngModel
+      (ngModelChange)="filterGuests(f)" [markDisabled]="isDisabled" [minDate]="fullDate" required #date="ngModel" />
+    <label for="formGroupExampleInput" class="label">Select time</label>
+    <select class="form-control" id="exampleFormControlSelect" name="time" ngModel required #time="ngModel"
+      (ngModelChange)="filterGuests(f);">
+      <option *ngFor="let item of filteredOptions" [value]="item.value">
+        {{ item.text }}
+      </option>
+    </select>
+    <div class="required" *ngIf="fullCapacityError">We are at full capacity. Please choose another time.</div>
+    <label for="formGroupExampleInput" class="label">Select guests</label>
+    <select class="form-control" id="exampleFormControlSelect1" name="guests" ngModel required #guests="ngModel">
+      <option *ngFor="let item of filteredGuests;" [value]="item.value">
+        {{ item.text }}
+      </option>
+    </select>
+    <label for="formGroupExampleInput" class="label">Full name</label>
+    <input type="text" class="form-control" name="name" ngModel required #name="ngModel" />
+    <label for="formGroupExampleInput" class="label">Email</label>
+    <input type="text" class="form-control" name="email" email ngModel required #email="ngModel" />
+    <label for="formGroupExampleInput" class="label">Phone number</label>
+    <input type="text" class="form-control" name="phone" ngModel required #phone="ngModel" />
+    <br>
+    <label class="label">Food allergy or intolerances</label>&nbsp;&nbsp;
+    <input type="checkbox" (click)="toggleShowAllergy()">
+    <div *ngIf="ShowHideAllergy" class="label">
+      ENTER GUESTS FOOD ALLERGY OR INTOLERANCE
+      <textarea maxlength="50" size="3" type="text" class="form-control" name="allergy" ngModel
+        #allergy="ngModel"></textarea>
+    </div>
+    <button hidden id="bookingFormBtn" type="submit" class="btn submit" class="btn submit">Submit</button>
+  </form>
+</div>

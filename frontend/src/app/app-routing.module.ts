@@ -16,6 +16,8 @@ import { BookingconfirmationComponent } from './components/app_pages/bookingconf
 import { BookingupdatedComponent } from './components/app_pages/bookingupdated/bookingupdated.component';
 import { AdmindashboardComponent } from './components/app_pages/admindashboard/admindashboard.component';
 import { AdmindashboardupdateComponent } from './components/app_pages/admindashboardupdate/admindashboardupdate.component';
+import { StaffOrManagerGuard } from './guards/staff-or-manager.guard';
+import { FreeBookingComponent } from './components/booking/free-booking/free-booking.component';
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
@@ -24,13 +26,15 @@ const routes: Routes = [
   {path:'booking-confirmation', component:BookingconfirmationComponent},
   {path:'booking-updated', component:BookingupdatedComponent},
 
-  {path:'login', component:LoginComponent, canActivate: [antiAuthGuard]}, 
-  {path:'register', component:RegisterComponent, canActivate: [antiAuthGuard] }, 
+  {path:'login', component:LoginComponent, canActivate: [antiAuthGuard]},
+  {path:'register', component:RegisterComponent, canActivate: [antiAuthGuard] },
   {path:'manager', component:ManagerPageComponent, canActivate: [ManagerGuard]},
   {path:'staff', component:StaffPageComponent, canActivate: [StaffGuard]},
   {path:'user/view', component: ViewbookingsComponent, canActivate: [AuthGuard] },
-  {path:'user/book', component: CreatebookingComponent, canActivate: [AuthGuard] }, //canActivate: [AuthGuard]
-  {path:'user/view/update/:id', component: UpdatebookingComponent, canActivate: [AuthGuard] }
+  {path:'user/book', component: CreatebookingComponent, canActivate: [AuthGuard] },
+  {path:'user/view/update/:id', component: UpdatebookingComponent, canActivate: [AuthGuard] },
+  {path:'user/staffbook', component: FreeBookingComponent, canActivate: [StaffOrManagerGuard] },
+
 
 ];
 

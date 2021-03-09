@@ -10,12 +10,6 @@ import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { StripeService, StripeCardComponent } from 'ngx-stripe';
-import {
-  StripeCardElementOptions,
-  StripeElementsOptions,
-  PaymentIntent,
-} from '@stripe/stripe-js';
 import { environment } from '../../../../environments/environment';
 
 const BASE_URL = environment.API_URL;
@@ -40,38 +34,12 @@ type Restaurant = {
 };
 
 @Component({
-  selector: 'app-createbooking',
-  templateUrl: './createbooking.component.html',
-  styleUrls: ['./createbooking.component.css']
+  selector: 'app-free-booking',
+  templateUrl: './free-booking.component.html',
+  styleUrls: ['./free-booking.component.css']
 })
-export class CreatebookingComponent implements OnInit {
-  @ViewChild(StripeCardComponent) card: StripeCardComponent;
+export class FreeBookingComponent implements OnInit {
 
-  cardOptions: StripeCardElementOptions = {
-    style: {
-      base: {
-        color: '#303238',
-        fontSize: '16px',
-        fontFamily: '"Open Sans", sans-serif',
-        lineHeight: '40px',
-        fontWeight: 300,
-        fontSmoothing: 'antialiased',
-        '::placeholder': {
-          color: '#CFD7DF',
-        },
-      },
-      invalid: {
-        iconColor: '#FFC7EE',
-        color: '#FFC7EE',
-      },
-    },
-  };
-
-  elementsOptions: StripeElementsOptions = {
-    locale: 'en-GB',
-  };
-
-  stripeTest: FormGroup;
   options: Option[] = [
     { text: '9am', value: '9' },
     { text: '10am', value: '10' },
@@ -115,14 +83,9 @@ export class CreatebookingComponent implements OnInit {
 
   constructor(private _user:UserService, private bookingService: BookingserviceService,
     private restaurantService: RestaurantService, private router: Router, private http: HttpClient,
-    private fb: FormBuilder,
-    private stripeService: StripeService) {}
+    private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.stripeTest = this.fb.group({
-      name: ['Angular v10', [Validators.required]],
-      amount: [1000],
-    });
     this.currentHour = this.today.getHours().toString();
     this.filteredOptions = this.options;
     this.filteredTbls = this.optionsTbl;
@@ -136,48 +99,6 @@ export class CreatebookingComponent implements OnInit {
       day: this.today.getDate(),
     };
   }
-
-  pay(): void {
-    var inputValue = (<HTMLInputElement>document.getElementById('cname')).value;
-    if (this.stripeTest.valid) {
-      this.createPaymentIntent(this.stripeTest.get('amount').value)
-        .pipe(
-          switchMap((pi) =>
-            this.stripeService.confirmCardPayment(pi.client_secret, {
-              payment_method: {
-                card: this.card.element,
-                billing_details: {
-                  name:inputValue
-                },
-              },
-            })
-          )
-        )
-        .subscribe((result) => {
-          if (result.error) {
-            // Show error to your customer (e.g., insufficient funds)
-            console.log(result.error.message);
-          } else {
-            // The payment has been processed!
-            if (result.paymentIntent.status === 'succeeded') {
-              // Show a success message to your customer
-              var myForm = document.getElementById('bookingFormBtn');
-              myForm.click();
-            }
-          }
-        });
-    } else {
-      console.log(this.stripeTest);
-    }
-  }
-
-  createPaymentIntent(amount: number): Observable<PaymentIntent> {
-    return this.http.post<PaymentIntent>(
-      BASE_URL + `create-payment-intent`,
-      { amount }
-    );
-  }
-
   getAll(): void {
     this.bookingService.getAllBookings().subscribe((data: any[]) => {
       this.bookings = data || [];

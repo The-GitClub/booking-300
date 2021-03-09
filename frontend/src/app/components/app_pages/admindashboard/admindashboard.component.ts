@@ -38,7 +38,7 @@ export class AdmindashboardComponent implements OnInit {
   ngOnInit() {
     this.getTheRestaurant();
     this.displayAllBookings();
-    
+
     const id = this.route.snapshot.paramMap.get('id');
   }
   getTheRestaurant() {
@@ -77,14 +77,13 @@ export class AdmindashboardComponent implements OnInit {
   }
 
   getAll(): void {
-    this.bookingService.getAllBookings().subscribe((data: any[]) => { 
+    this.bookingService.getAllBookings().subscribe((data: any[]) => {
       this.bookings = data || [];
-     //console.log(data);
     });
   }
 
   filterDate(f: NgForm): void {
-     this.filteredBookings = this.bookings.filter((booking) => 
+     this.filteredBookings = this.bookings.filter((booking) =>
         booking?.date?.year.toString().includes(f?.value?.date?.year) &&
         booking?.date?.month.toString().includes(f?.value?.date?.month) &&
         booking?.date?.day.toString().includes(f?.value?.date?.day)
@@ -92,8 +91,8 @@ export class AdmindashboardComponent implements OnInit {
   }
 
   filterName(f: NgForm): void {
-    this.filteredBookings = this.bookings.filter((booking) =>   
-       booking?.name?.toLowerCase().includes(f?.value?.search?.toLowerCase())
+    this.filteredBookings = this.bookings.filter((booking) =>
+       booking?.name?.toLowerCase().includes(f?.value?.search?.trim().toLowerCase())
    );
   }
 
