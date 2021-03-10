@@ -21,9 +21,6 @@ export class AdmindashboardComponent implements OnInit {
   public successMsg: string;
   //Defines the columns for the booking section
   public columns = ["restaurantName", "restaurantEmail", "restaurantPassword", "capacity", "update"];
-  public bookingcolumns = ["date", "name", "time", "guests", "allergy", "update", "cancel"];
-  bookings: Booking[];
-  filteredBookings: any[];
 
   username: String = "";
   userId: string = "";
@@ -31,13 +28,10 @@ export class AdmindashboardComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private restaurantService: RestaurantService,
-    private bookingService: BookingserviceService
-    //private _user: UserService
   ) {}
 
   ngOnInit() {
     this.getTheRestaurant();
-    this.displayAllBookings();
 
     const id = this.route.snapshot.paramMap.get('id');
   }
@@ -51,49 +45,4 @@ export class AdmindashboardComponent implements OnInit {
       }
     );
   }
-
-  cancelBooking(id: string) {
-    this.bookingService
-      .cancelBooking(id)
-      .pipe(mergeMap(() => this.bookingService.getBookingsForCancel()))
-      .subscribe(
-        (bookings: Booking[]) => {
-          this.bookings = bookings;
-          this.successMsg = "Booking cancelled successfully";
-        },
-        (error: ErrorEvent) => {
-          this.errorMsg = error.error.message;
-        }
-      );
-    this.displayAllBookings();
-  }
-
-  displayAllBookings(): void {
-    this.bookingService.getAllBookings().subscribe((data: any[]) => {
-      this.bookings = data;
-      this.filteredBookings = data;
-      console.log(data);
-    });
-  }
-
-  getAll(): void {
-    this.bookingService.getAllBookings().subscribe((data: any[]) => {
-      this.bookings = data || [];
-    });
-  }
-
-  filterDate(f: NgForm): void {
-     this.filteredBookings = this.bookings.filter((booking) =>
-        booking?.date?.year.toString().includes(f?.value?.date?.year) &&
-        booking?.date?.month.toString().includes(f?.value?.date?.month) &&
-        booking?.date?.day.toString().includes(f?.value?.date?.day)
-    );
-  }
-
-  filterName(f: NgForm): void {
-    this.filteredBookings = this.bookings.filter((booking) =>
-       booking?.name?.toLowerCase().includes(f?.value?.search?.trim().toLowerCase())
-   );
-  }
-
 }

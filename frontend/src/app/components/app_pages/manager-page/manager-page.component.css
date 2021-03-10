@@ -1,0 +1,18 @@
+mat-expansion-panel{
+  width: 50%;
+  margin: auto;
+  margin-bottom: 3 rem;
+  background-color: #612973;
+  color: white;
+  margin-bottom: 3rem;
+}
+mat-accordion{
+  margin-top: 2rem;
+  margin-bottom: 3 rem;
+}
+/* change the components display type to block */
+:host{
+  display: block;
+  margin-top: 3rem;
+  margin-bottom: 3 rem;
+}

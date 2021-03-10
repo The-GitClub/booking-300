@@ -176,3 +176,6 @@ p {
   color: grey;
   text-align: center;
 }
+.spacer{
+  margin-bottom: 5rem;
+}

@@ -47,14 +47,6 @@ export class BookingserviceService {
     return this.http.delete(BASE_URL + `bookings/${id}`);
   }
 
-
-
-
-  // createBooking(id: string, bookingDate: string, time: string, table: string, name: string, guests: number): Observable<Booking> {
-  //   return this.http.post<Booking>(`${this.BASE_URL}/users/${id}/bookings`,
-  //   {bookingDate, time, table, name, guests});
-  // }
-
   getBookingsForAdmin = () => {
     return this.http.get(BASE_URL + "bookings");
   };

@@ -11,11 +11,8 @@
           <li class="nav-item active" *ngIf = "!_user.loggedIn()">
             <button mat-button *ngIf = "!isManager() && !isStaff()" [routerLink]="['user/book']" routerLinkActive="active"><mat-icon>book</mat-icon><a class="nav-link">Book A Table</a></button>
           </li>
-          <li class="nav-item active" *ngIf = "!_user.loggedIn()">
-            <button mat-button *ngIf = "isStaff() || isManager() " [routerLink]="['user/staffbook']" routerLinkActive="active"><mat-icon>book</mat-icon><a class="nav-link">Staff Table Booking</a></button>
-          </li>
           <li class="nav-item" *ngIf = "!_user.loggedIn()">
-            <button mat-button [routerLink]="['user/view']" routerLinkActive="active"><mat-icon>event</mat-icon><a class="nav-link">View My Bookings</a></button>
+            <button mat-button *ngIf = "!isManager() && !isStaff()" [routerLink]="['user/view']" routerLinkActive="active"><mat-icon>event</mat-icon><a class="nav-link">View My Bookings</a></button>
         </li>
           <li class="nav-item" *ngIf = "!_user.loggedIn()">
             <button mat-button (click) = "protectedStaff()" [routerLink]="['/staff']" routerLinkActive="active" *ngIf = "isStaff()" ><mat-icon>group</mat-icon><a class="nav-link">Staff Options</a></button>

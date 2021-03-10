@@ -14,7 +14,8 @@ export class StaffOrManagerGuard implements CanActivate {
 
   }
   canActivate() {
-    if (this._user.ObtainRole() != "staff") {
+    if (this._user.ObtainRole() != "staff" || "manager") {
+      console.log(this._user.ObtainRole());
       this.router.navigate(["/"]);
       this.openDialog();
       return false;
