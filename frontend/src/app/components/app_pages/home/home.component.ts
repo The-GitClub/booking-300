@@ -9,7 +9,7 @@ import { UserService } from "../../../services/user/user.service";
 })
 export class HomeComponent implements OnInit {
   constructor(public _user: UserService, private _router: Router) {}
-  
+
   ngOnInit(): void {
   }
 }

@@ -24,14 +24,13 @@ const routes: Routes = [
   {path:'booking-confirmation', component:BookingconfirmationComponent},
   {path:'booking-updated', component:BookingupdatedComponent},
 
-  {path:'login', component:LoginComponent, canActivate: [antiAuthGuard]}, 
-  {path:'register', component:RegisterComponent, canActivate: [antiAuthGuard] }, 
+  {path:'login', component:LoginComponent, canActivate: [antiAuthGuard]},
+  {path:'register', component:RegisterComponent, canActivate: [antiAuthGuard] },
   {path:'manager', component:ManagerPageComponent, canActivate: [ManagerGuard]},
   {path:'staff', component:StaffPageComponent, canActivate: [StaffGuard]},
   {path:'user/view', component: ViewbookingsComponent, canActivate: [AuthGuard] },
-  {path:'user/book', component: CreatebookingComponent, canActivate: [AuthGuard] }, //canActivate: [AuthGuard]
+  {path:'user/book', component: CreatebookingComponent, canActivate: [AuthGuard] },
   {path:'user/view/update/:id', component: UpdatebookingComponent, canActivate: [AuthGuard] }
-
 ];
 
 @NgModule({

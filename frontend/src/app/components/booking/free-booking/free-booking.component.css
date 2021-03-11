@@ -1,11 +1,3 @@
-.stripeForm {
-  background: #F6F9FC;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100%;
-  float: left;
-}
 
 form {
   width: 480px;
@@ -175,7 +167,4 @@ text-align: center;
 p {
   color: grey;
   text-align: center;
-}
-.spacer{
-  margin-bottom: 5rem;
 }

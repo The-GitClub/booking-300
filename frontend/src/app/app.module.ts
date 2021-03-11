@@ -25,6 +25,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSelectModule } from '@angular/material/select';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 //alerts
 import {MatSnackBarModule} from '@angular/material/snack-bar';
@@ -63,6 +64,8 @@ import { AdmindashboardupdateComponent } from './components/app_pages/admindashb
 
 // Stripe
 import { NgxStripeModule } from 'ngx-stripe';
+import { FreeBookingComponent } from './components/booking/free-booking/free-booking.component';
+import { BookingsViewComponent } from './components/app_pages/bookings-view/bookings-view.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +89,8 @@ import { NgxStripeModule } from 'ngx-stripe';
     BookingupdatedComponent,
     AdmindashboardComponent,
     AdmindashboardupdateComponent,
+    FreeBookingComponent,
+    BookingsViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -107,6 +112,7 @@ import { NgxStripeModule } from 'ngx-stripe';
     MatIconModule,
     MatCardModule,
     NgbModule,
+    MatExpansionModule,
     NgxStripeModule.forRoot('pk_test_51IEHtSHNSX0dPtFXwuhN1cNF14lgeDVGf2pIfN4VDjwDAUQ4GE8EenTFkpJbxzpXD3gV6YdUc5LuCKSQhk1Tqfac00QM95ByXa'),
 
   ],

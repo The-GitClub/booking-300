@@ -78,7 +78,16 @@ body {
 }
 
 
+.mat-expansion-indicator::after {
+  color: white;
+}
 
+.mat-expansion-panel-content::after {
+  color: white;
+  outline: white;
+  border-style: solid;
+  border-color: aliceblue;
+}
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
