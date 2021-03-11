@@ -53,7 +53,7 @@
       </div>
     </label>
 
-    <button type="submit" (click)="pay()">Pay €10 Reservation Deposit</button>
+    <button type="submit" [disabled]="!f.valid" (click)="pay()">Pay €10 Reservation Deposit</button>
     <div class="outcome">
       <div class="error"></div>
       <div class="success">
