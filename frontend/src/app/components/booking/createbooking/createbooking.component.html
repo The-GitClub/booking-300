@@ -7,7 +7,7 @@
       Click to select available date
     </div>
     <input type="text" name="date" placeholder="..." class="form-control" ngbDatepicker #d="ngbDatepicker" ngModel
-      (ngModelChange)="filterGuests(f)" [markDisabled]="isDisabled" [minDate]="fullDate" required #date="ngModel" />
+      (ngModelChange)="filterGuests(f); filterTime(f);" [markDisabled]="isDisabled" [minDate]="fullDate" required #date="ngModel" />
     <label for="formGroupExampleInput" class="label">Select time</label>
     <select class="form-control" id="exampleFormControlSelect" name="time" ngModel required #time="ngModel"
       (ngModelChange)="filterGuests(f);">
@@ -16,7 +16,7 @@
       </option>
     </select>
     <div class="required" *ngIf="fullCapacityError">We are at full capacity. Please choose another time.</div>
-    <label for="formGroupExampleInput" class="label">Select guests</label>
+    <label for="formGroupExampleInput" class="label">Select Party Size</label>
     <select class="form-control" id="exampleFormControlSelect1" name="guests" ngModel required #guests="ngModel">
       <option *ngFor="let item of filteredGuests;" [value]="item.value">
         {{ item.text }}
