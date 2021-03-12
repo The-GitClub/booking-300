@@ -77,6 +77,7 @@ export class CreatebookingComponent implements OnInit {
     { text: '7pm', value: '19' },
     { text: '8pm', value: '20' },
     { text: '9pm', value: '21' },
+    { text: '12pm', value: '24' },
   ];
   optionsGuests: Option[] = [
     { text: '1', value: '1' },
@@ -386,19 +387,9 @@ export class CreatebookingComponent implements OnInit {
   }
 
     filterTime(f: NgForm): void {
-    let sameDayBookings = this.bookings.filter((booking) => {
-      return (
-        booking.date.year === f.value.date.year &&
-        booking.date.month === f.value.date.month &&
-        booking.date.day === f.value.date.day 
-      );
-    });
+
     this.filteredOptions = this.options
-      .filter((hour) => {
-        return !sameDayBookings.some((booking) => {
-          return booking.time === hour.value;
-        });
-      })
+      
       .filter((hour) => {
         if (
           this.fullDate.year === f.value.date.year &&
