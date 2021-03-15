@@ -102,20 +102,17 @@ export class FreeBookingComponent implements OnInit {
   getAll(): void {
     this.bookingService.getAllBookings().subscribe((data: any[]) => {
       this.bookings = data || [];
-     //console.log(data);
+
     });
   }
 
   getRestaurantCapacity() {
   this.restaurantService.getRestaurant().subscribe(
     (restaurant: Restaurant) => {
-     //this.restaurant = restaurant;
-     //this.restaurant.capacity = this.capacity
   this.capacity = restaurant[0].capacity
      console.log(this.capacity)
     },
     (error) => {
-    //  this.error = error.message;
     });
   }
 
@@ -165,8 +162,6 @@ export class FreeBookingComponent implements OnInit {
     if(data.guests){
     totalguests += Number(data.guests);
   }
-  // console.log(sameDayAppointments;
-  // console.log(totalguests);
 });
 
   console.log(totalguests);

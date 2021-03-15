@@ -226,8 +226,6 @@ export class CreatebookingComponent implements OnInit {
     if(data.guests){
     totalguests += Number(data.guests);
   }
-  // console.log(sameDayAppointments;
-  // console.log(totalguests);
 });
 
   console.log(totalguests);

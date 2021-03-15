@@ -89,7 +89,6 @@ export class UpdatebookingComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.bookingService.getBooking(id).subscribe((booking: Booking) => {
       this.booking = booking;
-    //  console.log(this.booking);
     },
     (error) => {
       this.errorMsg = error.message;
@@ -113,7 +112,6 @@ export class UpdatebookingComponent implements OnInit {
   getAll(): void {
     this.bookingService.getAllBookings().subscribe((data: any[]) => {
       this.bookingsArray = data || [];
-     // console.log(data);
     });
   }
 

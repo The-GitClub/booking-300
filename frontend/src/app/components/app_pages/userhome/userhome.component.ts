@@ -12,10 +12,6 @@ export class UserhomeComponent implements OnInit {
   userId: String = "";
 
   constructor(private _user: UserService, private _router: Router) {
-    // this._user.user().subscribe(
-    //   (data) => this.addName(data),
-    //   error=>console.log(error)
-    // );
   }
 
   addName(data) {
