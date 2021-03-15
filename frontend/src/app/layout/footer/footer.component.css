@@ -9,33 +9,31 @@ footer {
   color: white;
 }
 
+.nav-item{
+  height: 70px;
+}
+
 mat-icon {
   font-size: 2.7rem;
-  height: 1px;
-  margin-bottom: 5px;
 }
 
 a{
-  margin-top: 1rem;
+  margin-top: .5rem;
 }
+
 button {
   margin-left: 2px;
   margin-right: 2px;
-}
-
-button:hover{
-  text-decoration: underline;
 }
 
 button:focus {
   outline: none;
 }
 
-ul li .active {
-  border-right: 2px solid #581e6d;
-  border-left: 2px solid #581e6d;
-}
 
+.ftr-txt{
+  font-weight: 150;
+}
 .footer-link {
   text-transform: uppercase;
   font-weight: 150;
@@ -45,6 +43,8 @@ ul li .active {
   font-family: cursive;
 }
 
+
+=======
 li:hover {
   background-color: #2E1436;
   text-decoration: underline;
@@ -54,6 +54,7 @@ li:hover {
   text-decoration: none;
   background-color: black;
 }
+
 
 #toggler{
   background-color: yellow;

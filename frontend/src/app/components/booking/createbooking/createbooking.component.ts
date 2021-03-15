@@ -19,11 +19,8 @@ import {
 import { environment } from '../../../../environments/environment';
 
 const BASE_URL = environment.API_URL;
-
 type Option = { text: string; value: string };
 type BookingDate = { year: number; month: number; day: number };
-
-type TableInDB = { table: string; };
 type Booking = {
   date: BookingDate;
   time: string;
@@ -73,21 +70,14 @@ export class CreatebookingComponent implements OnInit {
 
   stripeTest: FormGroup;
   options: Option[] = [
-    { text: '9am', value: '9' },
-    { text: '10am', value: '10' },
-    { text: '11am', value: '11' },
-    { text: '12am', value: '12' },
-    { text: '1pm', value: '13' },
-    { text: '2pm', value: '14' },
     { text: '3pm', value: '15' },
     { text: '4pm', value: '16' },
     { text: '5pm', value: '17' },
-  ];
-  optionsTbl: Option[] = [
-    { text: '1', value: '1' },
-    { text: '2', value: '2' },
-    { text: '3', value: '3' },
-
+    { text: '6pm', value: '18' },
+    { text: '7pm', value: '19' },
+    { text: '8pm', value: '20' },
+    { text: '9pm', value: '21' },
+    { text: '12pm', value: '24' },
   ];
   optionsGuests: Option[] = [
     { text: '1', value: '1' },
@@ -96,7 +86,6 @@ export class CreatebookingComponent implements OnInit {
     { text: '4', value: '4' },
     { text: '5', value: '5' },
   ];
-
   bookings: Booking[];
   public restaurant: Restaurant;
   filteredOptions: Option[];
@@ -105,7 +94,6 @@ export class CreatebookingComponent implements OnInit {
   today = new Date();
   currentHour: string;
   fullDate: BookingDate;
-  tableDB: TableInDB;
   fullCapacityError: boolean;
   userId: string='';
   capacity: number;
@@ -125,7 +113,6 @@ export class CreatebookingComponent implements OnInit {
     });
     this.currentHour = this.today.getHours().toString();
     this.filteredOptions = this.options;
-    this.filteredTbls = this.optionsTbl;
     this.filteredGuests = this.optionsGuests;
     this.fullCapacityError = false;
     this.getAll();
@@ -135,6 +122,7 @@ export class CreatebookingComponent implements OnInit {
       month: this.today.getMonth() + 1,
       day: this.today.getDate(),
     };
+    console.log(this.currentHour);
   }
 
   pay(): void {
@@ -181,15 +169,12 @@ export class CreatebookingComponent implements OnInit {
   getAll(): void {
     this.bookingService.getAllBookings().subscribe((data: any[]) => {
       this.bookings = data || [];
-     //console.log(data);
     });
   }
 
   getRestaurantCapacity() {
   this.restaurantService.getRestaurant().subscribe(
     (restaurant: Restaurant) => {
-     //this.restaurant = restaurant;
-     //this.restaurant.capacity = this.capacity
   this.capacity = restaurant[0].capacity
      console.log(this.capacity)
     },
@@ -216,24 +201,21 @@ export class CreatebookingComponent implements OnInit {
       );
     });
 
+    
+
     var totalguests = 0;
     // If there is no appointsments for that date and time, totalguests = 0 and all guests options available
     if(sameDayBookings.length == 0){
       totalguests = 0;
       this.fullCapacityError = false;
-
       this.optionsGuests[0].text = "1";
       this.optionsGuests[0].value = "1";
-
       this.optionsGuests[1].text = "2";
       this.optionsGuests[1].value = "2";
-
       this.optionsGuests[2].text = "3";
       this.optionsGuests[2].value = "3";
-
       this.optionsGuests[3].text = "4";
       this.optionsGuests[3].value = "4";
-
       this.optionsGuests[4].text = "5";
       this.optionsGuests[4].value = "5";
     }
@@ -374,7 +356,7 @@ export class CreatebookingComponent implements OnInit {
       this.fullDate.month === date.month &&
       this.fullDate.day === date.day
     ) {
-      if (this.currentHour > this.options[this.options.length - 1].value) {
+      if (this.currentHour >= this.options[this.options.length - 1].value) {
         return true;
       }
     }
@@ -387,8 +369,7 @@ export class CreatebookingComponent implements OnInit {
     //The value returned by getDay() method is an integer corresponding to the day of the week: 0 for Sunday,
     //1 for Monday, 2 for Tuesday, 3 for Wednesday, 4 for Thursday, 5 for Friday, 6 for Saturday.
     return (
-      dayOfTheWeek === 0 ||
-      dayOfTheWeek === 6 ||
+      dayOfTheWeek === 0 ||   
       sameDayBookings.length === this.options.length
     );
   };
@@ -397,7 +378,6 @@ export class CreatebookingComponent implements OnInit {
     this.userId = this._user.ObtainID();
     this.bookingService.makeBooking(this.userId, f.value).subscribe((data) => {
       this.filteredOptions = this.options;
-      this.filteredTbls = this.optionsTbl;
       this.filteredGuests =this.optionsGuests;
       this.getAll();
       this.sendEmailConfirmation(data);
@@ -405,5 +385,24 @@ export class CreatebookingComponent implements OnInit {
       this.router.navigate(['booking-confirmation']);
     });
   }
+
+    filterTime(f: NgForm): void {
+
+    this.filteredOptions = this.options
+      
+      .filter((hour) => {
+        if (
+          this.fullDate.year === f.value.date.year &&
+          this.fullDate.month === f.value.date.month &&
+          this.fullDate.day === f.value.date.day 
+        ) {
+          return parseInt(hour.value) > parseInt(this.currentHour);
+        }
+        return true;
+      });
+  }
+
+    
+
 
 }
