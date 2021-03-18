@@ -33,11 +33,19 @@ th {
   }
 
 
+  .mat-cell:first-of-type, .mat-header-cell:first-of-type {
+    padding-left: 0%;
+  }
+  
+  .mat-cell:last-of-type, .mat-header-cell:last-of-type {
+    padding-right: 0%;
+  } 
+
 table{
     width: 70%;
 }
 
-.mat-column-restaurantName, .mat-column-restaurantEmail, .mat-column-restaurantPassword, .mat-column-capacity {
+.mat-column-restaurantName, .mat-column-restaurantEmail, .mat-column-restaurantPassword, .mat-column-capacity, .mat-column-update{
     border: 1px solid #000000;
     word-wrap: break-word !important;
     white-space: unset !important;
@@ -135,35 +143,8 @@ hyphens: auto;
     hyphens: auto;
 }
 
-.mat-column-update {
-    word-wrap: break-word !important;
-    white-space: unset !important;
-    width: 10% !important;
-    text-align: center;
-    border: 1px solid #000000;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    word-break: break-word;
-    -ms-hyphens: auto;
-    -moz-hyphens: auto;
-    -webkit-hyphens: auto;
-    hyphens: auto;
-}
 
-.mat-column-cancel {
-    word-wrap: break-word !important;
-    white-space: unset !important;
-    width: 10% !important;
-    text-align: center;   
-    border: 1px solid #000000;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    word-break: break-word;
-    -ms-hyphens: auto;
-    -moz-hyphens: auto;
-    -webkit-hyphens: auto;
-    hyphens: auto;
-}
+
 
   .date {
     /* width: 20%; */

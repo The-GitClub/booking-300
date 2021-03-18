@@ -37,7 +37,6 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { FooterComponent } from './layout/footer/footer.component';
-import { UserhomeComponent } from './components/app_pages/userhome/userhome.component';
 import { ViewbookingsComponent } from './components/booking/viewbookings/viewbookings.component';
 import { CreatebookingComponent } from './components/booking/createbooking/createbooking.component';
 import { HomeComponent } from './components/app_pages/home/home.component';
@@ -73,7 +72,6 @@ import { AuthInterceptor } from './components/authentication/auth-interceptor';
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    UserhomeComponent,
     ViewbookingsComponent,
     CreatebookingComponent,
     HomeComponent,

@@ -20,7 +20,7 @@
 
         <ng-container matColumnDef="time">
             <th mat-header-cell *matHeaderCellDef>Time</th>
-            <td mat-cell *matCellDef="let booking"> {{ booking?.time }} </td>
+            <td mat-cell *matCellDef="let booking"> {{ booking?.time }} : 00 </td>
         </ng-container>
 
         <ng-container matColumnDef="name">
@@ -40,12 +40,12 @@
 
         <ng-container matColumnDef="update">
             <th mat-header-cell *matHeaderCellDef>Update</th>
-            <td style  mat-cell *matCellDef="let booking"> <button [routerLink]="['update', booking._id]" class="btn buttons">Update</button></td>
+            <td style  mat-cell *matCellDef="let booking"> <button [routerLink]="['update', booking._id]" class="btn buttons mx-auto">Update</button></td>
         </ng-container>
 
         <ng-container matColumnDef="cancel">
             <th mat-header-cell *matHeaderCellDef>Cancel</th>
-            <td mat-cell *matCellDef="let booking"> <button (click)="cancelBooking(booking._id)" class="btn buttons">Cancel</button></td>
+            <td mat-cell *matCellDef="let booking"> <button (click)="cancelBooking(booking._id)" class="btn buttons mx-auto">Cancel</button></td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="columns"></tr>

@@ -1,9 +1,9 @@
 .go-back-to-home-page {
-    background-color: rgb(10, 73, 60);
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: smaller;
-    width: fit-content;
+  background-image: linear-gradient(-180deg, #652a77 0%, #250f2c 100%);
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: smaller;
+  width: fit-content;
   }
   
   .card {

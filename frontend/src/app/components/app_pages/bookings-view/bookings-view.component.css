@@ -1,10 +1,18 @@
-able {
+table {
   margin-top: 0px;
   width: 100%;
   text-transform: uppercase;
   font-weight: 150;
 }
 
+form {
+  display: flex; /* 2. display flex to the rescue */
+  flex-direction: row;
+}
+
+input {
+  display: block; /* 1. oh noes, my inputs are styled as block... */
+}
 
 th {
   background-image: linear-gradient(-180deg, #4b1f58 0%, #25102c 100%);
@@ -37,7 +45,7 @@ table{
   width: 70%;
 }
 
-.mat-column-restaurantName, .mat-column-restaurantEmail, .mat-column-restaurantPassword, .mat-column-capacity {
+.mat-column-restaurantName, .mat-column-restaurantEmail, .mat-column-restaurantPassword, .mat-column-capacity{
   border: 1px solid #000000;
   word-wrap: break-word !important;
   white-space: unset !important;
@@ -51,19 +59,27 @@ word-break: break-word;
 hyphens: auto;
 }
 
+.mat-cell:first-of-type, .mat-header-cell:first-of-type {
+  padding-left: 0%;
+}
+
+.mat-cell:last-of-type, .mat-header-cell:last-of-type {
+  padding-right: 0%;
+}
+
 .mat-column-date {
 word-wrap: break-word !important;
-white-space: unset !important;
-/* width: 10% !important;
-text-align: center; */
+
+width: 10% !important; 
+text-align: center;
 border: 1px solid #000000;
-overflow-wrap: break-word;
+/* overflow-wrap: break-word;
 word-wrap: break-word;
 word-break: break-word;
 -ms-hyphens: auto;
 -moz-hyphens: auto;
 -webkit-hyphens: auto;
-hyphens: auto;
+hyphens: auto; */
 }
 
  .mat-column-time {
@@ -151,18 +167,17 @@ hyphens: auto;
 }
 
 .mat-column-cancel {
-  word-wrap: break-word !important;
-  white-space: unset !important;
-  width: 10% !important;
-  text-align: center;
   border: 1px solid #000000;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  word-break: break-word;
-  -ms-hyphens: auto;
-  -moz-hyphens: auto;
-  -webkit-hyphens: auto;
-  hyphens: auto;
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    overflow-wrap: break-word;
+    text-align: center;
+word-wrap: break-word;
+word-break: break-word; 
+-ms-hyphens: auto;
+-moz-hyphens: auto;
+-webkit-hyphens: auto;
+hyphens: auto;
 }
 
 .date {
@@ -192,4 +207,6 @@ font-size: small;
 button{
   background-color: red;
   color: #000000;
+  display: block; /* 1. oh noes, my inputs are styled as block... */
+
 }

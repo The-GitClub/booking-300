@@ -11,7 +11,7 @@ img {
     width:  100%;
     height: 607px;
     object-fit: cover;
-    filter: brightness(30%);
+    filter: brightness(20%);
 
 }
 
@@ -51,10 +51,12 @@ img {
   color: black;
 }
 span{
-  color: #F620B8;
+  color: #c941ff9c;
   margin-bottom: 5rem;
-  font-weight: 600;
-  font-size: 25px;
+  font-style: oblique;
+
+  font-weight: 400;
+  font-size: 21px;
 }
 
 .jumbotron{

@@ -1,17 +1,26 @@
-
-  <form #f="ngForm" class="date mx-auto form-horizontal">
-    <div style="width: 24%;" class="input-group mx-auto">
+<form #f="ngForm" class="date mx-auto form-horizontal">
+    <div style="width: 30%;" class="input-group mx-auto">
   <div class="mx-auto">
   <input readonly (click)="d.toggle()" style="width: 100%;" type="search" name="date" placeholder="Search by date" class="form-control" ngbDatepicker #d="ngbDatepicker" ngModel
   (ngModelChange)="filterDate(f)" #date="ngModel" />
 </div>
-<button (click) = "clear(f)">X</button>
+
 <div class="mx-auto">
   <input style="width: 100%;" type="search" name="search" placeholder="Search by name" class="form-control" ngModel
   (ngModelChange)="filterName(f)" #name="ngModel" />
 </div>
+<div class="mx-auto">
+    <div class="">
+    <button class="btn btn-secondary" (click) = "clear(f)">Clear</button>
+      </div>
+    </div>
 </div>
+
+
+
 </form>
+
+
 
   <br>
 <div *ngIf="!errorMsg">
@@ -44,12 +53,12 @@
 
         <ng-container matColumnDef="update">
             <th mat-header-cell *matHeaderCellDef>Update</th>
-            <td style  mat-cell *matCellDef="let booking"> <button *ngIf = "isManager()" [routerLink]="['../','user','view', 'update', booking._id]" class="btn buttons">Update</button></td>
+            <td mat-cell *matCellDef="let booking"> <button *ngIf = "isManager()" [routerLink]="['../','user','view', 'update', booking._id]" class="btn buttons mx-auto">Update</button></td>
         </ng-container>
 
-        <ng-container matColumnDef="cancel">
+        <ng-container matColumnDef="cancel" class="text-center">
             <th mat-header-cell *matHeaderCellDef>Cancel</th>
-            <td mat-cell *matCellDef="let booking"> <button  *ngIf = "isManager()" (click)="cancelBooking(booking._id)" class="btn buttons">Cancel</button></td>
+            <td mat-cell *matCellDef="let booking"> <button  *ngIf = "isManager()" (click)="cancelBooking(booking._id)" class="btn buttons mx-auto">Cancel</button></td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="bookingcolumns"></tr>

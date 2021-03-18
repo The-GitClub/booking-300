@@ -3,11 +3,12 @@
     <div (click)="d.toggle()" class="date">
       Click to select available date
     <input readonly type="text" name="date" placeholder="..." class="form-control" ngbDatepicker #d="ngbDatepicker" ngModel
-      (ngModelChange)="filterGuests(f)" [markDisabled]="isDisabled" [minDate]="fullDate" required #date="ngModel" />
+      (ngModelChange)="filterGuests(f); filterTime(f);" [markDisabled]="isDisabled" [minDate]="fullDate" required #date="ngModel" />
     </div>
     <label for="formGroupExampleInput" class="label">Select time</label>
     <select class="form-control" id="exampleFormControlSelect" name="time" ngModel required #time="ngModel"
       (ngModelChange)="filterGuests(f);">
+      <option value="" selected disabled hidden></option>
       <option *ngFor="let item of filteredOptions" [value]="item.value">
         {{ item.text }}
       </option>

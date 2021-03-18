@@ -1,4 +1,3 @@
-
 <div class="centered">
   <div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel">
 
@@ -44,9 +43,9 @@
                     <button [routerLink]="['staff']" class="btn btn-md buttons">Take Me There</button> &nbsp;
                   </p>
                 </div>
-              </div>
+          </div>
           <div *ngIf="_user.loggedIn()"  class="centeredText">
-            <p class="lead">Welcome to Booking300<span> {{getUserName()}} </span> <br> You have successfully logged in to our system.</p>
+            <p class="lead">Welcome to Booking300<span> {{getUserName()}} </span> Please register or login below to start booking.</p>
 
             <p>Login or Register</p>
             <p class="lead" style="color:white;">
@@ -64,56 +63,8 @@
           <div *ngIf="!_user.loggedIn() && !isManager() && !isStaff()" class="centeredText">
             <div class="">
               <p class="lead">Welcome to Booking300<span> {{getUserName()}} </span> <br> You have successfully logged in to our system.</p>
-
-              <p>Create or view your bookings.</p>
-              <p class="lead" style="color:white;">
-                <button [routerLink]="['user/book']" class="btn btn-md buttons">Book A Table</button> &nbsp;
-                <button [routerLink]="['user/view']" class="btn btn-md buttons">View Bookings</button>
-              </p>
-            </div>
-          </div>
-          <div *ngIf="!_user.loggedIn() && isManager() && !isStaff()" class="centeredText">
-            <div class="">
-              <p class="lead">Welcome to Booking300<span> {{getUserName()}} </span> <br> You have successfully logged in to our system.</p>
-
-              <p>Manage Your Restaurant Now</p>
-                <p class="lead" style="color:white;">
-                  <button [routerLink]="['manager']" class="btn btn-md buttons">Create A Booking / Register Staff</button> &nbsp;
-                  <button [routerLink]="['dashboard']" class="btn btn-md buttons">Manage Restaurant/ Bookings</button>               <button [routerLink]="['user/view']" class="btn btn-md buttons">Manage Restaurant/ Bookings</button>
-                </p>
-              </div>
-            </div>
-            <div *ngIf="!_user.loggedIn() && !isManager() && isStaff()" class="centeredText">
-              <div class="">
-                <p class="lead">Welcome to Booking300<span> {{getUserName()}} </span> <br> You have successfully logged in to our system.</p>
-
-                <p>Create or View Bookings Now</p>
-                  <p class="lead" style="color:white;">
-                    <button [routerLink]="['staff']" class="btn btn-md buttons">Take Me There</button> &nbsp;
-                  </p>
-                </div>
-              </div>
-          <div *ngIf="_user.loggedIn()"  class="centeredText">
-            <p class="lead">Welcome to Booking300. Please register or login below to start booking.</p>
-
-            <p>Login or Register</p>
-            <p class="lead" style="color:white;">
-              <button [routerLink]="['/login']" class="btn btn-md buttons">Login</button> &nbsp;
-              <button [routerLink]="['/register']" class="btn btn-md buttons">Register</button>
-            </p>
-          </div>
-      </div>
-
-      <div class="carousel-item">
-        <img
-          src="https://images.squarespace-cdn.com/content/v1/56a2785c69a91af45e06a188/1581442353249-5YKSPLFWQQHQCA055MHY/ke17ZwdGBToddI8pDm48kKxwr4r2hz7vo_Ui83zm8ewUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYy7Mythp_T-mtop-vrsUOmeInPi9iDjx9w8K4ZfjXt2dovjk7KB0jeEJO-xe7GX5QH_T_sqrUpNy9JhPNT5wbFRCjLISwBs8eEdxAxTptZAUg/Restaurant-Food-Pics.png?format=1500w"
-          alt="Burger">
-        <div *ngIf="!_user.loggedIn() && !isManager() && !isStaff()" class="centeredText">
-          <div class="">
-            <p class="lead">Welcome to Booking300<span> {{getUserName()}} </span> <br> You have successfully logged in to our system.</p>
-
-            <p>Create or view your bookings.</p>
-              <p class="lead" style="color:white;">
+              <p class="">Create or view your bookings.</p>
+              <p class="lead" style="color:white">
                 <button [routerLink]="['user/book']" class="btn btn-md buttons">Book A Table</button> &nbsp;
                 <button [routerLink]="['user/view']" class="btn btn-md buttons">View Bookings</button>
               </p>
@@ -139,9 +90,55 @@
                     <button [routerLink]="['staff']" class="btn btn-md buttons">Take Me There</button> &nbsp;
                   </p>
                 </div>
-              </div>
+          </div>
           <div *ngIf="_user.loggedIn()"  class="centeredText">
-            <p class="lead">Welcome to Booking300<span> {{getUserName()}} </span> <br> You have successfully logged in to our system.</p>
+            <p class="lead">Welcome to Booking300<span> {{getUserName()}} </span> Please register or login below to start booking.</p>
+
+            <p>Login or Register</p>
+            <p class="lead" style="color:white;">
+              <button [routerLink]="['/login']" class="btn btn-md buttons">Login</button> &nbsp;
+              <button [routerLink]="['/register']" class="btn btn-md buttons">Register</button>
+            </p>
+          </div>
+      </div>
+
+      <div class="carousel-item">
+        <img
+          src="https://images.squarespace-cdn.com/content/v1/56a2785c69a91af45e06a188/1581442353249-5YKSPLFWQQHQCA055MHY/ke17ZwdGBToddI8pDm48kKxwr4r2hz7vo_Ui83zm8ewUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYy7Mythp_T-mtop-vrsUOmeInPi9iDjx9w8K4ZfjXt2dovjk7KB0jeEJO-xe7GX5QH_T_sqrUpNy9JhPNT5wbFRCjLISwBs8eEdxAxTptZAUg/Restaurant-Food-Pics.png?format=1500w"
+          alt="Burger">
+          <div *ngIf="!_user.loggedIn() && !isManager() && !isStaff()" class="centeredText">
+            <div class="">
+              <p class="lead">Welcome to Booking300<span> {{getUserName()}} </span> <br> You have successfully logged in to our system.</p>
+              <p class="">Create or view your bookings.</p>
+              <p class="lead" style="color:white">
+                <button [routerLink]="['user/book']" class="btn btn-md buttons">Book A Table</button> &nbsp;
+                <button [routerLink]="['user/view']" class="btn btn-md buttons">View Bookings</button>
+              </p>
+            </div>
+          </div>
+          <div *ngIf="!_user.loggedIn() && isManager() && !isStaff()" class="centeredText">
+            <div class="">
+              <p class="lead">Welcome to Booking300<span> {{getUserName()}} </span> <br> You have successfully logged in to our system.</p>
+
+              <p>Manage Your Restaurant Now</p>
+                <p class="lead" style="color:white;">
+                  <button [routerLink]="['manager']" class="btn btn-md buttons">Create A Booking / Register Staff</button> &nbsp;
+                  <button [routerLink]="['dashboard']" class="btn btn-md buttons">Manage Restaurant/ Bookings</button>
+                </p>
+              </div>
+            </div>
+            <div *ngIf="!_user.loggedIn() && !isManager() && isStaff()" class="centeredText">
+              <div class="">
+                <p class="lead">Welcome to Booking300<span> {{getUserName()}} </span> <br> You have successfully logged in to our system.</p>
+
+                <p>Create or View Bookings Now</p>
+                  <p class="lead" style="color:white;">
+                    <button [routerLink]="['staff']" class="btn btn-md buttons">Take Me There</button> &nbsp;
+                  </p>
+                </div>
+          </div>
+          <div *ngIf="_user.loggedIn()"  class="centeredText">
+            <p class="lead">Welcome to Booking300<span> {{getUserName()}} </span> Please register or login below to start booking.</p>
 
             <p>Login or Register</p>
             <p class="lead" style="color:white;">
@@ -174,13 +171,3 @@
     <br>
     <br>
   </div>
-
-
-
-
-
-
-
-
-
-

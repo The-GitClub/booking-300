@@ -77,7 +77,6 @@ export class CreatebookingComponent implements OnInit {
     { text: '7pm', value: '19' },
     { text: '8pm', value: '20' },
     { text: '9pm', value: '21' },
-    { text: '12pm', value: '24' },
   ];
   optionsGuests: Option[] = [
     { text: '1', value: '1' },

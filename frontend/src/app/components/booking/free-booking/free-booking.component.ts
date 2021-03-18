@@ -41,15 +41,13 @@ type Restaurant = {
 export class FreeBookingComponent implements OnInit {
 
   options: Option[] = [
-    { text: '9am', value: '9' },
-    { text: '10am', value: '10' },
-    { text: '11am', value: '11' },
-    { text: '12am', value: '12' },
-    { text: '1pm', value: '13' },
-    { text: '2pm', value: '14' },
     { text: '3pm', value: '15' },
     { text: '4pm', value: '16' },
     { text: '5pm', value: '17' },
+    { text: '6pm', value: '18' },
+    { text: '7pm', value: '19' },
+    { text: '8pm', value: '20' },
+    { text: '9pm', value: '21' },
   ];
   optionsTbl: Option[] = [
     { text: '1', value: '1' },
@@ -304,7 +302,6 @@ export class FreeBookingComponent implements OnInit {
     //1 for Monday, 2 for Tuesday, 3 for Wednesday, 4 for Thursday, 5 for Friday, 6 for Saturday.
     return (
       dayOfTheWeek === 0 ||
-      dayOfTheWeek === 6 ||
       sameDayBookings.length === this.options.length
     );
   };
@@ -321,5 +318,22 @@ export class FreeBookingComponent implements OnInit {
       this.router.navigate(['booking-confirmation']);
     });
   }
+
+  filterTime(f: NgForm): void {
+
+    this.filteredOptions = this.options
+      
+      .filter((hour) => {
+        if (
+          this.fullDate.year === f.value.date.year &&
+          this.fullDate.month === f.value.date.month &&
+          this.fullDate.day === f.value.date.day 
+        ) {
+          return parseInt(hour.value) > parseInt(this.currentHour);
+        }
+        return true;
+      });
+  }
+
 
 }
