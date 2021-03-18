@@ -70,7 +70,7 @@ hyphens: auto;
 .mat-column-date {
 word-wrap: break-word !important;
 
-width: 10% !important; 
+width: 8% !important; 
 text-align: center;
 border: 1px solid #000000;
 /* overflow-wrap: break-word;
@@ -86,6 +86,21 @@ hyphens: auto; */
   word-wrap: break-word !important;
   white-space: unset !important;
   width: 4% !important;
+  text-align: center;
+  border: 1px solid #000000;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.mat-column-phone {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  width: 9% !important;
   text-align: center;
   border: 1px solid #000000;
   overflow-wrap: break-word;
@@ -136,7 +151,7 @@ hyphens: auto; */
 .mat-column-allergy {
   word-wrap: break-word !important;
   white-space: unset !important;
-  width: 50% !important;
+  width: 45% !important;
   text-align: center;
   border: 1px solid #000000;
 
@@ -154,7 +169,7 @@ hyphens: auto; */
 .mat-column-update {
   word-wrap: break-word !important;
   white-space: unset !important;
-  width: 10% !important;
+  width: 8% !important;
   text-align: center;
   border: 1px solid #000000;
   overflow-wrap: break-word;
@@ -169,6 +184,7 @@ hyphens: auto; */
 .mat-column-cancel {
   border: 1px solid #000000;
     word-wrap: break-word !important;
+    width: 8% !important;
     white-space: unset !important;
     overflow-wrap: break-word;
     text-align: center;

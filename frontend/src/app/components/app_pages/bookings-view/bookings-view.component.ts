@@ -17,7 +17,7 @@ export class BookingsViewComponent implements OnInit {
   public errorMsg: string;
   public successMsg: string;
   //Defines the columns for the booking section
-  public bookingcolumns = ["date", "name", "time", "guests", "allergy", "update", "cancel"];
+  public bookingcolumns = ["date", "name", "time", "guests", "allergy", "phone", "update", "cancel"];
   bookings: Booking[];
   filteredBookings: any[];
 
