@@ -38,7 +38,7 @@
     <input type="checkbox" (click)="toggleShowAllergy()">
     <div *ngIf="ShowHideAllergy" class="label">
       ENTER GUESTS FOOD ALLERGY OR INTOLERANCE
-      <input type="text" id="booking.allergy" class="form-control" placeholder="{{booking?.allergy}}" name="allergy" ngModel #booking.allergy="ngModel" />
+      <input maxlength="50" size="3" type="text" id="booking.allergy" class="form-control" placeholder="{{booking?.allergy}}" name="allergy" ngModel #booking.allergy="ngModel" />
     </div>
     <button type="submit" class="btn submit" [disabled]="!f.valid">Submit Updated Booking</button>
   </form>
