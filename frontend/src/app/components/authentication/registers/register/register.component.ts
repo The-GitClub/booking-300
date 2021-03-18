@@ -53,6 +53,7 @@ export class RegisterComponent implements OnInit {
       if (
         !this._validate.validateRegisterPassword( this.registerForm.controls.password.value)) {
         this._snackBar.open("Password must be between 8 and 30 characters", "", {
+          panelClass: ['white-snackbar'],
           duration: 2000,
           horizontalPosition: this.horizontalPosition,
           verticalPosition: this.verticalPosition,
@@ -63,6 +64,7 @@ export class RegisterComponent implements OnInit {
     // (validate that the entered email is a valid email)
       if (!this._validate.validateEmail(this.registerForm.controls.email.value)) {
         this._snackBar.open("Invalid Email", "", {
+          panelClass: ['white-snackbar'],
           duration: 2000,
           horizontalPosition: this.horizontalPosition,
           verticalPosition: this.verticalPosition,
@@ -78,6 +80,7 @@ export class RegisterComponent implements OnInit {
             if ((data as any).success) {
               this._router.navigate(["/login"]);
               this._snackBar.open((data as any).message, "", {
+                panelClass: ['white-snackbar'],
                 duration: 2000,
                 horizontalPosition: this.horizontalPosition,
                 verticalPosition: this.verticalPosition,
@@ -87,6 +90,7 @@ export class RegisterComponent implements OnInit {
           },
           (error) => {
             this._snackBar.open((error as any).error.message, "", {
+              panelClass: ['white-snackbar'],
               duration: 2000,
               horizontalPosition: this.horizontalPosition,
               verticalPosition: this.verticalPosition,

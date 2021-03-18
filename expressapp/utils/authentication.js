@@ -1,7 +1,6 @@
 //used for password hashing
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const passport = require("passport");
 const User = require("../models/user");
 
 //To Register the User (Manager, Staff, User)
@@ -57,16 +56,13 @@ const userRegister = async (userDetails, role, res) => {
 //#endregion RegisterUser
 
 //#region LoginUser
-const userLogin = async (userCreds, role, res) => {
-  console.log("USER LOGIN METHOD BEGAN");
-  console.log("USER CREDNETAILS IN LOGIN METHOD",userCreds);  
+const userLogin = async (userCreds, res) => {
   let { email, password } = userCreds;
-  console.log("EMAIL" , email); 
   // First Check if the username is in the database
   const user = await User.findOne({ email });
   if (!user) {
     return res.status(404).json({
-      message: "Username is not found in the login method? Invalid login credentials.",
+      message: "User not found",
       success: false,
     });
   }
@@ -79,6 +75,7 @@ const userLogin = async (userCreds, role, res) => {
     let token = jwt.sign(
       //credentials we pass into the token
       {
+        username: user.username,
         user_id: user._id,
         role: user.role,
         email: user.email,
@@ -89,8 +86,6 @@ const userLogin = async (userCreds, role, res) => {
     );
 
     let result = {
-      role: user.role,
-      email: user.email,
       token: `Bearer ${token}`,
       expiresIn: 3600, // (seconds)
     };
@@ -122,22 +117,11 @@ const validateEmail = async (email) => {
 };
 //#endregion validateEmail
 
-/* #region  Find User Role For Login */
-  const findMyRole = async (email, err) => {
-    let user = await User.findOne({ email });
-    if (!user) {
-      return err;
-    } else {
-      console.log("ROLE IN UTILS FILE", user.role);
-      return user.role;
-    }
-  };
-/* #endregion Find User Role For Login  */
 
-//#region CheckRoleMiddleware
-//type of role necessary is passed in from the protected route in route file (users.js) and if role matches, authorize
-const checkRole = (roles) => (req, res, next) =>
-  !roles.includes(req.user.role)
+///#region CheckRoleMiddleware
+  //type of role necessary is passed in from the protected route in route file (users.js) and if role matches, authorize
+  const checkRole = (roles) => (req, res, next) =>
+  !roles.includes(req.userData.role)
     ? res.status(401).json("Unauthorized")
     : next();
 //#endregion CheckRoleMiddleware
@@ -148,7 +132,6 @@ const checkRole = (roles) => (req, res, next) =>
 module.exports = {
   userRegister,
   userLogin,
-  findMyRole,
   checkRole,
 };
 //#endregion ExportFunctions

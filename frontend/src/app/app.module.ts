@@ -12,7 +12,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/authentication/login/login.component';
 import { RegisterComponent } from './components/authentication/registers/register/register.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 //Material Components
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -66,6 +66,7 @@ import { AdmindashboardupdateComponent } from './components/app_pages/admindashb
 import { NgxStripeModule } from 'ngx-stripe';
 import { FreeBookingComponent } from './components/booking/free-booking/free-booking.component';
 import { BookingsViewComponent } from './components/app_pages/bookings-view/bookings-view.component';
+import { AuthInterceptor } from './components/authentication/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -117,7 +118,8 @@ import { BookingsViewComponent } from './components/app_pages/bookings-view/book
 
   ],
   entryComponents: [ManagerNotificationComponent, StaffNotificationComponent],
-  providers: [UserService, BookingserviceService, ValidationService, AuthGuard, antiAuthGuard, StaffGuard, ManagerGuard],
-  bootstrap: [AppComponent]
+  providers: [UserService, BookingserviceService, ValidationService, AuthGuard, antiAuthGuard, StaffGuard, ManagerGuard,{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, //multi means we can add more than 1 interceptor
+
+  ],    bootstrap: [AppComponent]
 })
 export class AppModule { }

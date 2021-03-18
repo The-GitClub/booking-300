@@ -188,3 +188,8 @@ hyphens: auto;
 text-transform: uppercase;
 font-size: small;
 }
+
+button{
+  background-color: red;
+  color: #000000;
+}

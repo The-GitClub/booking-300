@@ -36,7 +36,7 @@ export class NavbarComponent implements OnInit {
     else{
       return false;
     }
-    
+
   }
   isManager(){
     if(this._user.ObtainRole() == 'manager'){
@@ -72,5 +72,8 @@ export class NavbarComponent implements OnInit {
       });
       return false;
     }
+  } getUserName(){
+    this.username = this._user.getUserName();
+    return this.username;
   }
 }

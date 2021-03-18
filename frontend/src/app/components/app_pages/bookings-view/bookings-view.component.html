@@ -1,10 +1,11 @@
 
   <form #f="ngForm" class="date mx-auto form-horizontal">
     <div style="width: 24%;" class="input-group mx-auto">
-  <div (click)="d.toggle()" class="mx-auto">
-  <input style="width: 100%;" type="search" name="date" placeholder="Search by date" class="form-control" ngbDatepicker #d="ngbDatepicker" ngModel
+  <div class="mx-auto">
+  <input readonly (click)="d.toggle()" style="width: 100%;" type="search" name="date" placeholder="Search by date" class="form-control" ngbDatepicker #d="ngbDatepicker" ngModel
   (ngModelChange)="filterDate(f)" #date="ngModel" />
 </div>
+<button (click) = "clear(f)">X</button>
 <div class="mx-auto">
   <input style="width: 100%;" type="search" name="search" placeholder="Search by name" class="form-control" ngModel
   (ngModelChange)="filterName(f)" #name="ngModel" />

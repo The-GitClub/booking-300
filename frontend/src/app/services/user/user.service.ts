@@ -14,7 +14,8 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from "@angular/material/snack-bar";
-import { Router } from "@angular/router";
+
+export const InterceptorSkipHeader = 'X-Skip-Interceptor';
 
 @Injectable()
 export class UserService {
@@ -28,6 +29,7 @@ export class UserService {
   CredentialsUsed = false;
   id: string;
   role: string;
+  username: string;
   success: boolean;
   TokenForIdentification:any;
   // helper for Decoding JWT
@@ -47,7 +49,7 @@ export class UserService {
     return this._http
       .post<any>( BASE_URL + "users/register-customer", body, {
         observe: "body",
-        headers: new HttpHeaders().append("Content-Type", "application/json"),
+        headers: new HttpHeaders().append("Content-Type", "application/json").append(InterceptorSkipHeader, ''),
       })
       .pipe(catchError(this.handleError));
   }
@@ -56,13 +58,12 @@ export class UserService {
     return this._http
       .post( BASE_URL + "users/login", body, {
         observe: "body",
-        headers: new HttpHeaders().append("Content-Type", "application/json"),
+        headers: new HttpHeaders().append("Content-Type", "application/json").append(InterceptorSkipHeader, ''),
       })
       .pipe(
         map((response: any) => {
           const user = response;
 
-          console.log(user.success);
           //if the returned status message is success, do
           if (user.success) {
             localStorage.setItem("token", user.token);
@@ -82,7 +83,6 @@ export class UserService {
   ObtainID() {
     this.TokenForIdentification = this.helper.decodeToken(localStorage.getItem("token"));
     this.id = this.TokenForIdentification.user_id;
-    console.log("ID IN THE ObtainID method", this.id);
     return this.id;
   }
 
@@ -94,6 +94,17 @@ export class UserService {
     else{
        this.role = this.TokenForIdentification.role;
        return this.role;
+    }
+  }
+
+  getUserName() {
+    this.TokenForIdentification = this.helper.decodeToken(localStorage.getItem("token"));
+    if(this.TokenForIdentification == null){
+      return this.username = "";
+    }
+    else{
+       this.username = this.TokenForIdentification.username;
+       return this.username;
     }
   }
 
@@ -110,6 +121,13 @@ export class UserService {
     const token = localStorage.getItem("token");
     this.authToken = token;
   }
+
+  returnToken(){
+    const token = localStorage.getItem("token");
+    this.authToken = token;
+    return this?.authToken;
+  }
+
 
   //clears local storage
   logout() {

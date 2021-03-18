@@ -31,6 +31,9 @@
             <li class="nav-item" >
                 <button mat-button *ngIf = "_user.loggedIn()" [routerLink]="['/login']" routerLinkActive="active"><mat-icon>account_circle</mat-icon><a class="nav-link">Login</a></button>
             </li>
+            <li class="nav-item" >
+              <button id = "colour" disabled mat-button *ngIf = "!_user.loggedIn()" ><mat-icon>perm_identity</mat-icon><a  class="nav-link">Welcome, {{getUserName()}}</a></button>
+          </li>
             <li class="nav-item">
               <button mat-button (click) = "logout()" *ngIf = "!_user.loggedIn()"  [routerLink]="['/login']" routerLinkActive="active"><mat-icon>exit_to_app</mat-icon><a class="nav-link">Log Out</a></button>
               </li>

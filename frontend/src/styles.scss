@@ -91,3 +91,9 @@ body {
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
+
+.white-snackbar {
+  background: white;
+  color: #000000;
+  font-weight: bold;
+}

@@ -53,6 +53,8 @@ img {
 span{
   color: #F620B8;
   margin-bottom: 5rem;
+  font-weight: 600;
+  font-size: 25px;
 }
 
 .jumbotron{

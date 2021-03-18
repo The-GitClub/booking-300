@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit {
     // (validate that the entered email is a valid email)
       if (!this._validate.validateEmail(this.loginForm.controls.email.value)) {
         this._snackBar.open("Please Enter A Valid Email", "", {
+          panelClass: ['white-snackbar'],
           duration: 2000,
           horizontalPosition: this.horizontalPosition,
           verticalPosition: this.verticalPosition,
@@ -63,6 +64,7 @@ export class LoginComponent implements OnInit {
         this._router.navigate(["/"]);
 
         this._snackBar.open("You have successfully logged in", "", {
+          panelClass: ['white-snackbar'],
           duration: 2000,
           horizontalPosition: this.horizontalPosition,
           verticalPosition: this.verticalPosition,
@@ -71,6 +73,7 @@ export class LoginComponent implements OnInit {
       (error) => {
         //set the login state to true
         this._snackBar.open((error as any).error.message, "", {
+          panelClass: ['white-snackbar'],
           duration: 2000,
           horizontalPosition: this.horizontalPosition,
           verticalPosition: this.verticalPosition,

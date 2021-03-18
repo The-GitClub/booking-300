@@ -7,7 +7,6 @@ const checkAuth = require("../utils/check-auth");
 const {
     userRegister,
     userLogin,
-    findMyRole,
     checkRole
 } = require("../utils/authentication");
 
@@ -31,11 +30,8 @@ router.post("/register-manager", checkRole(["manager"]), async (req, res) => {
 
 /* #region  Login */
   router.post("/login", async (req, res) => {
-    console.log("LOGIN ROUTE ENTERED"); 
     try {
-      let role = await findMyRole(req.body.email, res);
-      console.log("ROLE IN LOGIN ROUTE", role); 
-      await userLogin(req.body, role, res);
+      await userLogin(req.body, res);
     }
     catch (err) {
       return res.status(501).json({
@@ -58,13 +54,11 @@ router.get("/user", checkAuth, async (req, res) => {
 async function getUserBookings(req, res, next) {
   const { userId } = req.params;
   const user = await User.findById(userId).populate("bookings");
-  console.log("user's bookings", user.bookings);
   res.status(200).json(user.bookings);
 }
 
 async function newUserBooking(req, res, next) {
   const { userId } = req.params;
-  console.log(userId); 
   // Create new booking
   const newBooking = new Bookings(req.body);
   // Get user

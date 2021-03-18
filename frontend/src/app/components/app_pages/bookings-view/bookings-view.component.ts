@@ -87,4 +87,9 @@ export class BookingsViewComponent implements OnInit {
        return false;
      }
   }
+  clear(f: NgForm): void{
+    this.filteredBookings = null;
+    this.displayAllBookings();
+    f.reset();
+  }
 }

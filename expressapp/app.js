@@ -36,10 +36,6 @@ try {
 app.use(express.static("."));
 app.use(express.json());
 
-var passport = require("passport");
-app.use(passport.initialize());
-require("./passport")(passport);
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');

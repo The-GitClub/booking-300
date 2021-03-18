@@ -1,51 +1,61 @@
 .navbar {
-    background-color: black;
-    color: white;
-    /* border-bottom: 1px solid #581e6d;
+  background-color: black;
+  color: white;
+  /* border-bottom: 1px solid #581e6d;
     border-top: 1px solid #581e6d; */
 }
 
 mat-icon {
-    font-size: 30px;
-    height: 2px;
+  font-size: 30px;
+  height: 2px;
 }
 
 button {
-    margin-left: 2px;
-    margin-right: 2px;
+  margin-left: 2px;
+  margin-right: 2px;
 }
 
-button:hover{
+button:hover {
   border-right: 2px solid #581e6d;
   border-left: 2px solid #581e6d;
 }
 
 button:focus {
-    outline: none;
+  outline: none;
 }
 
 ul li .active {
-    border-right: 2px solid white;
-    border-left: 2px solid white;
+  border-right: 2px solid white;
+  border-left: 2px solid white;
 }
 
 .nav-link {
-    text-transform: uppercase;
-    font-weight: 150;
+  text-transform: uppercase;
+  font-weight: 150;
 }
 
 .navbar-brand {
-    font-family: cursive;
+  font-family: cursive;
 }
 
 li:hover {
-    background-color: #181818;
-    text-decoration: underline;
+  background-color: #181818;
+  text-decoration: underline;
 }
 
-#toggler{
-    background-color: yellow;
+#toggler {
+  background-color: yellow;
 }
-#icon{
-    background-color: green;
+#icon {
+  background-color: green;
+}
+#colour {
+  background-color: #32153b;
+  color: white;
+}
+
+#colour:hover {
+  border-right: none;
+  border-left: none;
+  text-decoration: none;
 }

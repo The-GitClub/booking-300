@@ -40,6 +40,7 @@ export class ValidationService {
       !this.registerForm.controls.cpass.valid
     ) {
       this._snackBar.open("Username, Password and Email are Required", "", {
+        panelClass: ['white-snackbar'],
         duration: 2000,
         horizontalPosition: this.horizontalPosition,
         verticalPosition: this.verticalPosition,
@@ -50,6 +51,7 @@ export class ValidationService {
       !this.registerForm.controls.username.valid
     ) {
       this._snackBar.open("Username and Email are Required", "", {
+        panelClass: ['white-snackbar'],
         duration: 2000,
         horizontalPosition: this.horizontalPosition,
         verticalPosition: this.verticalPosition,
@@ -60,6 +62,7 @@ export class ValidationService {
       !this.registerForm.controls.password.valid
     ) {
       this._snackBar.open("Username and Password are Required", "", {
+        panelClass: ['white-snackbar'],
         duration: 2000,
         horizontalPosition: this.horizontalPosition,
         verticalPosition: this.verticalPosition,
@@ -70,6 +73,7 @@ export class ValidationService {
       !this.registerForm.controls.cpass.valid
     ) {
       this._snackBar.open("Username and Password are Required", "", {
+        panelClass: ['white-snackbar'],
         duration: 2000,
         horizontalPosition: this.horizontalPosition,
         verticalPosition: this.verticalPosition,
@@ -77,6 +81,7 @@ export class ValidationService {
       return false;
     } else if (!this.registerForm.controls.username.valid) {
       this._snackBar.open("Username is Required", "", {
+        panelClass: ['white-snackbar'],
         duration: 2000,
         horizontalPosition: this.horizontalPosition,
         verticalPosition: this.verticalPosition,
@@ -84,6 +89,7 @@ export class ValidationService {
       return false;
     } else if (!this.registerForm.controls.email.valid) {
       this._snackBar.open("Email is Required", "", {
+        panelClass: ['white-snackbar'],
         duration: 2000,
         horizontalPosition: this.horizontalPosition,
         verticalPosition: this.verticalPosition,
@@ -94,6 +100,7 @@ export class ValidationService {
       !this.registerForm.controls.cpass.valid
     ) {
       this._snackBar.open("Password is Required", "", {
+        panelClass: ['white-snackbar'],
         duration: 2000,
         horizontalPosition: this.horizontalPosition,
         verticalPosition: this.verticalPosition,
@@ -104,6 +111,7 @@ export class ValidationService {
       this.registerForm.controls.cpass.value
     ) {
       this._snackBar.open("Passwords Do Not Match", "", {
+        panelClass: ['white-snackbar'],
         duration: 2000,
         horizontalPosition: this.horizontalPosition,
         verticalPosition: this.verticalPosition,
@@ -111,6 +119,7 @@ export class ValidationService {
       return false;
     } else if (!this.registerForm.valid) {
        this._snackBar.open("Invalid Form", "", {
+        panelClass: ['white-snackbar'],
         duration: 2000,
         horizontalPosition: this.horizontalPosition,
         verticalPosition: this.verticalPosition,
@@ -141,6 +150,7 @@ export class ValidationService {
       !this.loginForm.controls.password.valid
     ) {
       this._snackBar.open("Email and Password are Required", "", {
+        panelClass: ['white-snackbar'],
         duration: 2000,
         horizontalPosition: this.horizontalPosition,
         verticalPosition: this.verticalPosition,
@@ -148,6 +158,7 @@ export class ValidationService {
       return false;
     } else if (!this.loginForm.controls.email.valid) {
       this._snackBar.open("Email Required", "", {
+        panelClass: ['white-snackbar'],
         duration: 2000,
         horizontalPosition: this.horizontalPosition,
         verticalPosition: this.verticalPosition,
@@ -155,6 +166,7 @@ export class ValidationService {
       return false;
     } else if (!this.loginForm.controls.password.valid) {
       this._snackBar.open("Password Required", "", {
+        panelClass: ['white-snackbar'],
         duration: 2000,
         horizontalPosition: this.horizontalPosition,
         verticalPosition: this.verticalPosition,
