@@ -8,11 +8,13 @@ STAFF LOGIN: staff@gmaiil.com
 
 STAFF PASSWORD: staff123
 
+-------------------------------------
+
 MANAGER PASSWORD: manager123
 
 MANAGER LOGIN: manager@gmail.com
 
-
+-------------------------------------
 Angular hosted on : http://project300.s3-website-eu-west-1.amazonaws.com/
 
 
