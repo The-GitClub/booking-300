@@ -13,3 +13,6 @@ This project will not run locally as the database is now configured to only be c
 Team Members: Aaron Dollard, Alan Regan, Matthew mMc Girl, Johnathon Mc Grory
 
 This project was built using the M.E.A.N. stack. 
+
+![image](https://user-images.githubusercontent.com/47417670/111818389-06e5c600-88d7-11eb-92bd-6f6bc9492bf8.png)
+
