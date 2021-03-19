@@ -16,6 +16,7 @@ import { BookingconfirmationComponent } from './components/app_pages/bookingconf
 import { BookingupdatedComponent } from './components/app_pages/bookingupdated/bookingupdated.component';
 import { AdmindashboardComponent } from './components/app_pages/admindashboard/admindashboard.component';
 import { AdmindashboardupdateComponent } from './components/app_pages/admindashboardupdate/admindashboardupdate.component';
+import { ProfilePageComponent } from './components/app_pages/profile-page/profile-page.component';
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
@@ -28,6 +29,7 @@ const routes: Routes = [
   {path:'register', component:RegisterComponent, canActivate: [antiAuthGuard] },
   {path:'manager', component:ManagerPageComponent, canActivate: [ManagerGuard]},
   {path:'staff', component:StaffPageComponent, canActivate: [StaffGuard]},
+  {path:'profile', component:ProfilePageComponent, canActivate: [AuthGuard]},
   {path:'user/view', component: ViewbookingsComponent, canActivate: [AuthGuard] },
   {path:'user/book', component: CreatebookingComponent, canActivate: [AuthGuard] },
   {path:'user/view/update/:id', component: UpdatebookingComponent, canActivate: [AuthGuard] }

@@ -24,6 +24,7 @@ export class ManagerGuard implements CanActivate {
   }
   openDialog() {
     this.dialog.open(ManagerNotificationComponent, {
+      panelClass: ['white-snackbar'],
       width: '350px',
       height: '200',
       backdropClass: 'backdropBackground',
