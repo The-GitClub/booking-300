@@ -1,0 +1,15 @@
+# booking-300
+We developed an application that could be used by a  restaurant to improve the flow of their booking process. 
+Using our application, all bookings for a restaurant would be centralised within the application whether a booking is created online by a customer or by a staff member of the restaurant. 
+Users must register and log in to the application to access functionality. 
+We implemented different types of users: Customers, Staff, Managers
+
+
+Angular hosted on : http://project300.s3-website-eu-west-1.amazonaws.com/
+
+
+This project will not run locally as the database is now configured to only be connected to from the EC2 instance that our API is hosted on.
+
+Team Members: Aaron Dollard, Alan Regan, Matthew mMc Girl, Johnathon Mc Grory
+
+This project was built using the M.E.A.N. stack. 
