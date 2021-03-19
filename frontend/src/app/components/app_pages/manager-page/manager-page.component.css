@@ -5,6 +5,7 @@ mat-expansion-panel{
   background-color: rgba(0,0,0,0);;
   color: white;
   margin-bottom: 3rem;
+  border: 1px #200D25 solid;
 }
 .mat-expansion-indicator::after {
   color: white !important;

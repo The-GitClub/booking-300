@@ -30,6 +30,7 @@ export class UserService {
   id: string;
   role: string;
   username: string;
+  email: string;
   success: boolean;
   TokenForIdentification:any;
   // helper for Decoding JWT
@@ -105,6 +106,17 @@ export class UserService {
     else{
        this.username = this.TokenForIdentification.username;
        return this.username;
+    }
+  }
+
+  getEmail() {
+    this.TokenForIdentification = this.helper.decodeToken(localStorage.getItem("token"));
+    if(this.TokenForIdentification == null){
+      return this.email = "";
+    }
+    else{
+       this.email = this.TokenForIdentification.email;
+       return this.email;
     }
   }
 

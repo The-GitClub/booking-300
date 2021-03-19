@@ -54,8 +54,4 @@ li:hover {
   color: white;
 }
 
-#colour:hover {
-  border-right: none;
-  border-left: none;
-  text-decoration: none;
-}
+

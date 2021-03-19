@@ -26,6 +26,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSelectModule } from '@angular/material/select';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatMenuModule} from '@angular/material/menu';
 
 //alerts
 import {MatSnackBarModule} from '@angular/material/snack-bar';
@@ -66,6 +68,7 @@ import { NgxStripeModule } from 'ngx-stripe';
 import { FreeBookingComponent } from './components/booking/free-booking/free-booking.component';
 import { BookingsViewComponent } from './components/app_pages/bookings-view/bookings-view.component';
 import { AuthInterceptor } from './components/authentication/auth-interceptor';
+import { ProfilePageComponent } from './components/app_pages/profile-page/profile-page.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +93,7 @@ import { AuthInterceptor } from './components/authentication/auth-interceptor';
     AdmindashboardupdateComponent,
     FreeBookingComponent,
     BookingsViewComponent,
+    ProfilePageComponent,
   ],
   imports: [
     BrowserModule,
@@ -112,6 +116,8 @@ import { AuthInterceptor } from './components/authentication/auth-interceptor';
     MatCardModule,
     NgbModule,
     MatExpansionModule,
+    MatMenuModule,
+    MatDividerModule,
     NgxStripeModule.forRoot('pk_test_51IEHtSHNSX0dPtFXwuhN1cNF14lgeDVGf2pIfN4VDjwDAUQ4GE8EenTFkpJbxzpXD3gV6YdUc5LuCKSQhk1Tqfac00QM95ByXa'),
 
   ],

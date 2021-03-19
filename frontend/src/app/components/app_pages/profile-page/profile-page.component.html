@@ -1,0 +1,24 @@
+<mat-card class="example-card mx-auto">
+  <div class="jumbotron">
+    <mat-card-header>
+      <mat-icon>perm_identity</mat-icon>
+
+      <mat-card-title>Welcome User!</mat-card-title>
+      <mat-card-subtitle>Here is your profile info</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content class="mx-auto">
+      <div class="mx-auto">
+
+        <ul>
+          <li *ngFor="let booking of booking;"> {{booking}} </li>
+        </ul>
+
+        <p><strong> Username:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ getUserName() }}</p>
+        <p><strong> Role:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ getRole() }}</p>
+
+        <p><strong> Email:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ getEmail()}} </p>
+      </div>
+    </mat-card-content>
+  </div>
+</mat-card>
