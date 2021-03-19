@@ -16,4 +16,5 @@ This project was built using the M.E.A.N. stack.
 
 ![image](https://user-images.githubusercontent.com/47417670/111818389-06e5c600-88d7-11eb-92bd-6f6bc9492bf8.png)
 
-![Uploading image.png…]()
+![bookingPoster](https://user-images.githubusercontent.com/47326832/111818779-7b206980-88d7-11eb-99d0-7b222893091e.png)
+
