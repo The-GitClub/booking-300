@@ -3,6 +3,7 @@ We developed an application that could be used by a  restaurant to improve the f
 Using our application, all bookings for a restaurant would be centralised within the application whether a booking is created online by a customer or by a staff member of the restaurant. 
 Users must register and log in to the application to access functionality. 
 We implemented different types of users: Customers, Staff, Managers
+-------------------------------------
 
 STAFF LOGIN: staff@gmaiil.com
 
