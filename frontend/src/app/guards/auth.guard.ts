@@ -22,12 +22,13 @@ export class AuthGuard implements CanActivate {
     if(this.userService.loggedIn()) {
       this.router.navigate(['/']);
       this._snackBar.open("Please Login First", "", {
+        panelClass: ['white-snackbar'],
         duration: 2000,
         horizontalPosition: this.horizontalPosition,
         verticalPosition: this.verticalPosition,
       });
       return false;
-    } 
+    }
     else{
       return true;
     }

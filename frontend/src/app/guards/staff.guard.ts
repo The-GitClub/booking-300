@@ -20,6 +20,7 @@ export class StaffGuard implements CanActivate {
   }
   openDialog() {
     this.dialog.open(StaffNotificationComponent, {
+      panelClass: ['white-snackbar'],
       width: '350px',
       height: '200',
       backdropClass: 'backdropBackground',
