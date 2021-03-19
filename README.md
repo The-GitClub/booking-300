@@ -16,3 +16,4 @@ This project was built using the M.E.A.N. stack.
 
 ![image](https://user-images.githubusercontent.com/47417670/111818389-06e5c600-88d7-11eb-92bd-6f6bc9492bf8.png)
 
+![Uploading image.png…]()
