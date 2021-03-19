@@ -2,9 +2,13 @@ mat-expansion-panel {
   width: 70%;
   margin: auto;
   margin-top: 3rem;
-  background-color: #612973;
+  background-color: rgba(0,0,0,0);;
   color: white;
   margin-bottom: 3rem;
+
+  color: white;
+  margin-bottom: 3rem;
+  border: 1px #200D25 solid;
 }
 
 /* change the components display type to block */
