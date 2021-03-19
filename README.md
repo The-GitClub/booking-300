@@ -5,7 +5,9 @@ Users must register and log in to the application to access functionality.
 We implemented different types of users: Customers, Staff, Managers
 
 STAFF LOGIN: staff@gmaiil.com
+
 STAFF PASSWORD: staff123
+
 MANAGER PASSWORD: manager123
 
 MANAGER LOGIN: manager@gmail.com
