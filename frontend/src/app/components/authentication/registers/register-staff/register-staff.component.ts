@@ -71,7 +71,7 @@ export class RegisterStaffComponent implements OnInit {
      }
    // (subscribe to the register method on the user service to log in)
      this._userService
-       .register(JSON.stringify(this.registerForm.value))
+       .registerStaff(JSON.stringify(this.registerForm.value))
        .subscribe(
          (data) => {
          // (if the boolean "success" returns true, display the returned message to the user and redirect them to the 'user' page)

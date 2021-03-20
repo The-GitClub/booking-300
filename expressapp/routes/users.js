@@ -7,7 +7,8 @@ const checkAuth = require("../utils/check-auth");
 const {
     userRegister,
     userLogin,
-    checkRole
+    checkRole,
+    findMyRole,
 } = require("../utils/authentication");
 
 /* #region  Registrations */
@@ -17,31 +18,32 @@ router.post("/register-customer", async (req, res) => {
 });
 
 // Staff Registration Route
-router.post("/register-staff", checkAuth, checkRole(["staff"]), async (req, res) => {
+router.post("/register-staff", checkAuth, checkRole(["manager"]), async (req, res) => {
   await userRegister(req.body, "staff", res);
 });
 
 // Manager  Registration Route
-router.post("/register-manager", checkRole(["manager"]), async (req, res) => {
+router.post("/register-manager", checkAuth, checkRole(["manager"]), async (req, res) => {
   await userRegister(req.body, "manager", res);
 });
 
 /* #endregion Registrations */
 
 /* #region  Login */
-  router.post("/login", async (req, res) => {
-    try {
-      await userLogin(req.body, res);
-    }
-    catch (err) {
-      return res.status(501).json({
-        message: `Login Failure. Account does not exist`,
-        success: false,
-      });
-    }
-  });
+router.post("/login", async (req, res) => {
+  console.log("LOGIN ROUTE ENTERED"); 
+  try {
+    let role = await findMyRole(req.body.email, res);
+    await userLogin(req.body, role, res);
+  }
+  catch (err) {
+    return res.status(501).json({
+      message: `Login Failure. Account does not exist`,
+      success: false,
+    });
+  }
+});
 /* #endregion Login*/
-
 
 // Get User Route 
 router.get("/user", checkAuth, async (req, res) => {

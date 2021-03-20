@@ -56,16 +56,17 @@ const userRegister = async (userDetails, role, res) => {
 //#endregion RegisterUser
 
 //#region LoginUser
-const userLogin = async (userCreds, res) => {
+const userLogin = async (userCreds, role, res) => {
   let { email, password } = userCreds;
   // First Check if the username is in the database
   const user = await User.findOne({ email });
   if (!user) {
     return res.status(404).json({
-      message: "User not found",
+      message: "Username is not found in the login method? Invalid login credentials.",
       success: false,
     });
   }
+
 
   // That means user is existing and trying to sign in from the right portal
   // Now check for the password
@@ -118,6 +119,18 @@ const validateEmail = async (email) => {
 //#endregion validateEmail
 
 
+/* #region  Find User Role For Login */
+const findMyRole = async (email, err) => {
+  let user = await User.findOne({ email });
+  if (!user) {
+    return err;
+  } else {
+    console.log("ROLE IN UTILS FILE", user.role);
+    return user.role;
+  }
+};
+/* #endregion Find User Role For Login  */
+
 ///#region CheckRoleMiddleware
   //type of role necessary is passed in from the protected route in route file (users.js) and if role matches, authorize
   const checkRole = (roles) => (req, res, next) =>
@@ -133,5 +146,6 @@ module.exports = {
   userRegister,
   userLogin,
   checkRole,
+  findMyRole,
 };
 //#endregion ExportFunctions

@@ -55,6 +55,26 @@ export class UserService {
       .pipe(catchError(this.handleError));
   }
 
+  registerStaff(body: any) {
+    //return this._http.get(`${this.BASE_URL}/users/register`,{
+    return this._http
+      .post<any>( BASE_URL + "users/register-staff", body, {
+        observe: "body",
+        headers: new HttpHeaders().append("Content-Type", "application/json"),
+      })
+      .pipe(catchError(this.handleError));
+  }
+
+  registerManager(body: any) {
+    //return this._http.get(`${this.BASE_URL}/users/register`,{
+    return this._http
+      .post<any>( BASE_URL + "users/register-manager", body, {
+        observe: "body",
+        headers: new HttpHeaders().append("Content-Type", "application/json"),
+      })
+      .pipe(catchError(this.handleError));
+  }
+
   login(body: any): Observable<User> {
     return this._http
       .post( BASE_URL + "users/login", body, {
